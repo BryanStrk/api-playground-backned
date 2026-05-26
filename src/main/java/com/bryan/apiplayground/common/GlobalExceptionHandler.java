@@ -1,5 +1,7 @@
 package com.bryan.apiplayground.common;
 
+import com.bryan.apiplayground.common.exception.ApiKeyNotConfiguredException;
+import com.bryan.apiplayground.common.exception.ExternalApiException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ApiError> handleIllegalArgument(IllegalArgumentException ex, HttpServletRequest req) {
         return badRequest(ex.getMessage(), req);
+    }
+
+    @ExceptionHandler(ApiKeyNotConfiguredException.class)
+    public ResponseEntity<ApiError> handleMissingKey(ApiKeyNotConfiguredException ex, HttpServletRequest req) {
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                .body(ApiError.of(HttpStatus.SERVICE_UNAVAILABLE.value(), ex.getMessage(), req.getRequestURI()));
+    }
+
+    @ExceptionHandler(ExternalApiException.class)
+    public ResponseEntity<ApiError> handleExternal(ExternalApiException ex, HttpServletRequest req) {
+        // upstreamStatus == 0 → timeout/connection failure → 504; otherwise upstream returned an error → 502.
+        var status = ex.getUpstreamStatus() == 0 ? HttpStatus.GATEWAY_TIMEOUT : HttpStatus.BAD_GATEWAY;
+        return ResponseEntity.status(status)
+                .body(ApiError.of(status.value(), ex.getMessage(), req.getRequestURI()));
     }
 
     @ExceptionHandler(Exception.class)
