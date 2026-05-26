@@ -1,0 +1,38 @@
+# --- Build output -----------------------------------------------------------
+target/
+*.class
+
+# --- Maven wrapper ----------------------------------------------------------
+.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# --- IDE: IntelliJ ----------------------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# --- IDE: Eclipse -----------------------------------------------------------
+.classpath
+.project
+.settings/
+bin/
+
+# --- IDE: VS Code -----------------------------------------------------------
+.vscode/
+
+# --- OS ---------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+
+# --- Logs -------------------------------------------------------------------
+*.log
+logs/
+
+# --- Local secrets — NEVER commit -------------------------------------------
+.env
+.env.local
+*.env.local
+application-local.properties
+application-local.yml
+application-local.yaml
