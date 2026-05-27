@@ -9,14 +9,22 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class SportsService {
 
     private static final String STANDINGS_URL =
             "https://api.football-data.org/v4/competitions/{code}/standings";
+    private static final String MATCHES_URL =
+            "https://api.football-data.org/v4/competitions/{code}/matches";
+    private static final String TEAMS_URL =
+            "https://api.football-data.org/v4/competitions/{code}/teams";
     private static final String AUTH_HEADER = "X-Auth-Token";
+    private static final Set<String> UPCOMING_STATUSES = Set.of("SCHEDULED", "TIMED");
+    private static final int MATCHES_LIMIT = 15;
     // The 12 competitions available on Football-Data's free tier. Hardcoded
     // because the /v4/competitions endpoint requires a key just to list them
     // and the free-tier subset never changes — a static list keeps the
@@ -50,10 +58,7 @@ public class SportsService {
     }
 
     public StandingsResponse getStandings(String competitionCode) {
-        if (apiKey == null || apiKey.isBlank()) {
-            throw new ApiKeyNotConfiguredException(
-                    "La API key de Football-Data no está configurada. Añade FOOTBALL_DATA_KEY a tu .env");
-        }
+        requireKey();
         try {
             var raw = restClient.get()
                     .uri(STANDINGS_URL, competitionCode)
@@ -94,6 +99,110 @@ public class SportsService {
         } catch (ResourceAccessException e) {
             throw new ExternalApiException(
                     "Football-Data unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
+    public MatchesResponse getMatches(String competitionCode) {
+        requireKey();
+        try {
+            var raw = restClient.get()
+                    .uri(MATCHES_URL, competitionCode)
+                    .header(AUTH_HEADER, apiKey)
+                    .retrieve()
+                    .body(MatchesRaw.class);
+            if (raw == null) {
+                throw new ExternalApiException("Football-Data returned an empty payload", 502);
+            }
+            var all = raw.matches() == null ? List.<MatchRaw>of() : raw.matches();
+            // Prefer the next fixtures (SCHEDULED + TIMED) ordered by date so the
+            // dashboard shows "what's coming up". When the season is over and no
+            // more upcoming fixtures exist, fall back to the most recent results.
+            var upcoming = all.stream()
+                    .filter(m -> m.status() != null && UPCOMING_STATUSES.contains(m.status().toUpperCase()))
+                    .sorted(Comparator.comparing(MatchRaw::utcDate,
+                            Comparator.nullsLast(Comparator.naturalOrder())))
+                    .limit(MATCHES_LIMIT)
+                    .toList();
+            List<MatchRaw> chosen;
+            String mode;
+            if (!upcoming.isEmpty()) {
+                chosen = upcoming;
+                mode = "UPCOMING";
+            } else {
+                chosen = all.stream()
+                        .filter(m -> "FINISHED".equalsIgnoreCase(m.status()))
+                        .sorted(Comparator.comparing(MatchRaw::utcDate,
+                                Comparator.nullsLast(Comparator.reverseOrder())))
+                        .limit(MATCHES_LIMIT)
+                        .toList();
+                mode = "RECENT";
+            }
+            var rows = chosen.stream().map(SportsService::toMatchRow).toList();
+            return new MatchesResponse(
+                    raw.competition() == null ? null : raw.competition().name(),
+                    mode,
+                    rows
+            );
+        } catch (RestClientResponseException e) {
+            throw new ExternalApiException(
+                    "Football-Data returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "Football-Data unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
+    public TeamsResponse getTeams(String competitionCode) {
+        requireKey();
+        try {
+            var raw = restClient.get()
+                    .uri(TEAMS_URL, competitionCode)
+                    .header(AUTH_HEADER, apiKey)
+                    .retrieve()
+                    .body(TeamsRaw.class);
+            if (raw == null) {
+                throw new ExternalApiException("Football-Data returned an empty payload", 502);
+            }
+            var rows = (raw.teams() == null ? List.<TeamRaw>of() : raw.teams()).stream()
+                    .map(t -> new TeamRow(t.name(), t.crest(), t.venue(), t.founded()))
+                    .toList();
+            return new TeamsResponse(
+                    raw.competition() == null ? null : raw.competition().name(),
+                    rows
+            );
+        } catch (RestClientResponseException e) {
+            throw new ExternalApiException(
+                    "Football-Data returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "Football-Data unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
+    private static MatchRow toMatchRow(MatchRaw m) {
+        Integer homeScore = null;
+        Integer awayScore = null;
+        if (m.score() != null && m.score().fullTime() != null) {
+            homeScore = m.score().fullTime().home();
+            awayScore = m.score().fullTime().away();
+        }
+        return new MatchRow(
+                m.utcDate(),
+                m.status(),
+                m.matchday(),
+                m.homeTeam() == null ? null : m.homeTeam().name(),
+                m.homeTeam() == null ? null : m.homeTeam().crest(),
+                m.awayTeam() == null ? null : m.awayTeam().name(),
+                m.awayTeam() == null ? null : m.awayTeam().crest(),
+                homeScore,
+                awayScore
+        );
+    }
+
+    private void requireKey() {
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new ApiKeyNotConfiguredException(
+                    "La API key de Football-Data no está configurada. Añade FOOTBALL_DATA_KEY a tu .env");
         }
     }
 
@@ -142,6 +251,30 @@ public class SportsService {
     ) {
     }
 
-    private record TeamRaw(int id, String name, String crest) {
+    // Shared shape: standings uses id/name/crest, /teams adds venue + founded
+    // (free-tier returns null for venue on some less-popular competitions).
+    private record TeamRaw(int id, String name, String crest, String venue, Integer founded) {
+    }
+
+    private record MatchesRaw(CompetitionRaw competition, List<MatchRaw> matches) {
+    }
+
+    private record MatchRaw(
+            String utcDate,
+            String status,
+            Integer matchday,
+            TeamRaw homeTeam,
+            TeamRaw awayTeam,
+            ScoreRaw score
+    ) {
+    }
+
+    private record ScoreRaw(FullTimeRaw fullTime) {
+    }
+
+    private record FullTimeRaw(Integer home, Integer away) {
+    }
+
+    private record TeamsRaw(CompetitionRaw competition, List<TeamRaw> teams) {
     }
 }

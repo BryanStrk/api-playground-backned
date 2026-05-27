@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/sports")
-@Tag(name = "Deportes", description = "Clasificaciones de fútbol vía Football-Data.org (requiere FOOTBALL_DATA_KEY)")
+@Tag(name = "Deportes", description = "Clasificaciones, partidos y equipos vía Football-Data.org (requiere FOOTBALL_DATA_KEY)")
 public class SportsController {
 
     private final SportsService sportsService;
@@ -30,6 +30,32 @@ public class SportsController {
             @RequestParam(defaultValue = "PD") String competition
     ) {
         return sportsService.getStandings(competition);
+    }
+
+    @GetMapping("/matches")
+    @Operation(
+            summary = "Partidos próximos (o últimos jugados)",
+            description = "Devuelve hasta 15 partidos. Modo UPCOMING si hay SCHEDULED/TIMED ordenados por "
+                    + "fecha ascendente; si no quedan próximos, modo RECENT con los FINISHED más recientes. "
+                    + "homeScore/awayScore vienen null para partidos no jugados; estadio no se expone porque "
+                    + "Football-Data no lo incluye en el free tier."
+    )
+    public MatchesResponse getMatches(
+            @RequestParam(defaultValue = "PD") String competition
+    ) {
+        return sportsService.getMatches(competition);
+    }
+
+    @GetMapping("/teams")
+    @Operation(
+            summary = "Equipos de una competición",
+            description = "Lista los clubes que disputan la temporada actual con name, crest, venue "
+                    + "(estadio si Football-Data lo expone) y founded (año de fundación)."
+    )
+    public TeamsResponse getTeams(
+            @RequestParam(defaultValue = "PD") String competition
+    ) {
+        return sportsService.getTeams(competition);
     }
 
     @GetMapping("/competitions")
