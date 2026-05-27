@@ -7,7 +7,9 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PokemonService {
@@ -32,8 +34,15 @@ public class PokemonService {
             var types = raw.types() == null
                     ? List.<String>of()
                     : raw.types().stream().map(t -> t.type().name()).toList();
-            var image = raw.sprites() == null ? null : raw.sprites().frontDefault();
-            return new PokemonResponse(raw.id(), raw.name(), raw.height(), raw.weight(), types, image);
+            return new PokemonResponse(
+                    raw.id(),
+                    raw.name(),
+                    raw.height(),
+                    raw.weight(),
+                    types,
+                    spriteUrl(raw.sprites()),
+                    statsMap(raw.stats())
+            );
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
                     "PokeAPI returned " + e.getStatusCode(), e.getStatusCode().value(), e);
@@ -43,13 +52,37 @@ public class PokemonService {
         }
     }
 
+    // Prefer the high-resolution official artwork render and fall back to the
+    // small pixel sprite so demos still get something when the artwork is null.
+    private static String spriteUrl(Sprites sprites) {
+        if (sprites == null) return null;
+        if (sprites.other() != null
+                && sprites.other().officialArtwork() != null
+                && sprites.other().officialArtwork().frontDefault() != null) {
+            return sprites.other().officialArtwork().frontDefault();
+        }
+        return sprites.frontDefault();
+    }
+
+    private static Map<String, Integer> statsMap(List<StatEntry> stats) {
+        if (stats == null) return Map.of();
+        var out = new LinkedHashMap<String, Integer>();
+        for (var s : stats) {
+            if (s.stat() != null && s.stat().name() != null) {
+                out.put(s.stat().name(), s.baseStat());
+            }
+        }
+        return out;
+    }
+
     private record PokeApiRaw(
             int id,
             String name,
             int height,
             int weight,
             List<TypeSlot> types,
-            Sprites sprites
+            Sprites sprites,
+            List<StatEntry> stats
     ) {
     }
 
@@ -59,6 +92,25 @@ public class PokemonService {
     private record NamedRef(String name) {
     }
 
-    private record Sprites(@JsonProperty("front_default") String frontDefault) {
+    private record Sprites(
+            @JsonProperty("front_default") String frontDefault,
+            Other other
+    ) {
+    }
+
+    private record Other(
+            @JsonProperty("official-artwork") OfficialArtwork officialArtwork
+    ) {
+    }
+
+    private record OfficialArtwork(
+            @JsonProperty("front_default") String frontDefault
+    ) {
+    }
+
+    private record StatEntry(
+            @JsonProperty("base_stat") int baseStat,
+            NamedRef stat
+    ) {
     }
 }
