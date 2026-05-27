@@ -234,6 +234,16 @@ public class CatalogService {
                     "/api/v1/trivia",
                     "https://opentdb.com",
                     "Preguntas de cultura general para jugar."
+            ),
+            new ApiInfo(
+                    "hn",
+                    "Hacker News",
+                    "Noticias",
+                    Difficulty.EASY,
+                    KeyRequirement.NONE,
+                    "/api/v1/hn/stories",
+                    "https://github.com/HackerNews/API",
+                    "Las noticias y debates tech del momento."
             )
     );
 
