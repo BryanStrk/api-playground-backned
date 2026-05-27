@@ -68,31 +68,26 @@ public class SportsService {
             if (raw == null) {
                 throw new ExternalApiException("Football-Data returned an empty payload", 502);
             }
-            // The API exposes three standings (TOTAL, HOME, AWAY); we surface TOTAL.
-            var totalGroup = (raw.standings() == null ? List.<StandingGroup>of() : raw.standings()).stream()
+            // The API exposes three standings for leagues (TOTAL, HOME, AWAY) and
+            // one TOTAL block per group for cups (GROUP_A..). Keep only the TOTAL
+            // blocks; the group field disambiguates league vs cup.
+            var totals = (raw.standings() == null ? List.<StandingGroup>of() : raw.standings()).stream()
                     .filter(g -> "TOTAL".equalsIgnoreCase(g.type()))
-                    .findFirst()
-                    .orElseGet(() -> raw.standings() == null || raw.standings().isEmpty()
-                            ? null
-                            : raw.standings().getFirst());
-            var rows = (totalGroup == null || totalGroup.table() == null
-                    ? List.<TableRow>of()
-                    : totalGroup.table()).stream()
-                    .map(r -> new StandingRow(
-                            r.position(),
-                            r.team() == null ? null : r.team().name(),
-                            r.team() == null ? null : r.team().crest(),
-                            r.playedGames(),
-                            r.won(),
-                            r.draw(),
-                            r.lost(),
-                            r.points()))
                     .toList();
-            return new StandingsResponse(
-                    raw.competition() == null ? null : raw.competition().name(),
-                    seasonLabel(raw.season()),
-                    rows
-            );
+            var competitionName = raw.competition() == null ? null : raw.competition().name();
+            var seasonLabel = seasonLabel(raw.season());
+            // Cup: each TOTAL belongs to a different group (GROUP_A, GROUP_B…).
+            // Surface every group so the dashboard can render all of them.
+            var hasGroups = totals.stream().anyMatch(g -> g.group() != null && !g.group().isBlank());
+            if (hasGroups) {
+                var groups = totals.stream()
+                        .map(g -> new GroupTable(g.group(), mapRows(g.table())))
+                        .toList();
+                return new StandingsResponse(competitionName, seasonLabel, List.of(), groups);
+            }
+            // League: exactly one TOTAL block, no group label — return as a flat table.
+            var leagueRows = totals.isEmpty() ? List.<StandingRow>of() : mapRows(totals.getFirst().table());
+            return new StandingsResponse(competitionName, seasonLabel, leagueRows, List.of());
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
                     "Football-Data returned " + e.getStatusCode(), e.getStatusCode().value(), e);
@@ -100,6 +95,21 @@ public class SportsService {
             throw new ExternalApiException(
                     "Football-Data unreachable: " + e.getMessage(), 0, e);
         }
+    }
+
+    private static List<StandingRow> mapRows(List<TableRow> rows) {
+        if (rows == null) return List.of();
+        return rows.stream()
+                .map(r -> new StandingRow(
+                        r.position(),
+                        r.team() == null ? null : r.team().name(),
+                        r.team() == null ? null : r.team().crest(),
+                        r.playedGames(),
+                        r.won(),
+                        r.draw(),
+                        r.lost(),
+                        r.points()))
+                .toList();
     }
 
     public MatchesResponse getMatches(String competitionCode, String type) {
@@ -237,7 +247,7 @@ public class SportsService {
     ) {
     }
 
-    private record StandingGroup(String stage, String type, List<TableRow> table) {
+    private record StandingGroup(String stage, String type, String group, List<TableRow> table) {
     }
 
     private record TableRow(

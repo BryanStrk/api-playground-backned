@@ -5,6 +5,7 @@ import java.util.List;
 public record StandingsResponse(
         String competition,
         String season,
-        List<StandingRow> table
+        List<StandingRow> table,
+        List<GroupTable> groups
 ) {
 }
