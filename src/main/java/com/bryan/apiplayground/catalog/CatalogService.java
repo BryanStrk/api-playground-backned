@@ -192,8 +192,8 @@ public class CatalogService {
                     Difficulty.MEDIUM,
                     KeyRequirement.REQUIRED,
                     "/api/v1/news/headlines",
-                    "https://newsapi.org/v2/top-headlines",
-                    "Titulares por país. Requiere NEWS_API_KEY."
+                    "https://newsapi.org/v2/everything",
+                    "Búsqueda de noticias por término e idioma. Requiere NEWS_API_KEY."
             ),
             new ApiInfo(
                     "characters",

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/news")
-@Tag(name = "Noticias", description = "Titulares vía NewsAPI (requiere NEWS_API_KEY)")
+@Tag(name = "Noticias", description = "Búsqueda de noticias vía NewsAPI /everything (requiere NEWS_API_KEY)")
 public class NewsController {
 
     private final NewsService newsService;
@@ -20,14 +20,15 @@ public class NewsController {
 
     @GetMapping("/headlines")
     @Operation(
-            summary = "Titulares por país y categoría",
-            description = "country = ISO 3166-1 alfa-2 (us, gb, es…). category opcional: "
-                    + "business, entertainment, general, health, science, sports, technology."
+            summary = "Buscar noticias por término e idioma",
+            description = "q: texto libre (por defecto 'world'). language: ISO-639-1 (es, en, fr, de, it, pt, nl…). "
+                    + "Orden: más recientes primero, 15 resultados por página. "
+                    + "Migrado desde /top-headlines porque NewsAPI restringió ?country= solo a 'us'."
     )
     public NewsResponse getHeadlines(
-            @RequestParam(defaultValue = "us") String country,
-            @RequestParam(required = false) String category
+            @RequestParam(required = false) String q,
+            @RequestParam(defaultValue = "en") String language
     ) {
-        return newsService.getHeadlines(country, category);
+        return newsService.getHeadlines(q, language);
     }
 }
