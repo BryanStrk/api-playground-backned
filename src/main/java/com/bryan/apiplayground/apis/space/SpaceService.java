@@ -1,6 +1,7 @@
 package com.bryan.apiplayground.apis.space;
 
 import com.bryan.apiplayground.common.exception.ExternalApiException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
@@ -33,11 +34,11 @@ public class SpaceService {
             var raw = restClient.get()
                     .uri(url.build(false).toUriString())
                     .retrieve()
-                    .body(ApodResponse.class);
+                    .body(ApodRaw.class);
             if (raw == null) {
                 throw new ExternalApiException("NASA APOD returned an empty payload", 502);
             }
-            return raw;
+            return toApodResponse(raw);
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
                     "NASA APOD returned " + e.getStatusCode(), e.getStatusCode().value(), e);
@@ -59,11 +60,11 @@ public class SpaceService {
             var raw = restClient.get()
                     .uri(url)
                     .retrieve()
-                    .body(ApodResponse[].class);
+                    .body(ApodRaw[].class);
             if (raw == null || raw.length == 0) {
                 throw new ExternalApiException("NASA APOD returned an empty payload", 502);
             }
-            return raw[0];
+            return toApodResponse(raw[0]);
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
                     "NASA APOD returned " + e.getStatusCode(), e.getStatusCode().value(), e);
@@ -71,5 +72,34 @@ public class SpaceService {
             throw new ExternalApiException(
                     "NASA APOD unreachable: " + e.getMessage(), 0, e);
         }
+    }
+
+    // APOD ships every asset URL in the single `url` field; whether it's a
+    // YouTube/Vimeo embed or a JPEG depends on media_type. Split here so the
+    // frontend can use <iframe src={videoUrl}> or <img src={imageUrl}>
+    // without checking mediaType again.
+    private static ApodResponse toApodResponse(ApodRaw raw) {
+        var isVideo = "video".equalsIgnoreCase(raw.mediaType());
+        return new ApodResponse(
+                raw.date(),
+                raw.title(),
+                raw.explanation(),
+                isVideo ? null : raw.url(),
+                isVideo ? raw.url() : null,
+                raw.hdurl(),
+                raw.mediaType(),
+                raw.copyright()
+        );
+    }
+
+    private record ApodRaw(
+            String date,
+            String title,
+            String explanation,
+            String url,
+            @JsonProperty("hdurl") String hdurl,
+            @JsonProperty("media_type") String mediaType,
+            String copyright
+    ) {
     }
 }

@@ -1,14 +1,13 @@
 package com.bryan.apiplayground.apis.space;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-
 public record ApodResponse(
         String date,
         String title,
         String explanation,
-        @JsonAlias("url") String imageUrl,
-        @JsonAlias("hdurl") String hdUrl,
-        @JsonAlias("media_type") String mediaType,
+        String imageUrl,
+        String videoUrl,
+        String hdUrl,
+        String mediaType,
         String copyright
 ) {
 }
