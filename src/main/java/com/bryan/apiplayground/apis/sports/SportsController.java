@@ -34,16 +34,18 @@ public class SportsController {
 
     @GetMapping("/matches")
     @Operation(
-            summary = "Partidos próximos (o últimos jugados)",
-            description = "Devuelve hasta 15 partidos. Modo UPCOMING si hay SCHEDULED/TIMED ordenados por "
-                    + "fecha ascendente; si no quedan próximos, modo RECENT con los FINISHED más recientes. "
-                    + "homeScore/awayScore vienen null para partidos no jugados; estadio no se expone porque "
-                    + "Football-Data no lo incluye en el free tier."
+            summary = "Partidos próximos o últimos jugados",
+            description = "type=upcoming (por defecto) → SCHEDULED + TIMED ordenados ascendente por fecha. "
+                    + "Si no hay próximos (parón o fin de temporada), devuelve lista vacía. "
+                    + "type=recent → FINISHED ordenados descendente por fecha. "
+                    + "Tope de 15 partidos. homeScore/awayScore vienen null para partidos no jugados. "
+                    + "El estadio no se expone porque Football-Data no lo incluye en el free tier."
     )
     public MatchesResponse getMatches(
-            @RequestParam(defaultValue = "PD") String competition
+            @RequestParam(defaultValue = "PD") String competition,
+            @RequestParam(defaultValue = "upcoming") String type
     ) {
-        return sportsService.getMatches(competition);
+        return sportsService.getMatches(competition, type);
     }
 
     @GetMapping("/teams")

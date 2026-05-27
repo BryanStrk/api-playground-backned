@@ -102,7 +102,7 @@ public class SportsService {
         }
     }
 
-    public MatchesResponse getMatches(String competitionCode) {
+    public MatchesResponse getMatches(String competitionCode, String type) {
         requireKey();
         try {
             var raw = restClient.get()
@@ -114,21 +114,12 @@ public class SportsService {
                 throw new ExternalApiException("Football-Data returned an empty payload", 502);
             }
             var all = raw.matches() == null ? List.<MatchRaw>of() : raw.matches();
-            // Prefer the next fixtures (SCHEDULED + TIMED) ordered by date so the
-            // dashboard shows "what's coming up". When the season is over and no
-            // more upcoming fixtures exist, fall back to the most recent results.
-            var upcoming = all.stream()
-                    .filter(m -> m.status() != null && UPCOMING_STATUSES.contains(m.status().toUpperCase()))
-                    .sorted(Comparator.comparing(MatchRaw::utcDate,
-                            Comparator.nullsLast(Comparator.naturalOrder())))
-                    .limit(MATCHES_LIMIT)
-                    .toList();
+            // type controls which slice the caller wants. No auto-fallback: an
+            // "upcoming" request after the season ends correctly returns []
+            // rather than silently swapping to past results.
             List<MatchRaw> chosen;
             String mode;
-            if (!upcoming.isEmpty()) {
-                chosen = upcoming;
-                mode = "UPCOMING";
-            } else {
+            if ("recent".equalsIgnoreCase(type)) {
                 chosen = all.stream()
                         .filter(m -> "FINISHED".equalsIgnoreCase(m.status()))
                         .sorted(Comparator.comparing(MatchRaw::utcDate,
@@ -136,6 +127,15 @@ public class SportsService {
                         .limit(MATCHES_LIMIT)
                         .toList();
                 mode = "RECENT";
+            } else {
+                chosen = all.stream()
+                        .filter(m -> m.status() != null
+                                && UPCOMING_STATUSES.contains(m.status().toUpperCase()))
+                        .sorted(Comparator.comparing(MatchRaw::utcDate,
+                                Comparator.nullsLast(Comparator.naturalOrder())))
+                        .limit(MATCHES_LIMIT)
+                        .toList();
+                mode = "UPCOMING";
             }
             var rows = chosen.stream().map(SportsService::toMatchRow).toList();
             return new MatchesResponse(
