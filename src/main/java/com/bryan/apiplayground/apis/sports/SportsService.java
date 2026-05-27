@@ -1,5 +1,6 @@
 package com.bryan.apiplayground.apis.sports;
 
+import com.bryan.apiplayground.common.exception.ApiKeyNotConfiguredException;
 import com.bryan.apiplayground.common.exception.ExternalApiException;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,64 +14,112 @@ import java.util.List;
 @Service
 public class SportsService {
 
-    private static final String SEARCH_URL =
-            "https://www.thesportsdb.com/api/v1/json/{key}/searchteams.php?t={name}";
+    private static final String STANDINGS_URL =
+            "https://api.football-data.org/v4/competitions/{code}/standings";
+    private static final String AUTH_HEADER = "X-Auth-Token";
 
     private final RestClient restClient;
     private final String apiKey;
 
     public SportsService(RestClient restClient,
-                         @Value("${sportsdb.api-key:123}") String apiKey) {
+                         @Value("${football-data.api-key:}") String apiKey) {
         this.restClient = restClient;
-        // SPORTSDB_KEY is OPTIONAL: empty falls back to the public test key "123".
-        this.apiKey = (apiKey == null || apiKey.isBlank()) ? "123" : apiKey;
+        this.apiKey = apiKey;
     }
 
-    public TeamsResponse searchTeams(String name) {
+    public StandingsResponse getStandings(String competitionCode) {
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new ApiKeyNotConfiguredException(
+                    "La API key de Football-Data no está configurada. Añade FOOTBALL_DATA_KEY a tu .env");
+        }
         try {
             var raw = restClient.get()
-                    .uri(SEARCH_URL, apiKey, name)
+                    .uri(STANDINGS_URL, competitionCode)
+                    .header(AUTH_HEADER, apiKey)
                     .retrieve()
-                    .body(TeamsRaw.class);
-            // TheSportsDB returns {"teams": null} when there is no match.
-            if (raw == null || raw.teams() == null) {
-                return new TeamsResponse(List.of());
+                    .body(StandingsRaw.class);
+            if (raw == null) {
+                throw new ExternalApiException("Football-Data returned an empty payload", 502);
             }
-            var teams = raw.teams().stream()
-                    .map(t -> new Team(
-                            t.idTeam(),
-                            t.strTeam(),
-                            t.strSport(),
-                            t.strLeague(),
-                            t.strCountry(),
-                            t.strStadium(),
-                            t.strDescriptionEN(),
-                            t.strBadge(),
-                            t.strLogo()))
+            // The API exposes three standings (TOTAL, HOME, AWAY); we surface TOTAL.
+            var totalGroup = (raw.standings() == null ? List.<StandingGroup>of() : raw.standings()).stream()
+                    .filter(g -> "TOTAL".equalsIgnoreCase(g.type()))
+                    .findFirst()
+                    .orElseGet(() -> raw.standings() == null || raw.standings().isEmpty()
+                            ? null
+                            : raw.standings().getFirst());
+            var rows = (totalGroup == null || totalGroup.table() == null
+                    ? List.<TableRow>of()
+                    : totalGroup.table()).stream()
+                    .map(r -> new StandingRow(
+                            r.position(),
+                            r.team() == null ? null : r.team().name(),
+                            r.team() == null ? null : r.team().crest(),
+                            r.playedGames(),
+                            r.won(),
+                            r.draw(),
+                            r.lost(),
+                            r.points()))
                     .toList();
-            return new TeamsResponse(teams);
+            return new StandingsResponse(
+                    raw.competition() == null ? null : raw.competition().name(),
+                    seasonLabel(raw.season()),
+                    rows
+            );
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
-                    "TheSportsDB returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+                    "Football-Data returned " + e.getStatusCode(), e.getStatusCode().value(), e);
         } catch (ResourceAccessException e) {
             throw new ExternalApiException(
-                    "TheSportsDB unreachable: " + e.getMessage(), 0, e);
+                    "Football-Data unreachable: " + e.getMessage(), 0, e);
         }
     }
 
-    private record TeamsRaw(List<TeamRaw> teams) {
+    // Football-Data returns startDate / endDate as "YYYY-MM-DD"; render as
+    // "2024/25" when the season spans two calendar years (most leagues) or
+    // just the start year when it's contained in one (e.g. summer tournaments).
+    private static String seasonLabel(SeasonRaw season) {
+        if (season == null || season.startDate() == null || season.startDate().length() < 4) {
+            return null;
+        }
+        var startYear = season.startDate().substring(0, 4);
+        if (season.endDate() == null || season.endDate().length() < 4) {
+            return startYear;
+        }
+        var endYear = season.endDate().substring(0, 4);
+        return startYear.equals(endYear) ? startYear : startYear + "/" + endYear.substring(2);
     }
 
-    private record TeamRaw(
-            @JsonProperty("idTeam") String idTeam,
-            @JsonProperty("strTeam") String strTeam,
-            @JsonProperty("strSport") String strSport,
-            @JsonProperty("strLeague") String strLeague,
-            @JsonProperty("strCountry") String strCountry,
-            @JsonProperty("strStadium") String strStadium,
-            @JsonProperty("strDescriptionEN") String strDescriptionEN,
-            @JsonProperty("strBadge") String strBadge,
-            @JsonProperty("strLogo") String strLogo
+    private record StandingsRaw(
+            CompetitionRaw competition,
+            SeasonRaw season,
+            List<StandingGroup> standings
     ) {
+    }
+
+    private record CompetitionRaw(String name, String code) {
+    }
+
+    private record SeasonRaw(
+            @JsonProperty("startDate") String startDate,
+            @JsonProperty("endDate") String endDate
+    ) {
+    }
+
+    private record StandingGroup(String stage, String type, List<TableRow> table) {
+    }
+
+    private record TableRow(
+            int position,
+            TeamRaw team,
+            @JsonProperty("playedGames") int playedGames,
+            int won,
+            int draw,
+            int lost,
+            int points
+    ) {
+    }
+
+    private record TeamRaw(int id, String name, String crest) {
     }
 }

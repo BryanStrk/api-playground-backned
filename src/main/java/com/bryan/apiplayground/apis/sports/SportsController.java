@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/sports")
-@Tag(name = "Deportes", description = "Equipos deportivos vía TheSportsDB (SPORTSDB_KEY opcional, '123' por defecto)")
+@Tag(name = "Deportes", description = "Clasificaciones de fútbol vía Football-Data.org (requiere FOOTBALL_DATA_KEY)")
 public class SportsController {
 
     private final SportsService sportsService;
@@ -18,12 +18,15 @@ public class SportsController {
         this.sportsService = sportsService;
     }
 
-    @GetMapping("/team")
+    @GetMapping("/standings")
     @Operation(
-            summary = "Buscar equipos por nombre",
-            description = "Devuelve la lista de equipos que coinciden con el nombre, con deporte, liga, país, estadio, descripción y URLs de escudo/logo."
+            summary = "Clasificación de una competición",
+            description = "Devuelve la tabla TOTAL del torneo indicado. competition es el código de "
+                    + "Football-Data (PD = La Liga por defecto, PL = Premier League, CL = Champions, ...)."
     )
-    public TeamsResponse searchTeams(@RequestParam String name) {
-        return sportsService.searchTeams(name);
+    public StandingsResponse getStandings(
+            @RequestParam(defaultValue = "PD") String competition
+    ) {
+        return sportsService.getStandings(competition);
     }
 }
