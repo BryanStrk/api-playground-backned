@@ -20,10 +20,14 @@ public class NewsController {
 
     @GetMapping("/headlines")
     @Operation(
-            summary = "Titulares por país",
-            description = "Devuelve los principales titulares del país indicado. country = ISO 3166-1 alfa-2 (us, gb, es…)."
+            summary = "Titulares por país y categoría",
+            description = "country = ISO 3166-1 alfa-2 (us, gb, es…). category opcional: "
+                    + "business, entertainment, general, health, science, sports, technology."
     )
-    public NewsResponse getHeadlines(@RequestParam(defaultValue = "us") String country) {
-        return newsService.getHeadlines(country);
+    public NewsResponse getHeadlines(
+            @RequestParam(defaultValue = "us") String country,
+            @RequestParam(required = false) String category
+    ) {
+        return newsService.getHeadlines(country, category);
     }
 }

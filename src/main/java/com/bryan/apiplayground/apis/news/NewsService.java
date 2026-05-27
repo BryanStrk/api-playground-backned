@@ -8,14 +8,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
 @Service
 public class NewsService {
 
-    private static final String HEADLINES_URL =
-            "https://newsapi.org/v2/top-headlines?country={country}&apiKey={apiKey}";
+    private static final String HEADLINES_BASE =
+            "https://newsapi.org/v2/top-headlines";
 
     private final RestClient restClient;
     private final String apiKey;
@@ -26,14 +27,20 @@ public class NewsService {
         this.apiKey = apiKey;
     }
 
-    public NewsResponse getHeadlines(String country) {
+    public NewsResponse getHeadlines(String country, String category) {
         if (apiKey == null || apiKey.isBlank()) {
             throw new ApiKeyNotConfiguredException(
                     "La API key de NewsAPI no está configurada. Añade NEWS_API_KEY a tu .env");
         }
+        var builder = UriComponentsBuilder.fromUriString(HEADLINES_BASE)
+                .queryParam("country", country)
+                .queryParam("apiKey", apiKey);
+        if (category != null && !category.isBlank()) {
+            builder.queryParam("category", category);
+        }
         try {
             var raw = restClient.get()
-                    .uri(HEADLINES_URL, country, apiKey)
+                    .uri(builder.build(false).toUriString())
                     .retrieve()
                     .body(NewsRaw.class);
             if (raw == null) {
