@@ -17,6 +17,8 @@ public class MoviesService {
     private static final String POPULAR_URL =
             "https://api.themoviedb.org/3/movie/popular?api_key={apiKey}&language={lang}";
     private static final String IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+    // TMDB returns 20 results per page; the dashboard grid only renders 12.
+    private static final int RESULT_LIMIT = 12;
 
     private final RestClient restClient;
     private final String apiKey;
@@ -41,6 +43,7 @@ public class MoviesService {
                 return new MoviesResponse(0, List.of(), 0, 0);
             }
             var movies = (raw.results() == null ? List.<MovieRaw>of() : raw.results()).stream()
+                    .limit(RESULT_LIMIT)
                     .map(m -> new Movie(
                             m.id(),
                             m.title(),
