@@ -17,6 +17,24 @@ public class SportsService {
     private static final String STANDINGS_URL =
             "https://api.football-data.org/v4/competitions/{code}/standings";
     private static final String AUTH_HEADER = "X-Auth-Token";
+    // The 12 competitions available on Football-Data's free tier. Hardcoded
+    // because the /v4/competitions endpoint requires a key just to list them
+    // and the free-tier subset never changes — a static list keeps the
+    // dashboard's competition selector working even before the user signs up.
+    private static final List<CompetitionInfo> FREE_TIER_COMPETITIONS = List.of(
+            new CompetitionInfo("PL", "Premier League"),
+            new CompetitionInfo("PD", "La Liga"),
+            new CompetitionInfo("BL1", "Bundesliga"),
+            new CompetitionInfo("SA", "Serie A"),
+            new CompetitionInfo("FL1", "Ligue 1"),
+            new CompetitionInfo("CL", "UEFA Champions League"),
+            new CompetitionInfo("DED", "Eredivisie"),
+            new CompetitionInfo("PPL", "Primeira Liga"),
+            new CompetitionInfo("ELC", "Championship"),
+            new CompetitionInfo("BSA", "Brasileirão Série A"),
+            new CompetitionInfo("WC", "FIFA World Cup"),
+            new CompetitionInfo("EC", "European Championship")
+    );
 
     private final RestClient restClient;
     private final String apiKey;
@@ -25,6 +43,10 @@ public class SportsService {
                          @Value("${football-data.api-key:}") String apiKey) {
         this.restClient = restClient;
         this.apiKey = apiKey;
+    }
+
+    public List<CompetitionInfo> listCompetitions() {
+        return FREE_TIER_COMPETITIONS;
     }
 
     public StandingsResponse getStandings(String competitionCode) {
