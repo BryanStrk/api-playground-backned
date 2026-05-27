@@ -1,5 +1,7 @@
 package com.bryan.apiplayground.apis.meals;
 
+import java.util.List;
+
 public record Meal(
         String id,
         String name,
@@ -7,6 +9,7 @@ public record Meal(
         String area,
         String instructions,
         String thumbUrl,
-        String youtubeUrl
+        String youtubeUrl,
+        List<Ingredient> ingredients
 ) {
 }
