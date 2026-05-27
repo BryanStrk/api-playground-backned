@@ -10,9 +10,11 @@ import org.springframework.web.client.RestClientResponseException;
 @Service
 public class WeatherService {
 
+    // Open-Meteo only returns the variables listed in current=...; ask for
+    // weather_code too so the frontend can render the corresponding icon.
     private static final String FORECAST_URL =
             "https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}"
-                    + "&current=temperature_2m,wind_speed_10m";
+                    + "&current=temperature_2m,wind_speed_10m,weather_code";
 
     private final RestClient restClient;
 
@@ -37,7 +39,8 @@ public class WeatherService {
                     raw.current().temperature(),
                     units == null ? null : units.temperature(),
                     raw.current().windSpeed(),
-                    units == null ? null : units.windSpeed()
+                    units == null ? null : units.windSpeed(),
+                    raw.current().weatherCode()
             );
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
@@ -59,7 +62,8 @@ public class WeatherService {
     private record Current(
             String time,
             @JsonProperty("temperature_2m") double temperature,
-            @JsonProperty("wind_speed_10m") double windSpeed
+            @JsonProperty("wind_speed_10m") double windSpeed,
+            @JsonProperty("weather_code") Integer weatherCode
     ) {
     }
 

@@ -7,6 +7,7 @@ public record WeatherResponse(
         double temperature,
         String temperatureUnit,
         double windSpeed,
-        String windSpeedUnit
+        String windSpeedUnit,
+        Integer weatherCode
 ) {
 }
