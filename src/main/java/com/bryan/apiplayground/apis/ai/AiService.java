@@ -28,16 +28,25 @@ public class AiService {
     }
 
     public GenerateResponse generate(String prompt) {
-        if (apiKey == null || apiKey.isBlank()) {
-            throw new ApiKeyNotConfiguredException(
-                    "La API key de Gemini no está configurada. Añade GEMINI_API_KEY a tu .env");
-        }
-        var requestBody = new GeminiRequest(List.of(new Content(List.of(new Part(prompt)))));
+        requireKey();
+        var contents = List.of(new Content("user", List.of(new Part(prompt))));
+        return callGemini(contents);
+    }
+
+    public GenerateResponse chat(List<ChatMessage> messages) {
+        requireKey();
+        var contents = messages.stream()
+                .map(m -> new Content(m.role(), List.of(new Part(m.text()))))
+                .toList();
+        return callGemini(contents);
+    }
+
+    private GenerateResponse callGemini(List<Content> contents) {
         try {
             var raw = restClient.post()
                     .uri(GENERATE_URL, apiKey)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(requestBody)
+                    .body(new GeminiRequest(contents))
                     .retrieve()
                     .body(GeminiResponse.class);
             if (raw == null || raw.candidates() == null || raw.candidates().isEmpty()) {
@@ -64,10 +73,20 @@ public class AiService {
         }
     }
 
+    private void requireKey() {
+        if (apiKey == null || apiKey.isBlank()) {
+            throw new ApiKeyNotConfiguredException(
+                    "La API key de Gemini no está configurada. Añade GEMINI_API_KEY a tu .env");
+        }
+    }
+
     private record GeminiRequest(List<Content> contents) {
     }
 
-    private record Content(List<Part> parts) {
+    // role is "user" or "model"; Gemini uses it to differentiate turns in chat mode.
+    // For single-turn /generate the role stays "user" — it doesn't change Gemini's
+    // behaviour but keeps both code paths funneling through the same builder.
+    private record Content(String role, List<Part> parts) {
     }
 
     private record Part(String text) {
