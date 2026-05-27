@@ -204,6 +204,16 @@ public class CatalogService {
                     "/api/v1/characters/{id}",
                     "https://rickandmortyapi.com/api/character",
                     "Personaje de Rick and Morty por id."
+            ),
+            new ApiInfo(
+                    "qrcode",
+                    "QR Code",
+                    "Herramientas",
+                    Difficulty.EASY,
+                    KeyRequirement.NONE,
+                    "/api/v1/qrcode",
+                    "https://goqr.me/api/",
+                    "Genera códigos QR a partir de texto o URL."
             )
     );
 
