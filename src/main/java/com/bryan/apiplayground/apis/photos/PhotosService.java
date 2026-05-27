@@ -37,10 +37,16 @@ public class PhotosService {
             if (raw == null) {
                 throw new ExternalApiException("Unsplash returned an empty payload", 502);
             }
+            // Unsplash's "description" (photographer-supplied caption) is usually
+            // null; "alt_description" (auto-generated alt text) is reliably set.
+            // Prefer the human caption when present, fall back to alt text so the
+            // public description is almost always populated.
+            var description = raw.description() != null && !raw.description().isBlank()
+                    ? raw.description()
+                    : raw.altDescription();
             return new PhotoResponse(
                     raw.id(),
-                    raw.description(),
-                    raw.altDescription(),
+                    description,
                     raw.urls() == null ? null : raw.urls().regular(),
                     raw.urls() == null ? null : raw.urls().thumb(),
                     raw.user() == null ? null : raw.user().name(),
