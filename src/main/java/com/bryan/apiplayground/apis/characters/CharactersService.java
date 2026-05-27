@@ -7,17 +7,43 @@ import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 public class CharactersService {
 
     private static final String BY_ID_URL = "https://rickandmortyapi.com/api/character/{id}";
     private static final String SEARCH_URL = "https://rickandmortyapi.com/api/character/?name={name}";
+    private static final String COUNT_URL = "https://rickandmortyapi.com/api/character";
 
     private final RestClient restClient;
 
     public CharactersService(RestClient restClient) {
         this.restClient = restClient;
+    }
+
+    public CharacterResponse getRandom() {
+        try {
+            // The R&M API has no "random" endpoint; the canonical trick is to
+            // read info.count from the first page (Jackson skips results[] under
+            // fail-on-unknown-properties=false) and pick a random id in [1, count].
+            var page = restClient.get()
+                    .uri(COUNT_URL)
+                    .retrieve()
+                    .body(InfoOnlyRaw.class);
+            if (page == null || page.info() == null || page.info().count() <= 0) {
+                throw new ExternalApiException(
+                        "Rick and Morty API returned no usable character count", 502);
+            }
+            var id = ThreadLocalRandom.current().nextInt(1, page.info().count() + 1);
+            return getById(id);
+        } catch (RestClientResponseException e) {
+            throw new ExternalApiException(
+                    "Rick and Morty API returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "Rick and Morty API unreachable: " + e.getMessage(), 0, e);
+        }
     }
 
     public CharacterResponse getById(int id) {
@@ -76,6 +102,12 @@ public class CharactersService {
     }
 
     private record SearchRaw(List<CharacterRaw> results) {
+    }
+
+    private record InfoOnlyRaw(InfoRaw info) {
+    }
+
+    private record InfoRaw(int count, int pages, String next, String prev) {
     }
 
     private record CharacterRaw(

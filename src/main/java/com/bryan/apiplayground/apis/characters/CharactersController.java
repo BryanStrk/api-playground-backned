@@ -31,6 +31,16 @@ public class CharactersController {
         return charactersService.search(name);
     }
 
+    @GetMapping("/random")
+    @Operation(
+            summary = "Personaje aleatorio",
+            description = "Devuelve un personaje aleatorio del catálogo completo (Rick and Morty no expone un /random "
+                    + "propio, así que el servicio lee info.count y pide un id al azar dentro del rango)."
+    )
+    public CharacterResponse getRandom() {
+        return charactersService.getRandom();
+    }
+
     @GetMapping("/{id}")
     @Operation(
             summary = "Personaje por id",
