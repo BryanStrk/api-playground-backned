@@ -12,6 +12,7 @@ public record CountryResponse(
         double area,
         List<String> languages,
         String flagUrl,
+        String flagAlt,
         String mapUrl
 ) {
 }

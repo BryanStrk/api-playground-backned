@@ -49,7 +49,13 @@ public class CountriesService {
         var official = c.name() == null ? null : c.name().official();
         var capital = c.capital() == null || c.capital().isEmpty() ? null : c.capital().getFirst();
         var languages = c.languages() == null ? List.<String>of() : List.copyOf(c.languages().values());
-        var flag = c.flags() == null ? null : (c.flags().svg() != null ? c.flags().svg() : c.flags().png());
+        // Prefer PNG so <img> tags work everywhere; fall back to SVG only if PNG is missing.
+        String flagUrl = null;
+        String flagAlt = null;
+        if (c.flags() != null) {
+            flagUrl = c.flags().png() != null ? c.flags().png() : c.flags().svg();
+            flagAlt = c.flags().alt();
+        }
         var map = c.maps() == null ? null : c.maps().googleMaps();
         return new CountryResponse(
                 common,
@@ -60,7 +66,8 @@ public class CountriesService {
                 c.population(),
                 c.area(),
                 languages,
-                flag,
+                flagUrl,
+                flagAlt,
                 map
         );
     }
@@ -81,7 +88,7 @@ public class CountriesService {
     private record CountryName(String common, String official) {
     }
 
-    private record Flags(String png, String svg) {
+    private record Flags(String png, String svg, String alt) {
     }
 
     private record Maps(@JsonProperty("googleMaps") String googleMaps) {
