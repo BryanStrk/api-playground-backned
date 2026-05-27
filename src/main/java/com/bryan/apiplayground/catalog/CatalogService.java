@@ -86,16 +86,6 @@ public class CatalogService {
                     "Generación de texto con Gemini 2.5 Flash. Requiere GEMINI_API_KEY."
             ),
             new ApiInfo(
-                    "posts",
-                    "JSONPlaceholder",
-                    "Demos",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/posts/{id}",
-                    "https://jsonplaceholder.typicode.com/posts",
-                    "Post de ejemplo (datos fake para demos)."
-            ),
-            new ApiInfo(
                     "cats",
                     "The Cat API",
                     "Animales",
