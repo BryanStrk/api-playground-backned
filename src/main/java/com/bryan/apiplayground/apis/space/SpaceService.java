@@ -6,12 +6,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
 public class SpaceService {
 
-    private static final String APOD_URL =
-            "https://api.nasa.gov/planetary/apod?api_key={apiKey}";
+    private static final String APOD_BASE = "https://api.nasa.gov/planetary/apod";
 
     private final RestClient restClient;
     private final String apiKey;
@@ -23,16 +23,47 @@ public class SpaceService {
         this.apiKey = (apiKey == null || apiKey.isBlank()) ? "DEMO_KEY" : apiKey;
     }
 
-    public ApodResponse getApod() {
+    public ApodResponse getApod(String date) {
+        var url = UriComponentsBuilder.fromUriString(APOD_BASE)
+                .queryParam("api_key", apiKey);
+        if (date != null && !date.isBlank()) {
+            url.queryParam("date", date);
+        }
         try {
             var raw = restClient.get()
-                    .uri(APOD_URL, apiKey)
+                    .uri(url.build(false).toUriString())
                     .retrieve()
                     .body(ApodResponse.class);
             if (raw == null) {
                 throw new ExternalApiException("NASA APOD returned an empty payload", 502);
             }
             return raw;
+        } catch (RestClientResponseException e) {
+            throw new ExternalApiException(
+                    "NASA APOD returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "NASA APOD unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
+    public ApodResponse getRandomApod() {
+        // count=N flips the response from a single object to an array; we ask
+        // for one entry and unwrap it so callers see the same shape as /apod.
+        var url = UriComponentsBuilder.fromUriString(APOD_BASE)
+                .queryParam("api_key", apiKey)
+                .queryParam("count", 1)
+                .build(false)
+                .toUriString();
+        try {
+            var raw = restClient.get()
+                    .uri(url)
+                    .retrieve()
+                    .body(ApodResponse[].class);
+            if (raw == null || raw.length == 0) {
+                throw new ExternalApiException("NASA APOD returned an empty payload", 502);
+            }
+            return raw[0];
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
                     "NASA APOD returned " + e.getStatusCode(), e.getStatusCode().value(), e);
