@@ -251,9 +251,11 @@ public class SportsService {
     ) {
     }
 
-    // Shared shape: standings uses id/name/crest, /teams adds venue + founded
-    // (free-tier returns null for venue on some less-popular competitions).
-    private record TeamRaw(int id, String name, String crest, String venue, Integer founded) {
+    // Shared shape: standings uses id/name/crest, /teams adds venue + founded.
+    // id is Integer (not int) because cup matches carry TBD entries with
+    // {"id": null, "name": "Winner Match 49"} until the bracket fills in,
+    // and a primitive int would blow up Jackson at parse time.
+    private record TeamRaw(Integer id, String name, String crest, String venue, Integer founded) {
     }
 
     private record MatchesRaw(CompetitionRaw competition, List<MatchRaw> matches) {
