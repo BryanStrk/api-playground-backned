@@ -41,6 +41,22 @@ public class CharactersController {
         return charactersService.getRandom();
     }
 
+    @GetMapping("/list")
+    @Operation(
+            summary = "Listado paginado con filtros",
+            description = "Devuelve una página de 20 personajes (la paginación la fija el upstream). "
+                    + "Filtros opcionales: status (alive/dead/unknown), species, gender (female/male/genderless/unknown). "
+                    + "Sin coincidencias → página vacía (info en cero y results vacío)."
+    )
+    public CharacterPage list(
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) String species,
+            @RequestParam(required = false) String gender,
+            @RequestParam(defaultValue = "1") int page
+    ) {
+        return charactersService.list(status, species, gender, page);
+    }
+
     @GetMapping("/{id}")
     @Operation(
             summary = "Personaje por id",

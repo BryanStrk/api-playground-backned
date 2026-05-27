@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -14,7 +15,7 @@ public class CharactersService {
 
     private static final String BY_ID_URL = "https://rickandmortyapi.com/api/character/{id}";
     private static final String SEARCH_URL = "https://rickandmortyapi.com/api/character/?name={name}";
-    private static final String COUNT_URL = "https://rickandmortyapi.com/api/character";
+    private static final String LIST_URL = "https://rickandmortyapi.com/api/character";
 
     private final RestClient restClient;
 
@@ -28,7 +29,7 @@ public class CharactersService {
             // read info.count from the first page (Jackson skips results[] under
             // fail-on-unknown-properties=false) and pick a random id in [1, count].
             var page = restClient.get()
-                    .uri(COUNT_URL)
+                    .uri(LIST_URL)
                     .retrieve()
                     .body(InfoOnlyRaw.class);
             if (page == null || page.info() == null || page.info().count() <= 0) {
@@ -65,6 +66,43 @@ public class CharactersService {
         }
     }
 
+    public CharacterPage list(String status, String species, String gender, int page) {
+        var url = UriComponentsBuilder.fromUriString(LIST_URL)
+                .queryParam("page", page);
+        if (notBlank(status)) url.queryParam("status", status);
+        if (notBlank(species)) url.queryParam("species", species);
+        if (notBlank(gender)) url.queryParam("gender", gender);
+        try {
+            var raw = restClient.get()
+                    .uri(url.build(false).toUriString())
+                    .retrieve()
+                    .body(PageRaw.class);
+            if (raw == null) {
+                return new CharacterPage(new PageInfo(0, 0, null, null), List.of());
+            }
+            var info = raw.info() == null
+                    ? new PageInfo(0, 0, null, null)
+                    : new PageInfo(raw.info().count(), raw.info().pages(),
+                            raw.info().next(), raw.info().prev());
+            var results = raw.results() == null
+                    ? List.<CharacterSummary>of()
+                    : raw.results().stream().map(CharactersService::toSummary).toList();
+            return new CharacterPage(info, results);
+        } catch (RestClientResponseException e) {
+            // No matching characters → R&M responds 404 with {"error": "..."}. The
+            // dashboard wants "empty page, not failure" so the UI can render zero
+            // rows and a "next page" button stays disabled.
+            if (e.getStatusCode().value() == 404) {
+                return new CharacterPage(new PageInfo(0, 0, null, null), List.of());
+            }
+            throw new ExternalApiException(
+                    "Rick and Morty API returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "Rick and Morty API unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
     public List<CharacterResponse> search(String name) {
         try {
             var raw = restClient.get()
@@ -85,6 +123,17 @@ public class CharactersService {
             throw new ExternalApiException(
                     "Rick and Morty API unreachable: " + e.getMessage(), 0, e);
         }
+    }
+
+    private static CharacterSummary toSummary(CharacterRaw raw) {
+        return new CharacterSummary(
+                raw.id(), raw.name(), raw.image(),
+                raw.status(), raw.species(), raw.gender()
+        );
+    }
+
+    private static boolean notBlank(String s) {
+        return s != null && !s.isBlank();
     }
 
     private CharacterResponse toCharacter(CharacterRaw raw) {
@@ -108,6 +157,9 @@ public class CharactersService {
     }
 
     private record InfoRaw(int count, int pages, String next, String prev) {
+    }
+
+    private record PageRaw(InfoRaw info, List<CharacterRaw> results) {
     }
 
     private record CharacterRaw(
