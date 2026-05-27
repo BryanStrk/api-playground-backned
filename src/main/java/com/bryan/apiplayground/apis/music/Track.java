@@ -1,13 +1,13 @@
 package com.bryan.apiplayground.apis.music;
 
 public record Track(
-        long trackId,
+        Long trackId,
         String trackName,
         String artistName,
         String collectionName,
         String previewUrl,
         String artworkUrl,
-        int trackTimeMillis,
+        Integer trackTimeMillis,
         String genre
 ) {
 }

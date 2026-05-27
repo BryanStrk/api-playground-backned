@@ -15,7 +15,7 @@ import java.util.List;
 public class MusicService {
 
     private static final String SEARCH_URL =
-            "https://itunes.apple.com/search?term={term}&entity=song&limit={limit}";
+            "https://itunes.apple.com/search?term={term}&entity={entity}&limit={limit}";
 
     private final RestClient restClient;
     private final ObjectMapper objectMapper;
@@ -25,13 +25,13 @@ public class MusicService {
         this.objectMapper = objectMapper;
     }
 
-    public MusicResponse search(String term, int limit) {
+    public MusicResponse search(String term, String entity, int limit) {
         try {
             // iTunes responds with Content-Type: text/javascript even though the body is JSON.
             // Spring's JSON converter is bound to application/json, so we fetch as String and
             // deserialize manually.
             var json = restClient.get()
-                    .uri(SEARCH_URL, term, limit)
+                    .uri(SEARCH_URL, term, entity, limit)
                     .retrieve()
                     .body(String.class);
             if (json == null || json.isBlank()) {
@@ -49,7 +49,7 @@ public class MusicService {
                             t.collectionName(),
                             t.previewUrl(),
                             highResArtwork(t.artworkUrl100()),
-                            t.trackTimeMillis() == null ? 0 : t.trackTimeMillis(),
+                            t.trackTimeMillis(),
                             t.primaryGenreName()))
                     .toList();
             return new MusicResponse(raw.resultCount(), tracks);
@@ -75,7 +75,7 @@ public class MusicService {
     }
 
     private record TrackRaw(
-            @JsonProperty("trackId") long trackId,
+            @JsonProperty("trackId") Long trackId,
             @JsonProperty("trackName") String trackName,
             @JsonProperty("artistName") String artistName,
             @JsonProperty("collectionName") String collectionName,

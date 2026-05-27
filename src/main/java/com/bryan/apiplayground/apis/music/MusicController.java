@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/v1/music")
-@Tag(name = "Música", description = "Búsqueda de canciones en el catálogo de iTunes (sin API key)")
+@Tag(name = "Música", description = "Búsqueda en el catálogo de iTunes (sin API key)")
 public class MusicController {
 
     private final MusicService musicService;
@@ -20,13 +20,15 @@ public class MusicController {
 
     @GetMapping("/search")
     @Operation(
-            summary = "Buscar canciones por término",
-            description = "Devuelve canciones con artista, álbum, preview de 30s y portada (artworkUrl100)."
+            summary = "Buscar canciones, álbumes o artistas",
+            description = "term: texto libre. entity: 'song' (canciones), 'album' (discos), 'musicArtist' (intérpretes). "
+                    + "Cada entity rellena un subconjunto distinto de campos del Track (p.ej. los álbumes no traen trackName ni previewUrl)."
     )
     public MusicResponse search(
             @RequestParam String term,
-            @RequestParam(defaultValue = "10") int limit
+            @RequestParam(defaultValue = "song") String entity,
+            @RequestParam(defaultValue = "15") int limit
     ) {
-        return musicService.search(term, limit);
+        return musicService.search(term, entity, limit);
     }
 }
