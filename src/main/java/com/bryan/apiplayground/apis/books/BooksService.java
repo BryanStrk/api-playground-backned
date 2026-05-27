@@ -55,7 +55,8 @@ public class BooksService {
     }
 
     private static String coverUrl(Integer coverId) {
-        return coverId == null ? null : "https://covers.openlibrary.org/b/id/" + coverId + "-L.jpg";
+        // -M.jpg (≈180px wide) is the right size for a grid of thumbnails; -L is overkill.
+        return coverId == null ? null : "https://covers.openlibrary.org/b/id/" + coverId + "-M.jpg";
     }
 
     private record OpenLibraryRaw(
