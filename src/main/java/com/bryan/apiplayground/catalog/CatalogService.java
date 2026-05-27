@@ -214,6 +214,16 @@ public class CatalogService {
                     "/api/v1/qrcode",
                     "https://goqr.me/api/",
                     "Genera códigos QR a partir de texto o URL."
+            ),
+            new ApiInfo(
+                    "holidays",
+                    "Festivos",
+                    "Cultura",
+                    Difficulty.EASY,
+                    KeyRequirement.NONE,
+                    "/api/v1/holidays",
+                    "https://date.nager.at",
+                    "Festivos públicos por país y año."
             )
     );
 
