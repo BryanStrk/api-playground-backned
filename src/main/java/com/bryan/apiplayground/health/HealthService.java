@@ -20,24 +20,30 @@ public class HealthService {
 
     private final CatalogService catalogService;
     private final RestClient healthRestClient;
-    // Maps api id → whether its REQUIRED key is configured. Only REQUIRED keys are
-    // tracked; OPTIONAL ones have working defaults (DEMO_KEY for NASA, "123" for
-    // TheSportsDB) so they're never SKIPPED.
+    // Maps api id → whether its REQUIRED key is configured. OPTIONAL keys have
+    // working defaults (DEMO_KEY for NASA) so they're never tracked here.
     private final Map<String, Boolean> requiredKeyConfigured;
+    // Football-Data requires an auth header just to hit /standings, so the
+    // health ping needs to send X-Auth-Token when the key exists; the other
+    // REQUIRED upstreams take their key in the URL query string.
+    private final String footballDataKey;
 
     public HealthService(CatalogService catalogService,
                          @Qualifier("healthRestClient") RestClient healthRestClient,
                          @Value("${tmdb.api-key:}") String tmdbKey,
                          @Value("${gemini.api-key:}") String geminiKey,
                          @Value("${unsplash.access-key:}") String unsplashKey,
-                         @Value("${news.api-key:}") String newsKey) {
+                         @Value("${news.api-key:}") String newsKey,
+                         @Value("${football-data.api-key:}") String footballDataKey) {
         this.catalogService = catalogService;
         this.healthRestClient = healthRestClient;
+        this.footballDataKey = footballDataKey;
         this.requiredKeyConfigured = Map.of(
                 "movies", isSet(tmdbKey),
                 "ai", isSet(geminiKey),
                 "photos", isSet(unsplashKey),
-                "news", isSet(newsKey)
+                "news", isSet(newsKey),
+                "sports", isSet(footballDataKey)
         );
     }
 
@@ -75,6 +81,11 @@ public class HealthService {
             // RestClientResponseException hierarchy.
             int httpStatus = healthRestClient.get()
                     .uri(api.externalUrl())
+                    .headers(h -> {
+                        if ("sports".equals(api.id()) && isSet(footballDataKey)) {
+                            h.add("X-Auth-Token", footballDataKey);
+                        }
+                    })
                     .exchange((req, res) -> res.getStatusCode().value());
             var elapsed = elapsedMs(start);
             // 404 counts as UP because it means the host answered. Only 5xx and

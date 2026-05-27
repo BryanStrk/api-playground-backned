@@ -117,13 +117,13 @@ public class CatalogService {
             ),
             new ApiInfo(
                     "sports",
-                    "TheSportsDB",
+                    "Football-Data",
                     "Deportes",
-                    Difficulty.EASY,
-                    KeyRequirement.OPTIONAL,
-                    "/api/v1/sports/team",
-                    "https://www.thesportsdb.com/api/v1/json/123/searchteams.php",
-                    "Búsqueda de equipos deportivos. Usa la key pública 123 si no se configura."
+                    Difficulty.MEDIUM,
+                    KeyRequirement.REQUIRED,
+                    "/api/v1/sports/standings",
+                    "https://api.football-data.org/v4/competitions/PD/standings",
+                    "Clasificación de las grandes ligas de fútbol (Football-Data.org). Requiere FOOTBALL_DATA_KEY."
             ),
             new ApiInfo(
                     "dictionary",
