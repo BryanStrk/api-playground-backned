@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/crypto")
 @Tag(name = "Finanzas", description = "Precios de criptomonedas vía CoinGecko (sin API key)")
@@ -28,5 +30,14 @@ public class CryptoController {
             @RequestParam(defaultValue = "eur") String vs
     ) {
         return cryptoService.getPrice(ids, vs);
+    }
+
+    @GetMapping("/search")
+    @Operation(
+            summary = "Buscar monedas por nombre",
+            description = "Devuelve los coins que coinciden con q (id, name, symbol, thumb). El id es lo que /crypto/price acepta como ids="
+    )
+    public List<CoinSummary> search(@RequestParam String q) {
+        return cryptoService.search(q);
     }
 }
