@@ -22,11 +22,16 @@ public class MealsController {
 
     @GetMapping("/search")
     @Operation(
-            summary = "Buscar recetas por nombre",
-            description = "Devuelve recetas completas con ingredientes (pares nombre + medida, "
-                    + "ignorando los slots vacíos del upstream). Vacía si no hay coincidencias."
+            summary = "Buscar recetas por nombre (q opcional)",
+            description = "Si llega ?q=, devuelve recetas completas que coinciden con el nombre. "
+                    + "Si no llega o viene vacío, sirve una receta aleatoria desde random.php para "
+                    + "que pulsar 'Ejecutar' sin teclear siempre muestre algo. Cada receta trae "
+                    + "ingredientes pareados (nombre + medida), ignorando los slots vacíos del upstream."
     )
-    public MealsResponse search(@RequestParam String q) {
+    public MealsResponse search(@RequestParam(required = false) String q) {
+        if (q == null || q.isBlank()) {
+            return mealsService.random();
+        }
         return mealsService.search(q);
     }
 

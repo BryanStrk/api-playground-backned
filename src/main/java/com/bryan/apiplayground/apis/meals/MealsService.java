@@ -17,6 +17,8 @@ public class MealsService {
 
     private static final String SEARCH_URL =
             "https://www.themealdb.com/api/json/v1/1/search.php?s={q}";
+    private static final String RANDOM_URL =
+            "https://www.themealdb.com/api/json/v1/1/random.php";
     private static final String CATEGORIES_URL =
             "https://www.themealdb.com/api/json/v1/1/categories.php";
     private static final String FILTER_URL =
@@ -48,6 +50,25 @@ public class MealsService {
             }
             var meals = raw.meals().stream().map(MealsService::toMeal).toList();
             return new MealsResponse(meals);
+        } catch (RestClientResponseException e) {
+            throw new ExternalApiException(
+                    "TheMealDB returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "TheMealDB unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
+    public MealsResponse random() {
+        try {
+            var raw = restClient.get()
+                    .uri(RANDOM_URL)
+                    .retrieve()
+                    .body(MEALS_RAW_MAP);
+            if (raw == null || raw.meals() == null || raw.meals().isEmpty()) {
+                return new MealsResponse(List.of());
+            }
+            return new MealsResponse(List.of(toMeal(raw.meals().getFirst())));
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
                     "TheMealDB returned " + e.getStatusCode(), e.getStatusCode().value(), e);
