@@ -8,7 +8,7 @@ public record CharacterResponse(
         String gender,
         String origin,
         String location,
-        String image,
+        String imageUrl,
         int episodeCount
 ) {
 }
