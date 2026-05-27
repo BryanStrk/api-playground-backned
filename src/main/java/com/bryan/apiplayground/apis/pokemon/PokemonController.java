@@ -26,4 +26,13 @@ public class PokemonController {
     public PokemonResponse getByName(@PathVariable String name) {
         return pokemonService.getByName(name);
     }
+
+    @GetMapping("/type/{type}")
+    @Operation(
+            summary = "Pokémon por tipo",
+            description = "Devuelve la lista de nombres de Pokémon que pertenecen al tipo indicado (fire, water, electric…). El front lo usa para poblar un desplegable o filtro."
+    )
+    public PokemonTypeResponse listByType(@PathVariable String type) {
+        return pokemonService.listByType(type);
+    }
 }
