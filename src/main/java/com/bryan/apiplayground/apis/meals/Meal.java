@@ -6,7 +6,7 @@ public record Meal(
         String category,
         String area,
         String instructions,
-        String thumbnail,
+        String thumbUrl,
         String youtubeUrl
 ) {
 }
