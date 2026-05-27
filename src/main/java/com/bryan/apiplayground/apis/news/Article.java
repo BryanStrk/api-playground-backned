@@ -1,7 +1,7 @@
 package com.bryan.apiplayground.apis.news;
 
 public record Article(
-        String source,
+        String sourceName,
         String author,
         String title,
         String description,
