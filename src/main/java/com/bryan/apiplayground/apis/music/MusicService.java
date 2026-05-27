@@ -48,7 +48,7 @@ public class MusicService {
                             t.artistName(),
                             t.collectionName(),
                             t.previewUrl(),
-                            t.artworkUrl100(),
+                            highResArtwork(t.artworkUrl100()),
                             t.trackTimeMillis() == null ? 0 : t.trackTimeMillis(),
                             t.primaryGenreName()))
                     .toList();
@@ -63,6 +63,12 @@ public class MusicService {
             throw new ExternalApiException(
                     "iTunes Search returned malformed JSON: " + e.getMessage(), 502, e);
         }
+    }
+
+    // iTunes ships artwork as a 100x100 JPEG; swapping the segment in the path
+    // upgrades it to 600x600 with no extra request.
+    private static String highResArtwork(String url100) {
+        return url100 == null ? null : url100.replace("100x100bb", "600x600bb");
     }
 
     private record ItunesRaw(int resultCount, List<TrackRaw> results) {
