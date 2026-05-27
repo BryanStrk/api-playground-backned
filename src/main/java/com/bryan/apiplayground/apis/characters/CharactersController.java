@@ -5,7 +5,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/characters")
@@ -16,6 +19,16 @@ public class CharactersController {
 
     public CharactersController(CharactersService charactersService) {
         this.charactersService = charactersService;
+    }
+
+    @GetMapping("/search")
+    @Operation(
+            summary = "Buscar personajes por nombre",
+            description = "Devuelve la lista de personajes cuyo nombre contiene el término (matching parcial del upstream). "
+                    + "Si no hay coincidencias, devuelve lista vacía (la API real responde 404 en ese caso)."
+    )
+    public List<CharacterResponse> search(@RequestParam String name) {
+        return charactersService.search(name);
     }
 
     @GetMapping("/{id}")

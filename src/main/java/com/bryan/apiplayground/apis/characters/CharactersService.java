@@ -11,7 +11,8 @@ import java.util.List;
 @Service
 public class CharactersService {
 
-    private static final String BASE_URL = "https://rickandmortyapi.com/api/character/{id}";
+    private static final String BY_ID_URL = "https://rickandmortyapi.com/api/character/{id}";
+    private static final String SEARCH_URL = "https://rickandmortyapi.com/api/character/?name={name}";
 
     private final RestClient restClient;
 
@@ -22,23 +23,13 @@ public class CharactersService {
     public CharacterResponse getById(int id) {
         try {
             var raw = restClient.get()
-                    .uri(BASE_URL, id)
+                    .uri(BY_ID_URL, id)
                     .retrieve()
                     .body(CharacterRaw.class);
             if (raw == null) {
                 throw new ExternalApiException("Rick and Morty API returned an empty payload", 502);
             }
-            return new CharacterResponse(
-                    raw.id(),
-                    raw.name(),
-                    raw.status(),
-                    raw.species(),
-                    raw.gender(),
-                    raw.origin() == null ? null : raw.origin().name(),
-                    raw.location() == null ? null : raw.location().name(),
-                    raw.image(),
-                    raw.episode() == null ? 0 : raw.episode().size()
-            );
+            return toCharacter(raw);
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
                     "Rick and Morty API returned " + e.getStatusCode(), e.getStatusCode().value(), e);
@@ -46,6 +37,45 @@ public class CharactersService {
             throw new ExternalApiException(
                     "Rick and Morty API unreachable: " + e.getMessage(), 0, e);
         }
+    }
+
+    public List<CharacterResponse> search(String name) {
+        try {
+            var raw = restClient.get()
+                    .uri(SEARCH_URL, name)
+                    .retrieve()
+                    .body(SearchRaw.class);
+            if (raw == null || raw.results() == null) return List.of();
+            return raw.results().stream().map(this::toCharacter).toList();
+        } catch (RestClientResponseException e) {
+            // The API answers 404 with {"error": "There is nothing here"} when the
+            // query matches no characters — surface that as an empty list, not 502.
+            if (e.getStatusCode().value() == 404) {
+                return List.of();
+            }
+            throw new ExternalApiException(
+                    "Rick and Morty API returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "Rick and Morty API unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
+    private CharacterResponse toCharacter(CharacterRaw raw) {
+        return new CharacterResponse(
+                raw.id(),
+                raw.name(),
+                raw.status(),
+                raw.species(),
+                raw.gender(),
+                raw.origin() == null ? null : raw.origin().name(),
+                raw.location() == null ? null : raw.location().name(),
+                raw.image(),
+                raw.episode() == null ? 0 : raw.episode().size()
+        );
+    }
+
+    private record SearchRaw(List<CharacterRaw> results) {
     }
 
     private record CharacterRaw(
