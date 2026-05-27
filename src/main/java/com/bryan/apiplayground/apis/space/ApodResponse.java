@@ -6,7 +6,7 @@ public record ApodResponse(
         String date,
         String title,
         String explanation,
-        String url,
+        @JsonAlias("url") String imageUrl,
         @JsonAlias("hdurl") String hdUrl,
         @JsonAlias("media_type") String mediaType,
         String copyright
