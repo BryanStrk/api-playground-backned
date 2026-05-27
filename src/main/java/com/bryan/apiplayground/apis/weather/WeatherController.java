@@ -22,13 +22,23 @@ public class WeatherController {
 
     @GetMapping
     @Operation(
-            summary = "Tiempo actual por coordenadas",
-            description = "Devuelve temperatura y velocidad del viento actuales en las coordenadas indicadas."
+            summary = "Tiempo actual por ciudad o por coordenadas",
+            description = "Acepta o bien ?city= (geocodificado vía Open-Meteo) o bien ?lat=&lon=. "
+                    + "Si llegan ambos, gana city. Cuando se busca por ciudad, locationName trae "
+                    + "el nombre completo (ej. 'Tokyo, Japan')."
     )
     public WeatherResponse getCurrent(
-            @RequestParam @DecimalMin("-90.0") @DecimalMax("90.0") double lat,
-            @RequestParam @DecimalMin("-180.0") @DecimalMax("180.0") double lon
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) @DecimalMin("-90.0") @DecimalMax("90.0") Double lat,
+            @RequestParam(required = false) @DecimalMin("-180.0") @DecimalMax("180.0") Double lon
     ) {
-        return weatherService.getCurrent(lat, lon);
+        if (city != null && !city.isBlank()) {
+            return weatherService.getByCity(city);
+        }
+        if (lat == null || lon == null) {
+            throw new IllegalArgumentException(
+                    "Provide either ?city= or both ?lat= and ?lon=");
+        }
+        return weatherService.getByCoordinates(lat, lon);
     }
 }

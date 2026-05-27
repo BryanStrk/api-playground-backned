@@ -1,6 +1,7 @@
 package com.bryan.apiplayground.apis.weather;
 
 public record WeatherResponse(
+        String locationName,
         double latitude,
         double longitude,
         String time,
