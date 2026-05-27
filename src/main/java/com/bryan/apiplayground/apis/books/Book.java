@@ -1,12 +1,13 @@
 package com.bryan.apiplayground.apis.books;
 
-import java.util.List;
-
 public record Book(
-        String key,
+        String workKey,
         String title,
-        List<String> authors,
+        String author,
         Integer year,
-        String coverUrl
+        Integer coverId,
+        String coverUrl,
+        String iaId,
+        String ebookAccess
 ) {
 }

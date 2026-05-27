@@ -25,7 +25,7 @@ public class BooksController {
     )
     public BooksResponse search(
             @RequestParam String title,
-            @RequestParam(defaultValue = "10") int limit
+            @RequestParam(defaultValue = "12") int limit
     ) {
         return booksService.search(title, limit);
     }
