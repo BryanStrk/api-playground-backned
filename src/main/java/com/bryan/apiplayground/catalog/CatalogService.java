@@ -224,6 +224,16 @@ public class CatalogService {
                     "/api/v1/holidays",
                     "https://date.nager.at",
                     "Festivos públicos por país y año."
+            ),
+            new ApiInfo(
+                    "trivia",
+                    "Trivia",
+                    "Juegos",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/trivia",
+                    "https://opentdb.com",
+                    "Preguntas de cultura general para jugar."
             )
     );
 
