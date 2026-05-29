@@ -2,6 +2,7 @@ package com.bryan.apiplayground.common;
 
 import com.bryan.apiplayground.common.exception.ApiKeyNotConfiguredException;
 import com.bryan.apiplayground.common.exception.ExternalApiException;
+import com.bryan.apiplayground.common.exception.PremiumFeatureException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,21 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleMissingKey(ApiKeyNotConfiguredException ex, HttpServletRequest req) {
         return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
                 .body(ApiError.of(HttpStatus.SERVICE_UNAVAILABLE.value(), ex.getMessage(), req.getRequestURI()));
+    }
+
+    // 402 Payment Required distinguishes "your tier doesn't cover this endpoint"
+    // from a real upstream failure. The body carries requiredPlan + feature so
+    // the frontend can render the right paywall without parsing the message.
+    @ExceptionHandler(PremiumFeatureException.class)
+    public ResponseEntity<PremiumRequiredError> handlePremium(PremiumFeatureException ex, HttpServletRequest req) {
+        return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED)
+                .body(PremiumRequiredError.of(
+                        HttpStatus.PAYMENT_REQUIRED.value(),
+                        ex.getMessage(),
+                        req.getRequestURI(),
+                        ex.getRequiredPlan(),
+                        ex.getFeature()
+                ));
     }
 
     @ExceptionHandler(ExternalApiException.class)
