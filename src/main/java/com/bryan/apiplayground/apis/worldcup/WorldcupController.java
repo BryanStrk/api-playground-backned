@@ -37,4 +37,17 @@ public class WorldcupController {
     ) {
         return worldcupService.getMatches(group, team, status);
     }
+
+    @GetMapping("/groups")
+    @Operation(
+            summary = "Clasificación de los grupos del Mundial 2026",
+            description = "Devuelve la tabla de cada grupo (A–L) calculada a partir de los "
+                    + "partidos ya jugados de fase de grupos: 3 puntos por victoria, 1 por "
+                    + "empate, 0 por derrota. Orden: points, goalDiff, goalsFor, team. Antes "
+                    + "del torneo todas las filas salen a 0 — comportamiento correcto. Los "
+                    + "partidos eliminatorios se ignoran (no tienen 'group' en la fuente)."
+    )
+    public List<GroupStanding> getGroups() {
+        return worldcupService.getGroups();
+    }
 }
