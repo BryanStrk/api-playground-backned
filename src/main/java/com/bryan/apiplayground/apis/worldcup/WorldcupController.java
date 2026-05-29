@@ -50,4 +50,15 @@ public class WorldcupController {
     public List<GroupStanding> getGroups() {
         return worldcupService.getGroups();
     }
+
+    @GetMapping("/info")
+    @Operation(
+            summary = "Resumen del torneo Mundial 2026",
+            description = "Devuelve el nombre del torneo, número total de partidos, fechas del "
+                    + "primer y último partido (formato YYYY-MM-DD), y la lista de sedes únicas "
+                    + "(grounds) ordenada alfabéticamente. Útil para la cabecera del dashboard."
+    )
+    public WorldCupInfo getInfo() {
+        return worldcupService.getInfo();
+    }
 }

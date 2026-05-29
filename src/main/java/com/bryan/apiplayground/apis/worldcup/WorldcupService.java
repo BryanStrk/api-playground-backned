@@ -22,6 +22,7 @@ public class WorldcupService {
     private static final long TTL_MS = 5 * 60 * 1000L;
     private static final String STATUS_PLAYED = "played";
     private static final String STATUS_UPCOMING = "upcoming";
+    private static final String TOURNAMENT_NAME = "World Cup 2026";
 
     private final RestClient restClient;
     // openfootball publishes a static file that changes at most a couple of times
@@ -44,6 +45,33 @@ public class WorldcupService {
                         || (m.team2() != null && m.team2().toLowerCase(Locale.ROOT).contains(teamFilter)))
                 .filter(m -> statusFilter == null || statusFilter.equals(m.status()))
                 .toList();
+    }
+
+    public WorldCupInfo getInfo() {
+        var matches = loadMatches();
+        var current = snapshot;
+        var name = current != null && current.name != null ? current.name : TOURNAMENT_NAME;
+        if (matches.isEmpty()) {
+            return new WorldCupInfo(name, 0, null, null, List.of());
+        }
+        var dates = matches.stream()
+                .map(WorldCupMatch::date)
+                .filter(d -> d != null && !d.isBlank())
+                .sorted()
+                .toList();
+        var grounds = matches.stream()
+                .map(WorldCupMatch::ground)
+                .filter(g -> g != null && !g.isBlank())
+                .distinct()
+                .sorted()
+                .toList();
+        return new WorldCupInfo(
+                name,
+                matches.size(),
+                dates.isEmpty() ? null : dates.getFirst(),
+                dates.isEmpty() ? null : dates.getLast(),
+                grounds
+        );
     }
 
     public List<GroupStanding> getGroups() {
@@ -100,19 +128,21 @@ public class WorldcupService {
         if (current != null && System.currentTimeMillis() - current.fetchedAt < TTL_MS) {
             return current.matches;
         }
-        var fetched = fetch();
-        snapshot = new Snapshot(fetched, System.currentTimeMillis());
-        return fetched;
+        snapshot = fetch();
+        return snapshot.matches;
     }
 
-    private List<WorldCupMatch> fetch() {
+    private Snapshot fetch() {
         try {
             var raw = restClient.get()
                     .uri(FEED_URL)
                     .retrieve()
                     .body(FeedRaw.class);
-            if (raw == null || raw.matches() == null) return List.of();
-            return raw.matches().stream().map(WorldcupService::toMatch).toList();
+            if (raw == null || raw.matches() == null) {
+                return new Snapshot(List.of(), raw == null ? null : raw.name(), System.currentTimeMillis());
+            }
+            var mapped = raw.matches().stream().map(WorldcupService::toMatch).toList();
+            return new Snapshot(mapped, raw.name(), System.currentTimeMillis());
         } catch (RestClientResponseException e) {
             throw new ExternalApiException(
                     "openfootball returned " + e.getStatusCode(), e.getStatusCode().value(), e);
@@ -181,7 +211,7 @@ public class WorldcupService {
         }
     }
 
-    private record Snapshot(List<WorldCupMatch> matches, long fetchedAt) {
+    private record Snapshot(List<WorldCupMatch> matches, String name, long fetchedAt) {
     }
 
     private record FeedRaw(String name, List<MatchRaw> matches) {
