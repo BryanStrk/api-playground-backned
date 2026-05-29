@@ -2,6 +2,7 @@ package com.bryan.apiplayground.apis.balldontlie;
 
 import com.bryan.apiplayground.common.exception.ApiKeyNotConfiguredException;
 import com.bryan.apiplayground.common.exception.ExternalApiException;
+import com.bryan.apiplayground.common.exception.PremiumFeatureException;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,11 @@ public class BalldontlieService {
     private static final String BASE_URL = "https://api.balldontlie.io/fifa/worldcup/v1";
     private static final String TEAMS_URL = BASE_URL + "/teams?per_page=100";
     private static final String STADIUMS_URL = BASE_URL + "/stadiums?per_page=100";
+    private static final String STANDINGS_URL = BASE_URL + "/standings?per_page=100";
+    private static final String MATCHES_URL = BASE_URL + "/matches?per_page=100&season={season}";
+    private static final String PLAYERS_URL = BASE_URL + "/players?per_page=100&search={search}";
+    private static final String PLAN_ALL_STAR = "ALL-STAR";
+    private static final String PLAN_GOAT = "GOAT";
 
     private final RestClient restClient;
     private final String apiKey;
@@ -44,6 +50,66 @@ public class BalldontlieService {
                 .toList();
     }
 
+    public List<BdlStanding> getStandings() {
+        var envelope = callPremium(STANDINGS_URL, StandingsEnvelope.class,
+                PLAN_ALL_STAR, "standings");
+        if (envelope.data() == null) return List.of();
+        return envelope.data().stream()
+                .map(s -> new BdlStanding(
+                        s.group(),
+                        s.team() == null ? null : s.team().name(),
+                        s.position(),
+                        s.played(),
+                        s.won(),
+                        s.drawn(),
+                        s.lost(),
+                        s.goalsFor(),
+                        s.goalsAgainst(),
+                        s.goalDiff(),
+                        s.points()))
+                .toList();
+    }
+
+    public List<BdlMatch> getMatches(Integer season) {
+        var effectiveSeason = season == null ? 2026 : season;
+        var envelope = callPremiumUri(MATCHES_URL, MatchesEnvelope.class,
+                PLAN_GOAT, "matches", effectiveSeason);
+        if (envelope.data() == null) return List.of();
+        return envelope.data().stream()
+                .map(m -> new BdlMatch(
+                        m.id(),
+                        m.matchNumber(),
+                        m.datetime(),
+                        m.status(),
+                        m.stageName(),
+                        m.group(),
+                        m.stadium() == null ? null : m.stadium().name(),
+                        m.homeTeam() == null ? null : m.homeTeam().name(),
+                        m.awayTeam() == null ? null : m.awayTeam().name(),
+                        m.homeScore(),
+                        m.awayScore()))
+                .toList();
+    }
+
+    public List<BdlPlayer> getPlayers(String search) {
+        // BALLDONTLIE accepts an empty search param and returns the first page
+        // of all players; no need to special-case null.
+        var effectiveSearch = search == null ? "" : search.trim();
+        var envelope = callPremiumUri(PLAYERS_URL, PlayersEnvelope.class,
+                PLAN_GOAT, "players", effectiveSearch);
+        if (envelope.data() == null) return List.of();
+        return envelope.data().stream()
+                .map(p -> new BdlPlayer(
+                        p.id(),
+                        p.name(),
+                        p.shortName(),
+                        p.position(),
+                        p.country() == null ? null : p.country().name(),
+                        p.heightCm(),
+                        p.jerseyNumber()))
+                .toList();
+    }
+
     // Shared call wrapper: validates the key, sets the Authorization header in
     // the raw form BALLDONTLIE expects (NO "Bearer " prefix), and translates
     // upstream failures into the project's exception hierarchy so the global
@@ -61,6 +127,60 @@ public class BalldontlieService {
             }
             return body;
         } catch (RestClientResponseException e) {
+            throw new ExternalApiException(
+                    "BALLDONTLIE returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "BALLDONTLIE unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
+    // Variant of call() for tier-gated endpoints: upstream 401 means "key valid
+    // but plan doesn't cover this feature" — translate to PremiumFeatureException
+    // so the global handler emits 402 with requiredPlan + feature, separating it
+    // from a real auth failure (which would be 503 ApiKeyNotConfigured).
+    private <T> T callPremium(String url, Class<T> type, String requiredPlan, String feature) {
+        requireKey();
+        try {
+            var body = restClient.get()
+                    .uri(url)
+                    .header("Authorization", apiKey)
+                    .retrieve()
+                    .body(type);
+            if (body == null) {
+                throw new ExternalApiException("BALLDONTLIE returned an empty payload", 502);
+            }
+            return body;
+        } catch (RestClientResponseException e) {
+            if (e.getStatusCode().value() == 401) {
+                throw new PremiumFeatureException(requiredPlan, feature);
+            }
+            throw new ExternalApiException(
+                    "BALLDONTLIE returned " + e.getStatusCode(), e.getStatusCode().value(), e);
+        } catch (ResourceAccessException e) {
+            throw new ExternalApiException(
+                    "BALLDONTLIE unreachable: " + e.getMessage(), 0, e);
+        }
+    }
+
+    // Same as callPremium but for URLs with placeholder vars (season, search).
+    private <T> T callPremiumUri(String url, Class<T> type, String requiredPlan,
+                                 String feature, Object... uriVars) {
+        requireKey();
+        try {
+            var body = restClient.get()
+                    .uri(url, uriVars)
+                    .header("Authorization", apiKey)
+                    .retrieve()
+                    .body(type);
+            if (body == null) {
+                throw new ExternalApiException("BALLDONTLIE returned an empty payload", 502);
+            }
+            return body;
+        } catch (RestClientResponseException e) {
+            if (e.getStatusCode().value() == 401) {
+                throw new PremiumFeatureException(requiredPlan, feature);
+            }
             throw new ExternalApiException(
                     "BALLDONTLIE returned " + e.getStatusCode(), e.getStatusCode().value(), e);
         } catch (ResourceAccessException e) {
@@ -106,5 +226,67 @@ public class BalldontlieService {
             Double latitude,
             Double longitude
     ) {
+    }
+
+    private record StandingsEnvelope(List<StandingRaw> data) {
+    }
+
+    private record StandingRaw(
+            String group,
+            TeamRef team,
+            Integer position,
+            Integer played,
+            Integer won,
+            Integer drawn,
+            Integer lost,
+            @JsonAlias({"goals_for", "goalsFor"}) Integer goalsFor,
+            @JsonAlias({"goals_against", "goalsAgainst"}) Integer goalsAgainst,
+            @JsonAlias({"goal_diff", "goalDiff"}) Integer goalDiff,
+            Integer points
+    ) {
+    }
+
+    private record MatchesEnvelope(List<MatchRaw> data) {
+    }
+
+    // homeTeam / awayTeam come back as nested {id,name,…} objects when the
+    // bracket is settled, and as null in pre-bracket knockouts — flattening to
+    // a String at the DTO layer keeps the frontend free of TBD-handling logic.
+    private record MatchRaw(
+            int id,
+            @JsonAlias({"match_number", "matchNumber"}) Integer matchNumber,
+            String datetime,
+            String status,
+            @JsonAlias({"stage_name", "stageName"}) String stageName,
+            String group,
+            StadiumRef stadium,
+            @JsonAlias({"home_team", "homeTeam"}) TeamRef homeTeam,
+            @JsonAlias({"away_team", "awayTeam"}) TeamRef awayTeam,
+            @JsonAlias({"home_score", "homeScore"}) Integer homeScore,
+            @JsonAlias({"away_score", "awayScore"}) Integer awayScore
+    ) {
+    }
+
+    private record PlayersEnvelope(List<PlayerRaw> data) {
+    }
+
+    private record PlayerRaw(
+            int id,
+            String name,
+            @JsonAlias({"short_name", "shortName"}) String shortName,
+            String position,
+            CountryRef country,
+            @JsonAlias({"height_cm", "heightCm"}) Integer heightCm,
+            @JsonAlias({"jersey_number", "jerseyNumber"}) String jerseyNumber
+    ) {
+    }
+
+    private record TeamRef(Integer id, String name) {
+    }
+
+    private record StadiumRef(Integer id, String name) {
+    }
+
+    private record CountryRef(Integer id, String name) {
     }
 }
