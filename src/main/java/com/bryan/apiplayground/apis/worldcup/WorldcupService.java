@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientResponseException;
+import tools.jackson.core.JacksonException;
+import tools.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -25,13 +27,15 @@ public class WorldcupService {
     private static final String TOURNAMENT_NAME = "World Cup 2026";
 
     private final RestClient restClient;
+    private final ObjectMapper objectMapper;
     // openfootball publishes a static file that changes at most a couple of times
     // per day; a single shared snapshot per JVM with a 5-minute window keeps the
     // hot path off the network without holding stale data for long.
     private volatile Snapshot snapshot;
 
-    public WorldcupService(RestClient restClient) {
+    public WorldcupService(RestClient restClient, ObjectMapper objectMapper) {
         this.restClient = restClient;
+        this.objectMapper = objectMapper;
     }
 
     public List<WorldCupMatch> getMatches(String group, String team, String status) {
@@ -134,10 +138,17 @@ public class WorldcupService {
 
     private Snapshot fetch() {
         try {
-            var raw = restClient.get()
+            // GitHub raw serves the file as text/plain;charset=utf-8, so the Jackson
+            // JSON converter refuses to bind directly. Pull the body as String and
+            // hand it to ObjectMapper — same pattern MusicService uses for iTunes.
+            var body = restClient.get()
                     .uri(FEED_URL)
                     .retrieve()
-                    .body(FeedRaw.class);
+                    .body(String.class);
+            if (body == null || body.isBlank()) {
+                return new Snapshot(List.of(), null, System.currentTimeMillis());
+            }
+            var raw = objectMapper.readValue(body, FeedRaw.class);
             if (raw == null || raw.matches() == null) {
                 return new Snapshot(List.of(), raw == null ? null : raw.name(), System.currentTimeMillis());
             }
@@ -149,6 +160,9 @@ public class WorldcupService {
         } catch (ResourceAccessException e) {
             throw new ExternalApiException(
                     "openfootball unreachable: " + e.getMessage(), 0, e);
+        } catch (JacksonException e) {
+            throw new ExternalApiException(
+                    "openfootball payload malformed: " + e.getMessage(), 502, e);
         }
     }
 
