@@ -31,7 +31,6 @@ public class HealthService {
     public HealthService(CatalogService catalogService,
                          @Qualifier("healthRestClient") RestClient healthRestClient,
                          @Value("${tmdb.api-key:}") String tmdbKey,
-                         @Value("${gemini.api-key:}") String geminiKey,
                          @Value("${unsplash.access-key:}") String unsplashKey,
                          @Value("${news.api-key:}") String newsKey,
                          @Value("${football-data.api-key:}") String footballDataKey) {
@@ -40,7 +39,6 @@ public class HealthService {
         this.footballDataKey = footballDataKey;
         this.requiredKeyConfigured = Map.of(
                 "movies", isSet(tmdbKey),
-                "ai", isSet(geminiKey),
                 "photos", isSet(unsplashKey),
                 "news", isSet(newsKey),
                 "sports", isSet(footballDataKey)

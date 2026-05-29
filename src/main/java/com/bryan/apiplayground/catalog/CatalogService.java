@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Single source of truth for the 20 public APIs the playground proxies.
+ * Single source of truth for the 18 public APIs the playground proxies.
  * The catalog endpoint surfaces this list to the frontend so the dashboard
  * can render the grid, and {@code HealthService} reuses it to know which
  * upstreams to ping — keep the list in sync with the controllers in
@@ -46,26 +46,6 @@ public class CatalogService {
                     "Búsqueda de canciones en el catálogo de iTunes."
             ),
             new ApiInfo(
-                    "crypto",
-                    "CoinGecko",
-                    "Finanzas",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/crypto/price",
-                    "https://api.coingecko.com/api/v3/simple/price",
-                    "Precio actual de criptomonedas en la divisa indicada."
-            ),
-            new ApiInfo(
-                    "pokemon",
-                    "PokéAPI",
-                    "Juegos",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/pokemon/{name}",
-                    "https://pokeapi.co/api/v2/pokemon",
-                    "Datos de un Pokémon por nombre."
-            ),
-            new ApiInfo(
                     "countries",
                     "REST Countries",
                     "Geografía",
@@ -74,26 +54,6 @@ public class CatalogService {
                     "/api/v1/countries/{name}",
                     "https://restcountries.com/v3.1/name",
                     "Información de un país por nombre."
-            ),
-            new ApiInfo(
-                    "ai",
-                    "Google Gemini",
-                    "Inteligencia Artificial",
-                    Difficulty.MEDIUM,
-                    KeyRequirement.REQUIRED,
-                    "/api/v1/ai/generate",
-                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
-                    "Generación de texto con Gemini 2.5 Flash. Requiere GEMINI_API_KEY."
-            ),
-            new ApiInfo(
-                    "cats",
-                    "The Cat API",
-                    "Animales",
-                    Difficulty.EASY,
-                    KeyRequirement.OPTIONAL,
-                    "/api/v1/cats/random",
-                    "https://api.thecatapi.com/v1/images/search",
-                    "Imagen aleatoria de gato. La key mejora el rate limit."
             ),
             new ApiInfo(
                     "meals",
@@ -126,16 +86,6 @@ public class CatalogService {
                     "Clasificación de las grandes ligas de fútbol (Football-Data.org). Requiere FOOTBALL_DATA_KEY."
             ),
             new ApiInfo(
-                    "dictionary",
-                    "Free Dictionary",
-                    "Idiomas",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/dictionary/{word}",
-                    "https://api.dictionaryapi.dev/api/v2/entries/en",
-                    "Definiciones en inglés palabra a palabra."
-            ),
-            new ApiInfo(
                     "space",
                     "NASA APOD",
                     "Ciencia",
@@ -144,16 +94,6 @@ public class CatalogService {
                     "/api/v1/space/apod",
                     "https://api.nasa.gov/planetary/apod",
                     "Astronomy Picture of the Day. Usa DEMO_KEY si no se configura NASA_API_KEY."
-            ),
-            new ApiInfo(
-                    "exchange",
-                    "Frankfurter",
-                    "Finanzas",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/exchange",
-                    "https://api.frankfurter.dev/v1/latest",
-                    "Tipos de cambio entre divisas."
             ),
             new ApiInfo(
                     "users",
