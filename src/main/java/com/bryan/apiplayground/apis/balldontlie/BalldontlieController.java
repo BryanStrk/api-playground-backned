@@ -79,4 +79,16 @@ public class BalldontlieController {
     ) {
         return balldontlieService.getPlayers(search);
     }
+
+    @GetMapping("/tiers")
+    @Operation(
+            summary = "Tabla de tiers de BALLDONTLIE [FREE]",
+            description = "Metadata estática: qué endpoints cubre cada plan (FREE, ALL-STAR, "
+                    + "GOAT), su precio mensual en USD y el rate limit por minuto. El frontend "
+                    + "la usa para pintar los candados sobre las cards de los endpoints "
+                    + "premium sin hardcodear la lista. No hace llamada al upstream."
+    )
+    public List<BdlTier> getTiers() {
+        return balldontlieService.getTiers();
+    }
 }

@@ -23,6 +23,18 @@ public class BalldontlieService {
     private static final String PLAYERS_URL = BASE_URL + "/players?per_page=100&search={search}";
     private static final String PLAN_ALL_STAR = "ALL-STAR";
     private static final String PLAN_GOAT = "GOAT";
+    // Static catalog of BALLDONTLIE tier pricing and feature coverage. Hardcoded
+    // because there's no public endpoint that surfaces it — the frontend reads
+    // this to render padlocks on premium cards without duplicating the list.
+    // Each tier inherits the previous tier's features (FREE ⊂ ALL-STAR ⊂ GOAT).
+    private static final List<BdlTier> TIERS = List.of(
+            new BdlTier("FREE", 0.0, 5,
+                    List.of("teams", "stadiums")),
+            new BdlTier(PLAN_ALL_STAR, 9.99, 60,
+                    List.of("teams", "stadiums", "standings")),
+            new BdlTier(PLAN_GOAT, 39.99, 600,
+                    List.of("teams", "stadiums", "standings", "matches", "players", "odds", "stats"))
+    );
 
     private final RestClient restClient;
     private final String apiKey;
@@ -31,6 +43,10 @@ public class BalldontlieService {
                               @Value("${balldontlie.api-key:}") String apiKey) {
         this.restClient = restClient;
         this.apiKey = apiKey;
+    }
+
+    public List<BdlTier> getTiers() {
+        return TIERS;
     }
 
     public List<BdlTeam> getTeams() {
