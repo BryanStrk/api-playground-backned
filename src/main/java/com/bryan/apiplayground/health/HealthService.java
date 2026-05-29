@@ -33,7 +33,8 @@ public class HealthService {
                          @Value("${tmdb.api-key:}") String tmdbKey,
                          @Value("${unsplash.access-key:}") String unsplashKey,
                          @Value("${news.api-key:}") String newsKey,
-                         @Value("${football-data.api-key:}") String footballDataKey) {
+                         @Value("${football-data.api-key:}") String footballDataKey,
+                         @Value("${balldontlie.api-key:}") String balldontlieKey) {
         this.catalogService = catalogService;
         this.healthRestClient = healthRestClient;
         this.footballDataKey = footballDataKey;
@@ -41,7 +42,8 @@ public class HealthService {
                 "movies", isSet(tmdbKey),
                 "photos", isSet(unsplashKey),
                 "news", isSet(newsKey),
-                "sports", isSet(footballDataKey)
+                "sports", isSet(footballDataKey),
+                "balldontlie", isSet(balldontlieKey)
         );
     }
 
