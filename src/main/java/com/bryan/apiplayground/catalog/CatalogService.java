@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * Single source of truth for the 18 public APIs the playground proxies.
+ * Single source of truth for the 19 public APIs the playground proxies.
  * The catalog endpoint surfaces this list to the frontend so the dashboard
  * can render the grid, and {@code HealthService} reuses it to know which
  * upstreams to ping — keep the list in sync with the controllers in
@@ -194,6 +194,16 @@ public class CatalogService {
                     "/api/v1/dota/heroes",
                     "https://docs.opendota.com",
                     "Datos públicos de Dota 2: héroes y partidas pro."
+            ),
+            new ApiInfo(
+                    "worldcup",
+                    "Mundial 2026",
+                    "Deportes",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/worldcup/matches",
+                    "https://github.com/openfootball/worldcup.json",
+                    "Partidos, grupos y datos del Mundial 2026 (openfootball, sin key)."
             )
     );
 
