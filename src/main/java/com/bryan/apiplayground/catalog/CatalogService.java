@@ -66,6 +66,16 @@ public class CatalogService {
                     "Búsqueda de recetas por nombre."
             ),
             new ApiInfo(
+                    "cocktails",
+                    "TheCocktailDB",
+                    "Bebida",
+                    Difficulty.EASY,
+                    KeyRequirement.NONE,
+                    "/api/v1/cocktails/search",
+                    "https://www.thecocktaildb.com/api/json/v1/1/search.php",
+                    "Búsqueda de cócteles por nombre."
+            ),
+            new ApiInfo(
                     "photos",
                     "Unsplash",
                     "Fotografía",
