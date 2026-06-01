@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>/ — graphify tree viewer</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      margin: 20px 0 0 24px;
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #1e3a56;
+    }
+    .controls {
+      margin: 20px 0 15px 24px;
+    }
+    button {
+      margin-right: 10px;
+      padding: 8px 18px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease-in-out;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    button:active {
+      background: #004085;
+    }
+    #tree-container {
+      width: calc(100vw - 48px); /* Adjust for body margin/padding */
+      height: 85vh;
+      overflow: auto;
+      border-radius: 8px;
+      background: #fff;
+      margin-left: 24px;
+      margin-right: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border: 1px solid #ddd;
+    }
+    svg {
+      background: #fff;
+      border-radius: 8px;
+      display: block; /* Important for D3 */
+    }
+    .node circle {
+      stroke-width: 2.5px;
+    }
+    .node text { /* Base style for the <text> container */
+      font: 13px 'Segoe UI', sans-serif;
+      paint-order: stroke fill; /* Ensures text is readable over lines */
+      stroke: #fff; /* White halo */
+      stroke-width: 3px; /* Halo thickness */
+      stroke-linejoin: round;
+      stroke-opacity: 0.85; /* Halo opacity */
+    }
+    .link {
+      fill: none;
+      stroke-opacity: 0.7;
+      stroke-width: 2px;
+    }
+  </style>
+</head>
+<body>
+  <h1>/ — Knowledge Graph</h1>
+  <div class="controls">
+    <button onclick="expandAll()">Expand All</button>
+    <button onclick="collapseAll()">Collapse All</button>
+    <button onclick="resetView()">Reset View</button>
+  </div>
+  <div id="tree-container">
+    <svg id="tree-svg" width="6000" height="8000"></svg>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    const initialJsonData = {"name":"/","total_count":624,"children":[{"name":".claude","total_count":2,"children":[{"name":"settings.local.json","total_count":2,"children":[{"name":"allow","total_count":1,"children":[]},{"name":"permissions","total_count":1,"children":[]}]}]},{"name":"README.md","total_count":10,"children":[{"name":"/api/v1/catalog","total_count":1,"children":[]},{"name":"/api/v1/health","total_count":1,"children":[]},{"name":"API Playground — Backend","total_count":1,"children":[]},{"name":"Google Gemini API","total_count":1,"children":[]},{"name":"Java 25","total_count":1,"children":[]},{"name":"Java Virtual Threads","total_count":1,"children":[]},{"name":"NewsAPI","total_count":1,"children":[]},{"name":"Spring Boot 4","total_count":1,"children":[]},{"name":"TMDB API","total_count":1,"children":[]},{"name":"Unsplash API","total_count":1,"children":[]}]},{"name":"src","total_count":612,"children":[{"name":"main","total_count":612,"children":[{"name":"java","total_count":612,"children":[{"name":"com","total_count":612,"children":[{"name":"bryan","total_count":612,"children":[{"name":"apiplayground","total_count":612,"children":[{"name":"ApiPlaygroundApplication.java","total_count":3,"children":[{"name":".main()","total_count":1,"children":[]},{"name":"ApiPlaygroundApplication","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"apis","total_count":523,"children":[{"name":"balldontlie","total_count":45,"children":[{"name":"BalldontlieController.java","total_count":19,"children":[{"name":".getMatches()","total_count":1,"children":[]},{"name":".getPlayers()","total_count":1,"children":[]},{"name":".getStadiums()","total_count":1,"children":[]},{"name":".getStandings()","total_count":1,"children":[]},{"name":".getTeams()","total_count":1,"children":[]},{"name":".getTiers()","total_count":1,"children":[]},{"name":"BalldontlieController","total_count":1,"children":[]},{"name":"BalldontlieService","total_count":1,"children":[]},{"name":"BdlMatch","total_count":1,"children":[]},{"name":"BdlPlayer","total_count":1,"children":[]},{"name":"BdlStadium","total_count":1,"children":[]},{"name":"BdlStanding","total_count":1,"children":[]},{"name":"BdlTeam","total_count":1,"children":[]},{"name":"BdlTier","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"BalldontlieService.java","total_count":20,"children":[{"name":".call()","total_count":1,"children":[]},{"name":".callPremium()","total_count":1,"children":[]},{"name":".getMatches()","total_count":1,"children":[]},{"name":".getPlayers()","total_count":1,"children":[]},{"name":".getStadiums()","total_count":1,"children":[]},{"name":".getStandings()","total_count":1,"children":[]},{"name":".getTeams()","total_count":1,"children":[]},{"name":".getTiers()","total_count":1,"children":[]},{"name":".requireKey()","total_count":1,"children":[]},{"name":"BdlMatch","total_count":1,"children":[]},{"name":"BdlPlayer","total_count":1,"children":[]},{"name":"BdlStanding","total_count":1,"children":[]},{"name":"BdlTeam","total_count":1,"children":[]},{"name":"BdlTier","total_count":1,"children":[]},{"name":"Class","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"T","total_count":1,"children":[]}]},{"name":"BdlMatch.java","total_count":1,"children":[]},{"name":"BdlPlayer.java","total_count":1,"children":[]},{"name":"BdlStadium.java","total_count":1,"children":[]},{"name":"BdlStanding.java","total_count":1,"children":[]},{"name":"BdlTeam.java","total_count":1,"children":[]},{"name":"BdlTier.java","total_count":1,"children":[]}]},{"name":"books","total_count":17,"children":[{"name":"BooksController.java","total_count":7,"children":[{"name":".search()","total_count":1,"children":[]},{"name":"BooksController","total_count":1,"children":[]},{"name":"BooksResponse","total_count":1,"children":[]},{"name":"BooksService","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"BooksService.java","total_count":8,"children":[{"name":".coverUrl()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":".toBook()","total_count":1,"children":[]},{"name":"Book","total_count":1,"children":[]},{"name":"DocRaw","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"Book.java","total_count":1,"children":[]},{"name":"BooksResponse.java","total_count":1,"children":[]}]},{"name":"characters","total_count":25,"children":[{"name":"CharactersController.java","total_count":11,"children":[{"name":".getById()","total_count":1,"children":[]},{"name":".getRandom()","total_count":1,"children":[]},{"name":".list()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":"CharacterPage","total_count":1,"children":[]},{"name":"CharacterResponse","total_count":1,"children":[]},{"name":"CharactersController","total_count":1,"children":[]},{"name":"CharactersService","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"CharactersService.java","total_count":11,"children":[{"name":".getById()","total_count":1,"children":[]},{"name":".getRandom()","total_count":1,"children":[]},{"name":".list()","total_count":1,"children":[]},{"name":".notBlank()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":".toCharacter()","total_count":1,"children":[]},{"name":".toSummary()","total_count":1,"children":[]},{"name":"CharacterRaw","total_count":1,"children":[]},{"name":"CharacterSummary","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"CharacterPage.java","total_count":1,"children":[]},{"name":"CharacterResponse.java","total_count":1,"children":[]},{"name":"PageInfo.java","total_count":1,"children":[]}]},{"name":"cocktails","total_count":34,"children":[{"name":"CocktailsController.java","total_count":13,"children":[{"name":".byId()","total_count":1,"children":[]},{"name":".categories()","total_count":1,"children":[]},{"name":".filterByAlcoholic()","total_count":1,"children":[]},{"name":".filterByCategory()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":"CocktailCategory","total_count":1,"children":[]},{"name":"CocktailsController","total_count":1,"children":[]},{"name":"CocktailsResponse","total_count":1,"children":[]},{"name":"CocktailsService","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"CocktailsService.java","total_count":17,"children":[{"name":".byId()","total_count":1,"children":[]},{"name":".categories()","total_count":1,"children":[]},{"name":".extractIngredients()","total_count":1,"children":[]},{"name":".filterByAlcoholic()","total_count":1,"children":[]},{"name":".filterByCategory()","total_count":1,"children":[]},{"name":".random()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":".str()","total_count":1,"children":[]},{"name":".toCocktail()","total_count":1,"children":[]},{"name":"Cocktail","total_count":1,"children":[]},{"name":"CocktailCategory","total_count":1,"children":[]},{"name":"Ingredient","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Map","total_count":1,"children":[]},{"name":"Object","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"Cocktail.java","total_count":1,"children":[]},{"name":"CocktailCategory.java","total_count":1,"children":[]},{"name":"CocktailsResponse.java","total_count":1,"children":[]},{"name":"Ingredient.java","total_count":1,"children":[]}]},{"name":"countries","total_count":14,"children":[{"name":"CountriesController.java","total_count":7,"children":[{"name":".getByName()","total_count":1,"children":[]},{"name":"CountriesController","total_count":1,"children":[]},{"name":"CountriesService","total_count":1,"children":[]},{"name":"CountryResponse","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"CountriesService.java","total_count":6,"children":[{"name":".getByName()","total_count":1,"children":[]},{"name":".toResponse()","total_count":1,"children":[]},{"name":"CountryRaw","total_count":1,"children":[]},{"name":"CountryResponse","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"CountryResponse.java","total_count":1,"children":[]}]},{"name":"dota","total_count":19,"children":[{"name":"DotaController.java","total_count":9,"children":[{"name":".listHeroes()","total_count":1,"children":[]},{"name":".listProMatches()","total_count":1,"children":[]},{"name":"DotaController","total_count":1,"children":[]},{"name":"DotaHero","total_count":1,"children":[]},{"name":"DotaService","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"ProMatch","total_count":1,"children":[]}]},{"name":"DotaService.java","total_count":8,"children":[{"name":".absolute()","total_count":1,"children":[]},{"name":".defaultMatchLimit()","total_count":1,"children":[]},{"name":".listHeroes()","total_count":1,"children":[]},{"name":".listProMatches()","total_count":1,"children":[]},{"name":"DotaHero","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"DotaHero.java","total_count":1,"children":[]},{"name":"ProMatch.java","total_count":1,"children":[]}]},{"name":"episodes","total_count":21,"children":[{"name":"EpisodesController.java","total_count":9,"children":[{"name":".getById()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":"Episode","total_count":1,"children":[]},{"name":"EpisodesController","total_count":1,"children":[]},{"name":"EpisodesService","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"EpisodesService.java","total_count":11,"children":[{"name":".extractCharacterId()","total_count":1,"children":[]},{"name":".getById()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":".toEpisode()","total_count":1,"children":[]},{"name":"Episode","total_count":1,"children":[]},{"name":"EpisodeRaw","total_count":1,"children":[]},{"name":"EpisodesService","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"Episode.java","total_count":1,"children":[]}]},{"name":"github","total_count":12,"children":[{"name":"GithubController.java","total_count":6,"children":[{"name":".getUser()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"GithubController","total_count":1,"children":[]},{"name":"GithubService","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"GithubService.java","total_count":5,"children":[{"name":".getUser()","total_count":1,"children":[]},{"name":"GithubService","total_count":1,"children":[]},{"name":"GithubUserResponse","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"GithubUserResponse.java","total_count":1,"children":[]}]},{"name":"hackernews","total_count":18,"children":[{"name":"HackerNewsController.java","total_count":8,"children":[{"name":".getStories()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"HackerNewsController","total_count":1,"children":[]},{"name":"HackerNewsService","total_count":1,"children":[]},{"name":"HnStory","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"HackerNewsService.java","total_count":9,"children":[{"name":".fetchIds()","total_count":1,"children":[]},{"name":".fetchItem()","total_count":1,"children":[]},{"name":".getStories()","total_count":1,"children":[]},{"name":"HackerNewsService","total_count":1,"children":[]},{"name":"HnStory","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Long","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"HnStory.java","total_count":1,"children":[]}]},{"name":"holidays","total_count":19,"children":[{"name":"HolidaysController.java","total_count":10,"children":[{"name":".list()","total_count":1,"children":[]},{"name":".listCountries()","total_count":1,"children":[]},{"name":"Country","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Holiday","total_count":1,"children":[]},{"name":"HolidaysController","total_count":1,"children":[]},{"name":"HolidaysService","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"HolidaysService.java","total_count":7,"children":[{"name":".list()","total_count":1,"children":[]},{"name":".listCountries()","total_count":1,"children":[]},{"name":"Country","total_count":1,"children":[]},{"name":"Holiday","total_count":1,"children":[]},{"name":"HolidaysService","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"Country.java","total_count":1,"children":[]},{"name":"Holiday.java","total_count":1,"children":[]}]},{"name":"locations","total_count":15,"children":[{"name":"LocationsController.java","total_count":8,"children":[{"name":".search()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Location","total_count":1,"children":[]},{"name":"LocationsController","total_count":1,"children":[]},{"name":"LocationsService","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"LocationsService.java","total_count":6,"children":[{"name":".search()","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Location","total_count":1,"children":[]},{"name":"LocationsService","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"Location.java","total_count":1,"children":[]}]},{"name":"meals","total_count":34,"children":[{"name":"MealsController.java","total_count":11,"children":[{"name":".categories()","total_count":1,"children":[]},{"name":".filterByCategory()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"MealCategory","total_count":1,"children":[]},{"name":"MealsController","total_count":1,"children":[]},{"name":"MealsService","total_count":1,"children":[]},{"name":"MealSummary","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"MealsService.java","total_count":18,"children":[{"name":".categories()","total_count":1,"children":[]},{"name":".extractIngredients()","total_count":1,"children":[]},{"name":".filterByCategory()","total_count":1,"children":[]},{"name":".random()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":".str()","total_count":1,"children":[]},{"name":".toMeal()","total_count":1,"children":[]},{"name":"Ingredient","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Map","total_count":1,"children":[]},{"name":"Meal","total_count":1,"children":[]},{"name":"MealCategory","total_count":1,"children":[]},{"name":"MealsResponse","total_count":1,"children":[]},{"name":"MealsService","total_count":1,"children":[]},{"name":"MealSummary","total_count":1,"children":[]},{"name":"Object","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"Ingredient.java","total_count":1,"children":[]},{"name":"Meal.java","total_count":1,"children":[]},{"name":"MealCategory.java","total_count":1,"children":[]},{"name":"MealsResponse.java","total_count":1,"children":[]},{"name":"MealSummary.java","total_count":1,"children":[]}]},{"name":"movies","total_count":37,"children":[{"name":"MoviesController.java","total_count":14,"children":[{"name":".getDetails()","total_count":1,"children":[]},{"name":".getGenres()","total_count":1,"children":[]},{"name":".getPopular()","total_count":1,"children":[]},{"name":".getTrailer()","total_count":1,"children":[]},{"name":".searchOrDiscover()","total_count":1,"children":[]},{"name":"Genre","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"MovieDetails","total_count":1,"children":[]},{"name":"MoviesController","total_count":1,"children":[]},{"name":"MoviesService","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"MoviesService.java","total_count":18,"children":[{"name":".callList()","total_count":1,"children":[]},{"name":".discover()","total_count":1,"children":[]},{"name":".getDetails()","total_count":1,"children":[]},{"name":".getGenres()","total_count":1,"children":[]},{"name":".getPopular()","total_count":1,"children":[]},{"name":".getTrailer()","total_count":1,"children":[]},{"name":".posterUrl()","total_count":1,"children":[]},{"name":".requireKey()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":"Genre","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"MovieDetails","total_count":1,"children":[]},{"name":"MoviesResponse","total_count":1,"children":[]},{"name":"MoviesService","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"TrailerResponse","total_count":1,"children":[]}]},{"name":"Genre.java","total_count":1,"children":[]},{"name":"Movie.java","total_count":1,"children":[]},{"name":"MovieDetails.java","total_count":1,"children":[]},{"name":"MoviesResponse.java","total_count":1,"children":[]},{"name":"TrailerResponse.java","total_count":1,"children":[]}]},{"name":"music","total_count":14,"children":[{"name":"MusicController.java","total_count":7,"children":[{"name":".search()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"MusicController","total_count":1,"children":[]},{"name":"MusicResponse","total_count":1,"children":[]},{"name":"MusicService","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"MusicService.java","total_count":5,"children":[{"name":".highResArtwork()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":"ObjectMapper","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"MusicResponse.java","total_count":1,"children":[]},{"name":"Track.java","total_count":1,"children":[]}]},{"name":"news","total_count":13,"children":[{"name":"NewsController.java","total_count":7,"children":[{"name":".getHeadlines()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"NewsController","total_count":1,"children":[]},{"name":"NewsResponse","total_count":1,"children":[]},{"name":"NewsService","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"NewsService.java","total_count":4,"children":[{"name":".getHeadlines()","total_count":1,"children":[]},{"name":"NewsService","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"Article.java","total_count":1,"children":[]},{"name":"NewsResponse.java","total_count":1,"children":[]}]},{"name":"photos","total_count":13,"children":[{"name":"PhotosController.java","total_count":7,"children":[{"name":".getRandom()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"PhotoResponse","total_count":1,"children":[]},{"name":"PhotosController","total_count":1,"children":[]},{"name":"PhotosService","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"PhotosService.java","total_count":5,"children":[{"name":".getRandom()","total_count":1,"children":[]},{"name":"PhotoResponse","total_count":1,"children":[]},{"name":"PhotosService","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"PhotoResponse.java","total_count":1,"children":[]}]},{"name":"posts","total_count":10,"children":[{"name":"PostsController.java","total_count":5,"children":[{"name":".getById()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"PostsController","total_count":1,"children":[]},{"name":"PostsService","total_count":1,"children":[]}]},{"name":"PostsService.java","total_count":4,"children":[{"name":".getById()","total_count":1,"children":[]},{"name":"PostResponse","total_count":1,"children":[]},{"name":"PostsService","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]}]},{"name":"PostResponse.java","total_count":1,"children":[]}]},{"name":"qrcode","total_count":11,"children":[{"name":"QrController.java","total_count":7,"children":[{"name":".generate()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"QrController","total_count":1,"children":[]},{"name":"QrResponse","total_count":1,"children":[]},{"name":"QrService","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"QrService.java","total_count":3,"children":[{"name":".generate()","total_count":1,"children":[]},{"name":"QrService","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"QrResponse.java","total_count":1,"children":[]}]},{"name":"space","total_count":24,"children":[{"name":"SpaceController.java","total_count":9,"children":[{"name":".getApod()","total_count":1,"children":[]},{"name":".search()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"SpaceController","total_count":1,"children":[]},{"name":"SpaceImage","total_count":1,"children":[]},{"name":"SpaceService","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"SpaceService.java","total_count":13,"children":[{"name":".getApod()","total_count":1,"children":[]},{"name":".getRandomApod()","total_count":1,"children":[]},{"name":".searchLibrary()","total_count":1,"children":[]},{"name":".toApodResponse()","total_count":1,"children":[]},{"name":".toSpaceImage()","total_count":1,"children":[]},{"name":"ApodRaw","total_count":1,"children":[]},{"name":"ApodResponse","total_count":1,"children":[]},{"name":"LibraryItem","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"SpaceImage","total_count":1,"children":[]},{"name":"SpaceService","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"ApodResponse.java","total_count":1,"children":[]},{"name":"SpaceImage.java","total_count":1,"children":[]}]},{"name":"sports","total_count":37,"children":[{"name":"SportsController.java","total_count":14,"children":[{"name":".getMatches()","total_count":1,"children":[]},{"name":".getStandings()","total_count":1,"children":[]},{"name":".getTeams()","total_count":1,"children":[]},{"name":".listCompetitions()","total_count":1,"children":[]},{"name":"CompetitionInfo","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"MatchesResponse","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"SportsController","total_count":1,"children":[]},{"name":"SportsService","total_count":1,"children":[]},{"name":"StandingsResponse","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"TeamsResponse","total_count":1,"children":[]}]},{"name":"SportsService.java","total_count":16,"children":[{"name":".getMatches()","total_count":1,"children":[]},{"name":".getStandings()","total_count":1,"children":[]},{"name":".getTeams()","total_count":1,"children":[]},{"name":".listCompetitions()","total_count":1,"children":[]},{"name":".mapRows()","total_count":1,"children":[]},{"name":".requireKey()","total_count":1,"children":[]},{"name":".seasonLabel()","total_count":1,"children":[]},{"name":".toMatchRow()","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"MatchRaw","total_count":1,"children":[]},{"name":"MatchRow","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"SeasonRaw","total_count":1,"children":[]},{"name":"StandingRow","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"TableRow","total_count":1,"children":[]}]},{"name":"CompetitionInfo.java","total_count":1,"children":[]},{"name":"GroupTable.java","total_count":1,"children":[]},{"name":"MatchesResponse.java","total_count":1,"children":[]},{"name":"MatchRow.java","total_count":1,"children":[]},{"name":"StandingsResponse.java","total_count":1,"children":[]},{"name":"TeamRow.java","total_count":1,"children":[]},{"name":"TeamsResponse.java","total_count":1,"children":[]}]},{"name":"trivia","total_count":24,"children":[{"name":"TriviaController.java","total_count":11,"children":[{"name":".getCategories()","total_count":1,"children":[]},{"name":".getQuestions()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"TriviaCategory","total_count":1,"children":[]},{"name":"TriviaController","total_count":1,"children":[]},{"name":"TriviaQuestion","total_count":1,"children":[]},{"name":"TriviaService","total_count":1,"children":[]}]},{"name":"TriviaService.java","total_count":11,"children":[{"name":".decode()","total_count":1,"children":[]},{"name":".getCategories()","total_count":1,"children":[]},{"name":".getQuestions()","total_count":1,"children":[]},{"name":".notBlank()","total_count":1,"children":[]},{"name":"Integer","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"TriviaCategory","total_count":1,"children":[]},{"name":"TriviaQuestion","total_count":1,"children":[]},{"name":"TriviaService","total_count":1,"children":[]}]},{"name":"TriviaCategory.java","total_count":1,"children":[]},{"name":"TriviaQuestion.java","total_count":1,"children":[]}]},{"name":"users","total_count":12,"children":[{"name":"UsersController.java","total_count":7,"children":[{"name":".getRandom()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"UserResponse","total_count":1,"children":[]},{"name":"UsersController","total_count":1,"children":[]},{"name":"UsersService","total_count":1,"children":[]}]},{"name":"UsersService.java","total_count":4,"children":[{"name":".getRandom()","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"UsersService","total_count":1,"children":[]}]},{"name":"UserResponse.java","total_count":1,"children":[]}]},{"name":"weather","total_count":16,"children":[{"name":"WeatherController.java","total_count":8,"children":[{"name":".getCurrent()","total_count":1,"children":[]},{"name":"Double","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"WeatherController","total_count":1,"children":[]},{"name":"WeatherResponse","total_count":1,"children":[]},{"name":"WeatherService","total_count":1,"children":[]}]},{"name":"WeatherService.java","total_count":7,"children":[{"name":".geocode()","total_count":1,"children":[]},{"name":".getByCity()","total_count":1,"children":[]},{"name":".getByCoordinates()","total_count":1,"children":[]},{"name":".getCurrent()","total_count":1,"children":[]},{"name":"GeocodeResult","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"WeatherResponse.java","total_count":1,"children":[]}]},{"name":"worldcup","total_count":39,"children":[{"name":"WorldcupController.java","total_count":11,"children":[{"name":".getGroups()","total_count":1,"children":[]},{"name":".getInfo()","total_count":1,"children":[]},{"name":".getMatches()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"GroupStanding","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"WorldcupController","total_count":1,"children":[]},{"name":"WorldCupInfo","total_count":1,"children":[]},{"name":"WorldcupService","total_count":1,"children":[]}]},{"name":"WorldcupService.java","total_count":24,"children":[{"name":".fetch()","total_count":1,"children":[]},{"name":".getGroups()","total_count":1,"children":[]},{"name":".getInfo()","total_count":1,"children":[]},{"name":".getMatches()","total_count":1,"children":[]},{"name":".loadMatches()","total_count":1,"children":[]},{"name":".normalizeStatus()","total_count":1,"children":[]},{"name":".record()","total_count":1,"children":[]},{"name":".refresh()","total_count":1,"children":[]},{"name":".toGoals()","total_count":1,"children":[]},{"name":".toMatch()","total_count":1,"children":[]},{"name":".toStanding()","total_count":1,"children":[]},{"name":"Goal","total_count":1,"children":[]},{"name":"GoalRaw","total_count":1,"children":[]},{"name":"GroupStanding","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"MatchRaw","total_count":1,"children":[]},{"name":"ObjectMapper","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"Snapshot","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"Tally","total_count":1,"children":[]},{"name":"WorldCupInfo","total_count":1,"children":[]},{"name":"WorldCupMatch","total_count":1,"children":[]},{"name":"WorldcupService","total_count":1,"children":[]}]},{"name":"Goal.java","total_count":1,"children":[]},{"name":"GroupStanding.java","total_count":1,"children":[]},{"name":"WorldCupInfo.java","total_count":1,"children":[]},{"name":"WorldCupMatch.java","total_count":1,"children":[]}]}]},{"name":"catalog","total_count":14,"children":[{"name":"CatalogController.java","total_count":7,"children":[{"name":".getCatalog()","total_count":1,"children":[]},{"name":"ApiInfo","total_count":1,"children":[]},{"name":"CatalogController","total_count":1,"children":[]},{"name":"CatalogService","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]}]},{"name":"CatalogService.java","total_count":4,"children":[{"name":".findAll()","total_count":1,"children":[]},{"name":"ApiInfo","total_count":1,"children":[]},{"name":"CatalogService","total_count":1,"children":[]},{"name":"List","total_count":1,"children":[]}]},{"name":"ApiInfo.java","total_count":1,"children":[]},{"name":"Difficulty.java","total_count":1,"children":[]},{"name":"KeyRequirement.java","total_count":1,"children":[]}]},{"name":"common","total_count":37,"children":[{"name":"ApiError.java","total_count":3,"children":[{"name":"ApiError","total_count":1,"children":[]},{"name":"of()","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"exception","total_count":10,"children":[{"name":"ApiKeyNotConfiguredException.java","total_count":2,"children":[{"name":"ApiKeyNotConfiguredException","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"ExternalApiException.java","total_count":4,"children":[{"name":".getUpstreamStatus()","total_count":1,"children":[]},{"name":"ExternalApiException","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]},{"name":"Throwable","total_count":1,"children":[]}]},{"name":"PremiumFeatureException.java","total_count":4,"children":[{"name":".getFeature()","total_count":1,"children":[]},{"name":".getRequiredPlan()","total_count":1,"children":[]},{"name":"PremiumFeatureException","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]}]},{"name":"GlobalExceptionHandler.java","total_count":22,"children":[{"name":".badRequest()","total_count":1,"children":[]},{"name":".handleBodyValidation()","total_count":1,"children":[]},{"name":".handleExternal()","total_count":1,"children":[]},{"name":".handleGeneric()","total_count":1,"children":[]},{"name":".handleIllegalArgument()","total_count":1,"children":[]},{"name":".handleMissingKey()","total_count":1,"children":[]},{"name":".handleParamValidation()","total_count":1,"children":[]},{"name":".handlePremium()","total_count":1,"children":[]},{"name":"ApiError","total_count":1,"children":[]},{"name":"ApiKeyNotConfiguredException","total_count":1,"children":[]},{"name":"Exception","total_count":1,"children":[]},{"name":"ExceptionHandler","total_count":1,"children":[]},{"name":"ExternalApiException","total_count":1,"children":[]},{"name":"GlobalExceptionHandler","total_count":1,"children":[]},{"name":"HandlerMethodValidationException","total_count":1,"children":[]},{"name":"HttpServletRequest","total_count":1,"children":[]},{"name":"IllegalArgumentException","total_count":1,"children":[]},{"name":"MethodArgumentNotValidException","total_count":1,"children":[]},{"name":"PremiumFeatureException","total_count":1,"children":[]},{"name":"PremiumRequiredError","total_count":1,"children":[]},{"name":"ResponseEntity","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"PremiumRequiredError.java","total_count":2,"children":[{"name":"of()","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]}]},{"name":"config","total_count":15,"children":[{"name":"CorsConfig.java","total_count":4,"children":[{"name":".addCorsMappings()","total_count":1,"children":[]},{"name":"CorsConfig","total_count":1,"children":[]},{"name":"CorsRegistry","total_count":1,"children":[]},{"name":"Override","total_count":1,"children":[]}]},{"name":"OpenApiConfig.java","total_count":4,"children":[{"name":".apiPlaygroundOpenAPI()","total_count":1,"children":[]},{"name":"Bean","total_count":1,"children":[]},{"name":"OpenAPI","total_count":1,"children":[]},{"name":"OpenApiConfig","total_count":1,"children":[]}]},{"name":"RestClientConfig.java","total_count":7,"children":[{"name":".factory()","total_count":1,"children":[]},{"name":".healthRestClient()","total_count":1,"children":[]},{"name":".restClient()","total_count":1,"children":[]},{"name":"Bean","total_count":1,"children":[]},{"name":"ClientHttpRequestFactory","total_count":1,"children":[]},{"name":"Duration","total_count":1,"children":[]},{"name":"RestClientConfig","total_count":1,"children":[]}]}]},{"name":"health","total_count":20,"children":[{"name":"HealthController.java","total_count":6,"children":[{"name":".check()","total_count":1,"children":[]},{"name":"GetMapping","total_count":1,"children":[]},{"name":"HealthController","total_count":1,"children":[]},{"name":"HealthReport","total_count":1,"children":[]},{"name":"HealthService","total_count":1,"children":[]},{"name":"Operation","total_count":1,"children":[]}]},{"name":"HealthService.java","total_count":11,"children":[{"name":".check()","total_count":1,"children":[]},{"name":".checkAll()","total_count":1,"children":[]},{"name":".elapsedMs()","total_count":1,"children":[]},{"name":".isSet()","total_count":1,"children":[]},{"name":"ApiHealth","total_count":1,"children":[]},{"name":"ApiInfo","total_count":1,"children":[]},{"name":"CatalogService","total_count":1,"children":[]},{"name":"HealthReport","total_count":1,"children":[]},{"name":"HealthService","total_count":1,"children":[]},{"name":"RestClient","total_count":1,"children":[]},{"name":"String","total_count":1,"children":[]}]},{"name":"ApiHealth.java","total_count":1,"children":[]},{"name":"HealthReport.java","total_count":1,"children":[]},{"name":"HealthStatus.java","total_count":1,"children":[]}]}]}]}]}]}]}]}]};
+
+    function transformData(jsonData) {
+        // Helper function to recursively build the children structure
+        function processNode(node, parentL1StageName) {
+            let displayName = node.name;
+            // Append total_count if it exists and is not already in the name
+            if (node.total_count !== undefined) {
+                if (!/\(Total Count: \d+\)$/.test(displayName)) {
+                    displayName += ` (Total Count: ${node.total_count})`;
+                }
+            }
+
+            const newNode = { name: displayName };
+
+            if (parentL1StageName === "Root") {
+                 newNode.originalStageName = node.name;
+            } else {
+                newNode.originalStageName = parentL1StageName;
+            }
+
+            if (node.children && node.children.length > 0) {
+                const stageNameToPass = (parentL1StageName === "Root") ? node.name : parentL1StageName;
+                newNode.children = node.children.map(child => processNode(child, stageNameToPass));
+            }
+
+            return newNode;
+        }
+
+        let rootDisplayName = jsonData.name;
+        if (jsonData.total_count !== undefined && !/\(Total Count: \d+\)$/.test(rootDisplayName)) {
+            rootDisplayName += ` (Total Count: ${jsonData.total_count})`;
+        }
+
+        return {
+            name: rootDisplayName,
+            originalStageName: "Root",
+            children: (jsonData.children || []).map(child => processNode(child, "Root"))
+        };
+    }
+
+    const treeData = transformData(initialJsonData);
+
+    // Auto-populated phaseColors: every depth-1 child of the root gets
+    // a stable colour from a bigger palette so all top-level dirs are
+    // distinguishable.
+    const PALETTE = [
+      ["#3498DB","#2980B9","#AED6F1"], ["#2ECC71","#27AE60","#A9DFBF"],
+      ["#E74C3C","#C0392B","#F5B7B1"], ["#9B59B6","#8E44AD","#D7BDE2"],
+      ["#F39C12","#D68910","#FAD7A0"], ["#1ABC9C","#117864","#A2D9CE"],
+      ["#34495E","#1B2631","#ABB2B9"], ["#E67E22","#BA4A00","#F5CBA7"],
+      ["#16A085","#0E6655","#A2D9CE"], ["#D35400","#A04000","#EDBB99"],
+      ["#7F8C8D","#566573","#D5DBDB"], ["#C0392B","#7B241C","#F5B7B1"],
+      ["#2E86C1","#1B4F72","#A9CCE3"], ["#28B463","#196F3D","#A9DFBF"],
+      ["#AF7AC5","#6C3483","#D2B4DE"],
+    ];
+    const phaseColors = { "Root": { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+                          "Default": { fill: "#BDC3C7", stroke: "#95A5A6", collapsedFill: "#ECF0F1" } };
+    (initialJsonData.children || []).forEach((c, i) => {
+      const pal = PALETTE[i % PALETTE.length];
+      phaseColors[c.name] = { fill: pal[0], stroke: pal[1], collapsedFill: pal[2] };
+    });
+
+    const levelSpecificPalettes = {
+      0: { fill: "#4A4A4A", stroke: "#333333", collapsedFill: "#6C757D" },
+      2: { fill: "#6ab04c", stroke: "#508a38", collapsedFill: "#a3d391" },
+      3: { fill: "#f0932b", stroke: "#d0730f", collapsedFill: "#f6c07e" },
+      4: { fill: "#be2edd", stroke: "#a01cb3", collapsedFill: "#e08bf2" },
+      5: { fill: "#00a8ff", stroke: "#007ac1", collapsedFill: "#74d2ff" },
+      6: { fill: "#e55039", stroke: "#c23620", collapsedFill: "#f09a8d" },
+      default: { fill: "#747d8c", stroke: "#57606f", collapsedFill: "#a4b0be" }
+    };
+
+    const svgElement = d3.select("#tree-svg");
+    const initialSvgWidth = +svgElement.attr("width");
+    const initialSvgHeight = +svgElement.attr("height");
+    const margin = { top: 40, right: 120, bottom: 80, left: 450 };
+    let width = initialSvgWidth - margin.left - margin.right;
+    let height = initialSvgHeight - margin.top - margin.bottom;
+    const duration = 500;
+    let nodeCounter = 0;
+    const g = svgElement.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+    const treemap = d3.tree().nodeSize([40, 0]);
+    let rootNode = d3.hierarchy(treeData, d => d.children);
+    rootNode.x0 = 0;
+    rootNode.y0 = 0;
+
+    if (rootNode.children) {
+      rootNode.children.forEach(d_child => {
+        if (d_child.children) { collapseBranch(d_child); }
+      });
+    }
+    updateTree(rootNode);
+
+    function collapseBranch(d) { if (d.children) { d._children = d.children; d._children.forEach(collapseBranch); d.children = null; } }
+    function expandBranch(d) { if (d._children) { d.children = d._children; d._children = null; } if (d.children) { d.children.forEach(expandBranch); } }
+    window.expandAll = () => { expandBranch(rootNode); updateTree(rootNode); };
+    window.collapseAll = () => { if (rootNode.children) { rootNode.children.forEach(collapseBranch); } updateTree(rootNode); };
+    window.resetView = () => { if (rootNode.children) { rootNode.children.forEach(d_child => { if (d_child.children || d_child._children) { collapseBranch(d_child); } }); } if (rootNode._children && !rootNode.children) { rootNode.children = rootNode._children; rootNode._children = null; } updateTree(rootNode); };
+
+    function updateTree(source) {
+      const treeLayoutData = treemap(rootNode);
+      let nodes = treeLayoutData.descendants();
+      let links = treeLayoutData.descendants().slice(1);
+
+      let minX = 0;
+      let maxX = 0;
+      if (nodes.length > 0) {
+        minX = d3.min(nodes, d => d.x);
+        maxX = d3.max(nodes, d => d.x);
+      }
+
+      let neededHeight = Math.max(initialSvgHeight, maxX - minX + margin.top + margin.bottom + 100);
+      svgElement.transition().duration(duration / 2).attr("height", neededHeight);
+      g.transition().duration(duration / 2).attr("transform", `translate(${margin.left},${margin.top - minX + 40})`);
+
+      nodes.forEach(d => { d.y = d.depth * 400; }); // Adjust horizontal separation if needed
+
+      const node = g.selectAll('g.node').data(nodes, d => d.id || (d.id = ++nodeCounter));
+      const nodeEnter = node.enter().append('g')
+        .attr('class', d => "node" + (d.children || d._children ? " node--internal" : " node--leaf") + (d._children ? " _children" : ""))
+        .attr('transform', d => `translate(${source.y0},${source.x0})`)
+        .on('click', (event, d) => { if (d.children) { d._children = d.children; d.children = null; } else if (d._children) { d.children = d._children; d._children = null; } updateTree(d); })
+        .style('cursor', d => (d.children || d._children) ? 'pointer' : 'default');
+
+      nodeEnter.append('circle').attr('r', 1e-6);
+
+      nodeEnter.append('text')
+        .attr('dy', '.35em')
+        .attr('x', d => d.children || d._children ? -14 : 14)
+        .attr('text-anchor', d => d.children || d._children ? 'end' : 'start')
+        .style("fill-opacity", 1e-6)
+        .call(wrapText, 380);
+
+      const nodeUpdate = nodeEnter.merge(node);
+      nodeUpdate.transition().duration(duration)
+        .attr('transform', d => `translate(${d.y},${d.x})`)
+        .attr('class', d => "node" + (d.children ? " node--internal" : " node--leaf") + (d._children ? " node--internal _children" : ""));
+
+      nodeUpdate.select('circle').attr('r', 8.5)
+        .style('fill', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            if (d._children) return palette.collapsedFill;
+            if (d.children) return palette.fill;
+            return "#fff";
+        })
+        .style('stroke', d => {
+            let palette;
+            if (d.depth === 0) {
+                palette = levelSpecificPalettes[0];
+            } else if (d.depth === 1) {
+                palette = phaseColors[d.data.originalStageName] || phaseColors.Default;
+            } else {
+                palette = levelSpecificPalettes[d.depth] || levelSpecificPalettes.default;
+            }
+            return palette.stroke;
+        });
+      nodeUpdate.select('text').style("fill-opacity", 1).call(wrapText, 380);
+
+      const nodeExit = node.exit().transition().duration(duration).attr('transform', d => `translate(${source.y},${source.x})`).remove();
+      nodeExit.select('circle').attr('r', 1e-6);
+      nodeExit.select('text').style('fill-opacity', 1e-6);
+
+      const link = g.selectAll('path.link').data(links, d => d.id);
+      const linkEnter = link.enter().insert('path', "g").attr('class', 'link').attr('d', d => { const o = { x: source.x0, y: source.y0 }; return diagonal(o, o); });
+
+      linkEnter.merge(link).transition().duration(duration).attr('d', d => diagonal(d, d.parent))
+        .style('stroke', d => {
+            const sourceNode = d.parent;
+            if (!sourceNode) return phaseColors.Default.stroke;
+            const l1AncestorName = sourceNode.data.originalStageName;
+            const colorPalette = phaseColors[l1AncestorName] || phaseColors.Default;
+            return colorPalette.stroke;
+        });
+      link.exit().transition().duration(duration).attr('d', d => { const o = { x: source.x, y: source.y }; return diagonal(o, o); }).remove();
+      nodes.forEach(d => { d.x0 = d.x; d.y0 = d.y; });
+    }
+
+    function diagonal(s, d) { return `M ${s.y} ${s.x} C ${(s.y + d.y) / 2} ${s.x}, ${(s.y + d.y) / 2} ${d.x}, ${d.y} ${d.x}`; }
+
+    function wrapText(textElements, maxWidth) {
+        const textPartColors = {
+            name: '#343a40',
+            count: '#0056b3'
+        };
+        const countRegex = /(\s\(Total Count: \d+\))$/;
+
+        textElements.each(function () {
+            const textD3 = d3.select(this);
+            const originalNodeText = textD3.datum().data.name;
+            const x = parseFloat(textD3.attr("x") || 0);
+            const initialDy = textD3.attr("dy");
+            const textAnchor = textD3.attr("text-anchor");
+            const lineHeight = 1.1;
+
+            textD3.text(null);
+
+            let namePart = originalNodeText;
+            let countPartText = "";
+
+            const countMatch = originalNodeText.match(countRegex);
+            if (countMatch && originalNodeText.endsWith(countMatch[0])) {
+                namePart = originalNodeText.substring(0, originalNodeText.length - countMatch[0].length).trim();
+                countPartText = countMatch[0].trim();
+            }
+
+            const tokens = [];
+            namePart.split(/\s+/).filter(Boolean).forEach(word => {
+                tokens.push({ text: word, type: 'name' });
+            });
+            if (countPartText) {
+                tokens.push({ text: countPartText, type: 'count' });
+            }
+
+            if (tokens.length === 0 && originalNodeText) {
+                tokens.push({ text: originalNodeText, type: 'name' });
+            }
+
+            let currentTspan = textD3.append("tspan").attr("x", x).attr("dy", initialDy);
+            if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+
+            let lineTokens = [];
+
+            for (let i = 0; i < tokens.length; i++) {
+                const tokenObj = tokens[i];
+
+                lineTokens.push(tokenObj);
+                currentTspan.text(lineTokens.map(t => t.text).join(" "));
+
+                if (currentTspan.node().getComputedTextLength() > maxWidth && lineTokens.length > 1) {
+                    lineTokens.pop();
+
+                    currentTspan.text(null);
+                    lineTokens.forEach((prevToken, idx) => {
+                        currentTspan.append("tspan")
+                            .text((idx > 0 ? " " : "") + prevToken.text)
+                            .style("fill", textPartColors[prevToken.type] || textPartColors.name)
+                            .style("font-weight", prevToken.type === 'count' ? "bold" : "normal");
+                    });
+
+                    lineTokens = [tokenObj];
+                    currentTspan = textD3.append("tspan").attr("x", x).attr("dy", lineHeight + "em");
+                    if (textAnchor === "end") currentTspan.attr("text-anchor", "end");
+                }
+            }
+
+            currentTspan.text(null);
+            lineTokens.forEach((token, idx) => {
+                currentTspan.append("tspan")
+                    .text((idx > 0 ? " " : "") + token.text)
+                    .style("fill", textPartColors[token.type] || textPartColors.name)
+                    .style("font-weight", token.type === 'count' ? "bold" : "normal");
+            });
+
+            if (textD3.selectAll("tspan > tspan").empty() && textD3.select("tspan").text().length === 0 && originalNodeText) {
+                let t = textD3.select("tspan");
+                let displayText = originalNodeText;
+                t.text(displayText).style("fill", textPartColors.name);
+                if (t.node() && t.node().getComputedTextLength() > maxWidth && displayText.length > 20) {
+                    let estimatedChars = Math.floor(maxWidth / (t.node().getComputedTextLength()/displayText.length) );
+                    displayText = displayText.substring(0, Math.max(0, estimatedChars - 3)) + "...";
+                    t.text(displayText);
+                }
+            }
+        });
+    }
+  </script>
+</body>
+</html>

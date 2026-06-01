@@ -1,0 +1,1031 @@
+{
+  "communities": {
+    "0": [
+      "book",
+      "books_bookscontroller_bookscontroller",
+      "books_bookscontroller_bookscontroller_search",
+      "books_booksservice_booksservice_coverurl",
+      "books_booksservice_booksservice_search",
+      "books_booksservice_booksservice_tobook",
+      "booksservice",
+      "docraw",
+      "externalapiexception",
+      "github_githubservice_githubservice",
+      "github_githubservice_githubservice_getuser",
+      "news_newsservice_newsservice",
+      "news_newsservice_newsservice_getheadlines",
+      "photos_photosservice_photosservice",
+      "photos_photosservice_photosservice_getrandom",
+      "src_main_java_com_bryan_apiplayground_apis_books_bookscontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_books_bookscontroller_java_booksresponse",
+      "src_main_java_com_bryan_apiplayground_apis_books_bookscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_books_bookscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_books_bookscontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_books_booksresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_books_booksservice_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_books_booksservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_books_booksservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_github_githubservice_java",
+      "src_main_java_com_bryan_apiplayground_apis_github_githubservice_java_githubuserresponse",
+      "src_main_java_com_bryan_apiplayground_apis_github_githubservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_github_githubservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_news_newsresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_news_newsservice_java",
+      "src_main_java_com_bryan_apiplayground_apis_news_newsservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_news_newsservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photosservice_java",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photosservice_java_photoresponse",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photosservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photosservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_users_userresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_users_usersservice_java",
+      "src_main_java_com_bryan_apiplayground_apis_users_usersservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_users_usersservice_java_string",
+      "users_usersservice_usersservice",
+      "users_usersservice_usersservice_getrandom"
+    ],
+    "1": [
+      "apikeynotconfiguredexception",
+      "common_globalexceptionhandler_globalexceptionhandler",
+      "common_globalexceptionhandler_globalexceptionhandler_badrequest",
+      "common_globalexceptionhandler_globalexceptionhandler_handlebodyvalidation",
+      "common_globalexceptionhandler_globalexceptionhandler_handleexternal",
+      "common_globalexceptionhandler_globalexceptionhandler_handlegeneric",
+      "common_globalexceptionhandler_globalexceptionhandler_handleillegalargument",
+      "common_globalexceptionhandler_globalexceptionhandler_handlemissingkey",
+      "common_globalexceptionhandler_globalexceptionhandler_handleparamvalidation",
+      "common_globalexceptionhandler_globalexceptionhandler_handlepremium",
+      "exception",
+      "exception_apikeynotconfiguredexception_apikeynotconfiguredexception",
+      "exception_externalapiexception_externalapiexception",
+      "exception_externalapiexception_externalapiexception_getupstreamstatus",
+      "exception_premiumfeatureexception_premiumfeatureexception",
+      "exception_premiumfeatureexception_premiumfeatureexception_getfeature",
+      "exception_premiumfeatureexception_premiumfeatureexception_getrequiredplan",
+      "exceptionhandler",
+      "handlermethodvalidationexception",
+      "httpservletrequest",
+      "illegalargumentexception",
+      "methodargumentnotvalidexception",
+      "premiumfeatureexception",
+      "responseentity",
+      "runtimeexception",
+      "src_main_java_com_bryan_apiplayground_common_exception_apikeynotconfiguredexception_java_string",
+      "src_main_java_com_bryan_apiplayground_common_exception_externalapiexception_java_string",
+      "src_main_java_com_bryan_apiplayground_common_exception_premiumfeatureexception_java_string",
+      "src_main_java_com_bryan_apiplayground_common_globalexceptionhandler_java_apierror",
+      "src_main_java_com_bryan_apiplayground_common_globalexceptionhandler_java_premiumrequirederror",
+      "src_main_java_com_bryan_apiplayground_common_globalexceptionhandler_java_string",
+      "throwable"
+    ],
+    "2": [
+      "apihealth",
+      "catalog_catalogcontroller_catalogcontroller",
+      "catalog_catalogcontroller_catalogcontroller_getcatalog",
+      "catalog_catalogservice_catalogservice",
+      "catalog_catalogservice_catalogservice_findall",
+      "health_healthcontroller_healthcontroller",
+      "health_healthcontroller_healthcontroller_check",
+      "health_healthservice_healthservice_check",
+      "health_healthservice_healthservice_checkall",
+      "health_healthservice_healthservice_elapsedms",
+      "health_healthservice_healthservice_isset",
+      "healthservice",
+      "readme_health_service",
+      "readme_virtual_threads",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogcontroller_java",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogcontroller_java_apiinfo",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogcontroller_java_catalogservice",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogcontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogcontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogcontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogservice_java",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogservice_java_apiinfo",
+      "src_main_java_com_bryan_apiplayground_catalog_catalogservice_java_list",
+      "src_main_java_com_bryan_apiplayground_health_healthcontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_health_healthcontroller_java_healthreport",
+      "src_main_java_com_bryan_apiplayground_health_healthcontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_health_healthservice_java_apiinfo",
+      "src_main_java_com_bryan_apiplayground_health_healthservice_java_catalogservice",
+      "src_main_java_com_bryan_apiplayground_health_healthservice_java_healthreport",
+      "src_main_java_com_bryan_apiplayground_health_healthservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_health_healthservice_java_string"
+    ],
+    "3": [
+      "clienthttprequestfactory",
+      "config_restclientconfig_restclientconfig_factory",
+      "config_restclientconfig_restclientconfig_healthrestclient",
+      "config_restclientconfig_restclientconfig_restclient",
+      "dota_dotacontroller_dotacontroller",
+      "dota_dotacontroller_dotacontroller_listheroes",
+      "dota_dotacontroller_dotacontroller_listpromatches",
+      "dota_dotaservice_dotaservice_absolute",
+      "dota_dotaservice_dotaservice_defaultmatchlimit",
+      "dota_dotaservice_dotaservice_listheroes",
+      "dota_dotaservice_dotaservice_listpromatches",
+      "dotaservice",
+      "duration",
+      "readme_rest_client_config",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotacontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotacontroller_java_dotahero",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotacontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotacontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotacontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotacontroller_java_promatch",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotaservice_java_dotahero",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotaservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotaservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotaservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_dota_promatch_java",
+      "src_main_java_com_bryan_apiplayground_config_restclientconfig_java",
+      "src_main_java_com_bryan_apiplayground_config_restclientconfig_java_bean"
+    ],
+    "4": [
+      "goal",
+      "goalraw",
+      "snapshot",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupservice_java_groupstanding",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupservice_java_matchraw",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupservice_java_objectmapper",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupservice_java_worldcupinfo",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupservice_java_worldcupmatch",
+      "worldcup_worldcupservice_tally",
+      "worldcup_worldcupservice_tally_record",
+      "worldcup_worldcupservice_tally_tostanding",
+      "worldcup_worldcupservice_worldcupservice",
+      "worldcup_worldcupservice_worldcupservice_fetch",
+      "worldcup_worldcupservice_worldcupservice_getgroups",
+      "worldcup_worldcupservice_worldcupservice_getinfo",
+      "worldcup_worldcupservice_worldcupservice_getmatches",
+      "worldcup_worldcupservice_worldcupservice_loadmatches",
+      "worldcup_worldcupservice_worldcupservice_normalizestatus",
+      "worldcup_worldcupservice_worldcupservice_refresh",
+      "worldcup_worldcupservice_worldcupservice_togoals",
+      "worldcup_worldcupservice_worldcupservice_tomatch",
+      "worldcupservice"
+    ],
+    "5": [
+      "characterraw",
+      "characters_characterscontroller_characterscontroller",
+      "characters_characterscontroller_characterscontroller_getbyid",
+      "characters_characterscontroller_characterscontroller_getrandom",
+      "characters_characterscontroller_characterscontroller_list",
+      "characters_characterscontroller_characterscontroller_search",
+      "characters_charactersservice_charactersservice_getbyid",
+      "characters_charactersservice_charactersservice_getrandom",
+      "characters_charactersservice_charactersservice_list",
+      "characters_charactersservice_charactersservice_notblank",
+      "characters_charactersservice_charactersservice_search",
+      "characters_charactersservice_charactersservice_tocharacter",
+      "characters_charactersservice_charactersservice_tosummary",
+      "charactersservice",
+      "charactersummary",
+      "src_main_java_com_bryan_apiplayground_apis_characters_characterpage_java",
+      "src_main_java_com_bryan_apiplayground_apis_characters_characterresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_characters_characterscontroller_java_characterpage",
+      "src_main_java_com_bryan_apiplayground_apis_characters_characterscontroller_java_characterresponse",
+      "src_main_java_com_bryan_apiplayground_apis_characters_characterscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_characters_characterscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_characters_characterscontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_characters_charactersservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_characters_charactersservice_java_string"
+    ],
+    "6": [
+      "apodraw",
+      "libraryitem",
+      "space_spacecontroller_spacecontroller",
+      "space_spacecontroller_spacecontroller_getapod",
+      "space_spacecontroller_spacecontroller_search",
+      "space_spaceservice_spaceservice",
+      "space_spaceservice_spaceservice_getapod",
+      "space_spaceservice_spaceservice_getrandomapod",
+      "space_spaceservice_spaceservice_searchlibrary",
+      "space_spaceservice_spaceservice_toapodresponse",
+      "space_spaceservice_spaceservice_tospaceimage",
+      "spaceservice",
+      "src_main_java_com_bryan_apiplayground_apis_space_apodresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_space_spacecontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_space_spacecontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_space_spacecontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_space_spacecontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_space_spacecontroller_java_spaceimage",
+      "src_main_java_com_bryan_apiplayground_apis_space_spacecontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_space_spaceservice_java_apodresponse",
+      "src_main_java_com_bryan_apiplayground_apis_space_spaceservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_space_spaceservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_space_spaceservice_java_spaceimage",
+      "src_main_java_com_bryan_apiplayground_apis_space_spaceservice_java_string"
+    ],
+    "7": [
+      "balldontlie_balldontlieservice_balldontlieservice_call",
+      "balldontlie_balldontlieservice_balldontlieservice_callpremium",
+      "balldontlie_balldontlieservice_balldontlieservice_getmatches",
+      "balldontlie_balldontlieservice_balldontlieservice_getplayers",
+      "balldontlie_balldontlieservice_balldontlieservice_getstadiums",
+      "balldontlie_balldontlieservice_balldontlieservice_getstandings",
+      "balldontlie_balldontlieservice_balldontlieservice_getteams",
+      "balldontlie_balldontlieservice_balldontlieservice_gettiers",
+      "balldontlie_balldontlieservice_balldontlieservice_requirekey",
+      "balldontlieservice",
+      "class",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_bdlmatch",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_bdlplayer",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_bdlstanding",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_bdlteam",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_bdltier",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontlieservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_bdlstadium_java",
+      "t"
+    ],
+    "8": [
+      "matchrow",
+      "seasonraw",
+      "sports_sportsservice_sportsservice_getmatches",
+      "sports_sportsservice_sportsservice_getstandings",
+      "sports_sportsservice_sportsservice_getteams",
+      "sports_sportsservice_sportsservice_listcompetitions",
+      "sports_sportsservice_sportsservice_maprows",
+      "sports_sportsservice_sportsservice_requirekey",
+      "sports_sportsservice_sportsservice_seasonlabel",
+      "sports_sportsservice_sportsservice_tomatchrow",
+      "sportsservice",
+      "src_main_java_com_bryan_apiplayground_apis_sports_competitioninfo_java",
+      "src_main_java_com_bryan_apiplayground_apis_sports_matchesresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportsservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportsservice_java_matchraw",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportsservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportsservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_sports_standingsresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_sports_teamsresponse_java",
+      "standingrow",
+      "tablerow"
+    ],
+    "9": [
+      "episoderaw",
+      "episodes_episodescontroller_episodescontroller",
+      "episodes_episodescontroller_episodescontroller_getbyid",
+      "episodes_episodescontroller_episodescontroller_search",
+      "episodes_episodesservice_episodesservice",
+      "episodes_episodesservice_episodesservice_extractcharacterid",
+      "episodes_episodesservice_episodesservice_getbyid",
+      "episodes_episodesservice_episodesservice_search",
+      "episodes_episodesservice_episodesservice_toepisode",
+      "episodesservice",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodescontroller_java_episode",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodescontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodescontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodescontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodescontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodesservice_java_episode",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodesservice_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodesservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodesservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episodesservice_java_string"
+    ],
+    "10": [
+      "movies_moviesservice_moviesservice",
+      "movies_moviesservice_moviesservice_calllist",
+      "movies_moviesservice_moviesservice_discover",
+      "movies_moviesservice_moviesservice_getdetails",
+      "movies_moviesservice_moviesservice_getgenres",
+      "movies_moviesservice_moviesservice_getpopular",
+      "movies_moviesservice_moviesservice_gettrailer",
+      "movies_moviesservice_moviesservice_posterurl",
+      "movies_moviesservice_moviesservice_requirekey",
+      "movies_moviesservice_moviesservice_search",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java_genre",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java_moviedetails",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java_moviesresponse",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesservice_java_trailerresponse"
+    ],
+    "11": [
+      "cocktail",
+      "cocktails_cocktailsservice_cocktailsservice_byid",
+      "cocktails_cocktailsservice_cocktailsservice_categories",
+      "cocktails_cocktailsservice_cocktailsservice_extractingredients",
+      "cocktails_cocktailsservice_cocktailsservice_filterbyalcoholic",
+      "cocktails_cocktailsservice_cocktailsservice_filterbycategory",
+      "cocktails_cocktailsservice_cocktailsservice_random",
+      "cocktails_cocktailsservice_cocktailsservice_search",
+      "cocktails_cocktailsservice_cocktailsservice_str",
+      "cocktails_cocktailsservice_cocktailsservice_tococktail",
+      "cocktailsservice",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailsresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailsservice_java_cocktailcategory",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailsservice_java_ingredient",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailsservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailsservice_java_map",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailsservice_java_object",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailsservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailsservice_java_string"
+    ],
+    "12": [
+      "meal",
+      "meals_mealsservice_mealsservice",
+      "meals_mealsservice_mealsservice_categories",
+      "meals_mealsservice_mealsservice_extractingredients",
+      "meals_mealsservice_mealsservice_filterbycategory",
+      "meals_mealsservice_mealsservice_random",
+      "meals_mealsservice_mealsservice_search",
+      "meals_mealsservice_mealsservice_str",
+      "meals_mealsservice_mealsservice_tomeal",
+      "mealsservice",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_ingredient",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_map",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_mealcategory",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_mealsresponse",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_mealsummary",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_object",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsservice_java_string"
+    ],
+    "13": [
+      "holidays_holidayscontroller_holidayscontroller",
+      "holidays_holidayscontroller_holidayscontroller_list",
+      "holidays_holidayscontroller_holidayscontroller_listcountries",
+      "holidays_holidaysservice_holidaysservice",
+      "holidays_holidaysservice_holidaysservice_list",
+      "holidays_holidaysservice_holidaysservice_listcountries",
+      "holidaysservice",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidayscontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidayscontroller_java_country",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidayscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidayscontroller_java_holiday",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidayscontroller_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidayscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidayscontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidaysservice_java_country",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidaysservice_java_holiday",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidaysservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holidaysservice_java_string"
+    ],
+    "14": [
+      "balldontlie_balldontliecontroller_balldontliecontroller",
+      "balldontlie_balldontliecontroller_balldontliecontroller_getmatches",
+      "balldontlie_balldontliecontroller_balldontliecontroller_getplayers",
+      "balldontlie_balldontliecontroller_balldontliecontroller_getstadiums",
+      "balldontlie_balldontliecontroller_balldontliecontroller_getstandings",
+      "balldontlie_balldontliecontroller_balldontliecontroller_getteams",
+      "balldontlie_balldontliecontroller_balldontliecontroller_gettiers",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_bdlmatch",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_bdlplayer",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_bdlstadium",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_bdlstanding",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_bdlteam",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_bdltier",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_balldontliecontroller_java_string"
+    ],
+    "15": [
+      "movies_moviescontroller_moviescontroller",
+      "movies_moviescontroller_moviescontroller_getdetails",
+      "movies_moviescontroller_moviescontroller_getgenres",
+      "movies_moviescontroller_moviescontroller_getpopular",
+      "movies_moviescontroller_moviescontroller_gettrailer",
+      "movies_moviescontroller_moviescontroller_searchordiscover",
+      "moviesservice",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviescontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviescontroller_java_genre",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviescontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviescontroller_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviescontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviescontroller_java_moviedetails",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviescontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviescontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviesresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_movies_trailerresponse_java"
+    ],
+    "16": [
+      "double",
+      "geocoderesult",
+      "src_main_java_com_bryan_apiplayground_apis_weather_weathercontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_weather_weathercontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_weather_weathercontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_weather_weathercontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_weather_weathercontroller_java_weatherresponse",
+      "src_main_java_com_bryan_apiplayground_apis_weather_weatherresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_weather_weatherservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_weather_weatherservice_java_string",
+      "weather_weathercontroller_weathercontroller",
+      "weather_weathercontroller_weathercontroller_getcurrent",
+      "weather_weatherservice_weatherservice_geocode",
+      "weather_weatherservice_weatherservice_getbycity",
+      "weather_weatherservice_weatherservice_getbycoordinates",
+      "weather_weatherservice_weatherservice_getcurrent",
+      "weatherservice"
+    ],
+    "17": [
+      "locations_locationscontroller_locationscontroller",
+      "locations_locationscontroller_locationscontroller_search",
+      "locations_locationsservice_locationsservice",
+      "locations_locationsservice_locationsservice_search",
+      "locationsservice",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationscontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationscontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationscontroller_java_location",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationscontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationsservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationsservice_java_location",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationsservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_locations_locationsservice_java_string"
+    ],
+    "18": [
+      "music_musiccontroller_musiccontroller",
+      "music_musiccontroller_musiccontroller_search",
+      "music_musicservice_musicservice_highresartwork",
+      "music_musicservice_musicservice_search",
+      "musicservice",
+      "src_main_java_com_bryan_apiplayground_apis_music_musiccontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_music_musiccontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_music_musiccontroller_java_musicresponse",
+      "src_main_java_com_bryan_apiplayground_apis_music_musiccontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_music_musiccontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_music_musicresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_music_musicservice_java_objectmapper",
+      "src_main_java_com_bryan_apiplayground_apis_music_musicservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_music_musicservice_java_string"
+    ],
+    "19": [
+      "sports_sportscontroller_sportscontroller",
+      "sports_sportscontroller_sportscontroller_getmatches",
+      "sports_sportscontroller_sportscontroller_getstandings",
+      "sports_sportscontroller_sportscontroller_getteams",
+      "sports_sportscontroller_sportscontroller_listcompetitions",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java_competitioninfo",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java_matchesresponse",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java_standingsresponse",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_sports_sportscontroller_java_teamsresponse"
+    ],
+    "20": [
+      "countries_countriescontroller_countriescontroller",
+      "countries_countriescontroller_countriescontroller_getbyname",
+      "countries_countriesservice_countriesservice_getbyname",
+      "countries_countriesservice_countriesservice_toresponse",
+      "countriesservice",
+      "countryraw",
+      "src_main_java_com_bryan_apiplayground_apis_countries_countriescontroller_java_countryresponse",
+      "src_main_java_com_bryan_apiplayground_apis_countries_countriescontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_countries_countriescontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_countries_countriescontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_countries_countriesservice_java_countryresponse",
+      "src_main_java_com_bryan_apiplayground_apis_countries_countriesservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_countries_countriesservice_java_string"
+    ],
+    "21": [
+      "cocktails_cocktailscontroller_cocktailscontroller",
+      "cocktails_cocktailscontroller_cocktailscontroller_byid",
+      "cocktails_cocktailscontroller_cocktailscontroller_categories",
+      "cocktails_cocktailscontroller_cocktailscontroller_filterbyalcoholic",
+      "cocktails_cocktailscontroller_cocktailscontroller_filterbycategory",
+      "cocktails_cocktailscontroller_cocktailscontroller_search",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailscontroller_java_cocktailcategory",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailscontroller_java_cocktailsresponse",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailscontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailscontroller_java_string"
+    ],
+    "22": [
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviaservice_java",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviaservice_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviaservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviaservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviaservice_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviaservice_java_triviacategory",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviaservice_java_triviaquestion",
+      "trivia_triviaservice_triviaservice",
+      "trivia_triviaservice_triviaservice_decode",
+      "trivia_triviaservice_triviaservice_getcategories",
+      "trivia_triviaservice_triviaservice_getquestions",
+      "trivia_triviaservice_triviaservice_notblank"
+    ],
+    "23": [
+      "meals_mealscontroller_mealscontroller",
+      "meals_mealscontroller_mealscontroller_categories",
+      "meals_mealscontroller_mealscontroller_filterbycategory",
+      "meals_mealscontroller_mealscontroller_search",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealscontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealscontroller_java_mealcategory",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealscontroller_java_mealsummary",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealscontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsresponse_java"
+    ],
+    "24": [
+      "posts_postscontroller_postscontroller",
+      "posts_postscontroller_postscontroller_getbyid",
+      "posts_postsservice_postsservice",
+      "posts_postsservice_postsservice_getbyid",
+      "postsservice",
+      "src_main_java_com_bryan_apiplayground_apis_posts_postresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_posts_postscontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_posts_postscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_posts_postscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_posts_postsservice_java_postresponse",
+      "src_main_java_com_bryan_apiplayground_apis_posts_postsservice_java_restclient"
+    ],
+    "25": [
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviacontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviacontroller_java_integer",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviacontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviacontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviacontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviacontroller_java_triviacategory",
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviacontroller_java_triviaquestion",
+      "trivia_triviacontroller_triviacontroller",
+      "trivia_triviacontroller_triviacontroller_getcategories",
+      "trivia_triviacontroller_triviacontroller_getquestions",
+      "triviaservice"
+    ],
+    "26": [
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupcontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupcontroller_java_groupstanding",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupcontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupcontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupcontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupcontroller_java_worldcupinfo",
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupmatch_java",
+      "worldcup_worldcupcontroller_worldcupcontroller",
+      "worldcup_worldcupcontroller_worldcupcontroller_getgroups",
+      "worldcup_worldcupcontroller_worldcupcontroller_getinfo",
+      "worldcup_worldcupcontroller_worldcupcontroller_getmatches"
+    ],
+    "27": [
+      "hackernews_hackernewsservice_hackernewsservice",
+      "hackernews_hackernewsservice_hackernewsservice_fetchids",
+      "hackernews_hackernewsservice_hackernewsservice_fetchitem",
+      "hackernews_hackernewsservice_hackernewsservice_getstories",
+      "long",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewsservice_java",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewsservice_java_hnstory",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewsservice_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewsservice_java_restclient",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewsservice_java_string"
+    ],
+    "28": [
+      "hackernews_hackernewscontroller_hackernewscontroller",
+      "hackernews_hackernewscontroller_hackernewscontroller_getstories",
+      "hackernewsservice",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewscontroller_java_hnstory",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewscontroller_java_list",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hackernewscontroller_java_string"
+    ],
+    "29": [
+      "photos_photoscontroller_photoscontroller",
+      "photos_photoscontroller_photoscontroller_getrandom",
+      "photosservice",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photoscontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photoscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photoscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photoscontroller_java_photoresponse",
+      "src_main_java_com_bryan_apiplayground_apis_photos_photoscontroller_java_string"
+    ],
+    "30": [
+      "qrcode_qrcontroller_qrcontroller",
+      "qrcode_qrcontroller_qrcontroller_generate",
+      "qrservice",
+      "src_main_java_com_bryan_apiplayground_apis_qrcode_qrcontroller_java",
+      "src_main_java_com_bryan_apiplayground_apis_qrcode_qrcontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_qrcode_qrcontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_qrcode_qrcontroller_java_qrresponse",
+      "src_main_java_com_bryan_apiplayground_apis_qrcode_qrcontroller_java_string"
+    ],
+    "31": [
+      "github_githubcontroller_githubcontroller",
+      "github_githubcontroller_githubcontroller_getuser",
+      "githubservice",
+      "src_main_java_com_bryan_apiplayground_apis_github_githubcontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_github_githubcontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_github_githubcontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_github_githubuserresponse_java"
+    ],
+    "32": [
+      "news_newscontroller_newscontroller",
+      "news_newscontroller_newscontroller_getheadlines",
+      "newsservice",
+      "src_main_java_com_bryan_apiplayground_apis_news_newscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_news_newscontroller_java_newsresponse",
+      "src_main_java_com_bryan_apiplayground_apis_news_newscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_news_newscontroller_java_string"
+    ],
+    "33": [
+      "readme_api_playground_backend",
+      "readme_gemini_api",
+      "readme_java_25",
+      "readme_news_api",
+      "readme_spring_boot_4",
+      "readme_tmdb_api",
+      "readme_unsplash_api"
+    ],
+    "34": [
+      "src_main_java_com_bryan_apiplayground_apis_users_userscontroller_java_getmapping",
+      "src_main_java_com_bryan_apiplayground_apis_users_userscontroller_java_operation",
+      "src_main_java_com_bryan_apiplayground_apis_users_userscontroller_java_string",
+      "src_main_java_com_bryan_apiplayground_apis_users_userscontroller_java_userresponse",
+      "users_userscontroller_userscontroller",
+      "users_userscontroller_userscontroller_getrandom",
+      "usersservice"
+    ],
+    "35": [
+      "config_corsconfig_corsconfig",
+      "config_corsconfig_corsconfig_addcorsmappings",
+      "corsregistry",
+      "override",
+      "src_main_java_com_bryan_apiplayground_config_corsconfig_java",
+      "webmvcconfigurer"
+    ],
+    "36": [
+      "config_openapiconfig_openapiconfig",
+      "config_openapiconfig_openapiconfig_apiplaygroundopenapi",
+      "openapi",
+      "src_main_java_com_bryan_apiplayground_config_openapiconfig_java",
+      "src_main_java_com_bryan_apiplayground_config_openapiconfig_java_bean"
+    ],
+    "37": [
+      "qrcode_qrservice_qrservice",
+      "qrcode_qrservice_qrservice_generate",
+      "src_main_java_com_bryan_apiplayground_apis_qrcode_qrresponse_java",
+      "src_main_java_com_bryan_apiplayground_apis_qrcode_qrservice_java",
+      "src_main_java_com_bryan_apiplayground_apis_qrcode_qrservice_java_string"
+    ],
+    "38": [
+      "common_apierror_of",
+      "src_main_java_com_bryan_apiplayground_common_apierror_java",
+      "src_main_java_com_bryan_apiplayground_common_apierror_java_apierror",
+      "src_main_java_com_bryan_apiplayground_common_apierror_java_string"
+    ],
+    "39": [
+      "apiplayground_apiplaygroundapplication_apiplaygroundapplication",
+      "apiplayground_apiplaygroundapplication_apiplaygroundapplication_main",
+      "src_main_java_com_bryan_apiplayground_apiplaygroundapplication_java_string"
+    ],
+    "40": [
+      "claude_settings_local_json",
+      "claude_settings_local_permissions",
+      "claude_settings_local_permissions_allow"
+    ],
+    "41": [
+      "common_premiumrequirederror_of",
+      "src_main_java_com_bryan_apiplayground_common_premiumrequirederror_java",
+      "src_main_java_com_bryan_apiplayground_common_premiumrequirederror_java_string"
+    ],
+    "42": [
+      "src_main_java_com_bryan_apiplayground_apis_music_track_java"
+    ],
+    "43": [
+      "src_main_java_com_bryan_apiplayground_apis_hackernews_hnstory_java"
+    ],
+    "44": [
+      "src_main_java_com_bryan_apiplayground_apis_holidays_country_java"
+    ],
+    "45": [
+      "src_main_java_com_bryan_apiplayground_apis_holidays_holiday_java"
+    ],
+    "46": [
+      "src_main_java_com_bryan_apiplayground_apis_episodes_episode_java"
+    ],
+    "47": [
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_groupstanding_java"
+    ],
+    "48": [
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_worldcupinfo_java"
+    ],
+    "49": [
+      "src_main_java_com_bryan_apiplayground_apis_worldcup_goal_java"
+    ],
+    "50": [
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_bdltier_java"
+    ],
+    "51": [
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_bdlmatch_java"
+    ],
+    "52": [
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_bdlteam_java"
+    ],
+    "53": [
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_bdlplayer_java"
+    ],
+    "54": [
+      "src_main_java_com_bryan_apiplayground_apis_balldontlie_bdlstanding_java"
+    ],
+    "55": [
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviaquestion_java"
+    ],
+    "56": [
+      "src_main_java_com_bryan_apiplayground_apis_trivia_triviacategory_java"
+    ],
+    "57": [
+      "src_main_java_com_bryan_apiplayground_apis_books_book_java"
+    ],
+    "58": [
+      "src_main_java_com_bryan_apiplayground_apis_sports_teamrow_java"
+    ],
+    "59": [
+      "src_main_java_com_bryan_apiplayground_apis_sports_matchrow_java"
+    ],
+    "60": [
+      "src_main_java_com_bryan_apiplayground_apis_sports_grouptable_java"
+    ],
+    "61": [
+      "src_main_java_com_bryan_apiplayground_apis_news_article_java"
+    ],
+    "62": [
+      "src_main_java_com_bryan_apiplayground_apis_locations_location_java"
+    ],
+    "63": [
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealcategory_java"
+    ],
+    "64": [
+      "src_main_java_com_bryan_apiplayground_apis_meals_ingredient_java"
+    ],
+    "65": [
+      "src_main_java_com_bryan_apiplayground_apis_meals_mealsummary_java"
+    ],
+    "66": [
+      "src_main_java_com_bryan_apiplayground_apis_meals_meal_java"
+    ],
+    "67": [
+      "src_main_java_com_bryan_apiplayground_apis_movies_moviedetails_java"
+    ],
+    "68": [
+      "src_main_java_com_bryan_apiplayground_apis_movies_genre_java"
+    ],
+    "69": [
+      "src_main_java_com_bryan_apiplayground_apis_movies_movie_java"
+    ],
+    "70": [
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_ingredient_java"
+    ],
+    "71": [
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktail_java"
+    ],
+    "72": [
+      "src_main_java_com_bryan_apiplayground_apis_cocktails_cocktailcategory_java"
+    ],
+    "73": [
+      "src_main_java_com_bryan_apiplayground_apis_dota_dotahero_java"
+    ],
+    "74": [
+      "src_main_java_com_bryan_apiplayground_apis_countries_countryresponse_java"
+    ],
+    "75": [
+      "src_main_java_com_bryan_apiplayground_apis_characters_pageinfo_java"
+    ],
+    "76": [
+      "src_main_java_com_bryan_apiplayground_apis_space_spaceimage_java"
+    ],
+    "77": [
+      "src_main_java_com_bryan_apiplayground_apis_photos_photoresponse_java"
+    ],
+    "78": [
+      "src_main_java_com_bryan_apiplayground_health_healthstatus_java"
+    ],
+    "79": [
+      "src_main_java_com_bryan_apiplayground_health_healthreport_java"
+    ],
+    "80": [
+      "src_main_java_com_bryan_apiplayground_health_apihealth_java"
+    ],
+    "81": [
+      "src_main_java_com_bryan_apiplayground_catalog_apiinfo_java"
+    ],
+    "82": [
+      "src_main_java_com_bryan_apiplayground_catalog_difficulty_java"
+    ],
+    "83": [
+      "src_main_java_com_bryan_apiplayground_catalog_keyrequirement_java"
+    ],
+    "84": [
+      "readme_health_endpoint"
+    ],
+    "85": [
+      "readme_catalog_endpoint"
+    ]
+  },
+  "cohesion": {
+    "0": 0.059233449477351915,
+    "1": 0.14717741935483872,
+    "2": 0.09462365591397849,
+    "3": 0.1225071225071225,
+    "4": 0.15333333333333332,
+    "5": 0.16304347826086957,
+    "6": 0.14492753623188406,
+    "7": 0.16883116883116883,
+    "8": 0.14761904761904762,
+    "9": 0.1631578947368421,
+    "10": 0.24561403508771928,
+    "11": 0.2222222222222222,
+    "12": 0.19883040935672514,
+    "13": 0.16993464052287582,
+    "14": 0.22875816993464052,
+    "15": 0.23529411764705882,
+    "16": 0.19852941176470587,
+    "17": 0.18095238095238095,
+    "18": 0.18681318681318682,
+    "19": 0.26373626373626374,
+    "20": 0.20512820512820512,
+    "21": 0.42424242424242425,
+    "22": 0.2727272727272727,
+    "23": 0.34545454545454546,
+    "24": 0.23636363636363636,
+    "25": 0.2909090909090909,
+    "26": 0.32727272727272727,
+    "27": 0.35555555555555557,
+    "28": 0.35714285714285715,
+    "29": 0.32142857142857145,
+    "30": 0.32142857142857145,
+    "31": 0.38095238095238093,
+    "32": 0.38095238095238093,
+    "33": 0.2857142857142857,
+    "34": 0.38095238095238093,
+    "35": 0.4666666666666667,
+    "36": 0.6,
+    "37": 0.4,
+    "38": 0.5,
+    "39": 0.6666666666666666,
+    "40": 0.6666666666666666,
+    "41": 0.6666666666666666,
+    "42": 1.0,
+    "43": 1.0,
+    "44": 1.0,
+    "45": 1.0,
+    "46": 1.0,
+    "47": 1.0,
+    "48": 1.0,
+    "49": 1.0,
+    "50": 1.0,
+    "51": 1.0,
+    "52": 1.0,
+    "53": 1.0,
+    "54": 1.0,
+    "55": 1.0,
+    "56": 1.0,
+    "57": 1.0,
+    "58": 1.0,
+    "59": 1.0,
+    "60": 1.0,
+    "61": 1.0,
+    "62": 1.0,
+    "63": 1.0,
+    "64": 1.0,
+    "65": 1.0,
+    "66": 1.0,
+    "67": 1.0,
+    "68": 1.0,
+    "69": 1.0,
+    "70": 1.0,
+    "71": 1.0,
+    "72": 1.0,
+    "73": 1.0,
+    "74": 1.0,
+    "75": 1.0,
+    "76": 1.0,
+    "77": 1.0,
+    "78": 1.0,
+    "79": 1.0,
+    "80": 1.0,
+    "81": 1.0,
+    "82": 1.0,
+    "83": 1.0,
+    "84": 1.0,
+    "85": 1.0
+  },
+  "gods": [
+    {
+      "id": "externalapiexception",
+      "label": "ExternalApiException",
+      "degree": 26
+    },
+    {
+      "id": "balldontlieservice",
+      "label": "BalldontlieService",
+      "degree": 16
+    },
+    {
+      "id": "common_globalexceptionhandler_globalexceptionhandler",
+      "label": "GlobalExceptionHandler",
+      "degree": 16
+    },
+    {
+      "id": "sportsservice",
+      "label": "SportsService",
+      "degree": 14
+    },
+    {
+      "id": "cocktailsservice",
+      "label": "CocktailsService",
+      "degree": 14
+    },
+    {
+      "id": "worldcup_worldcupservice_worldcupservice",
+      "label": "WorldcupService",
+      "degree": 12
+    },
+    {
+      "id": "movies_moviesservice_moviesservice",
+      "label": "MoviesService",
+      "degree": 12
+    },
+    {
+      "id": "balldontlie_balldontliecontroller_balldontliecontroller",
+      "label": "BalldontlieController",
+      "degree": 10
+    },
+    {
+      "id": "charactersservice",
+      "label": "CharactersService",
+      "degree": 10
+    },
+    {
+      "id": "readme_health_service",
+      "label": "HealthService",
+      "degree": 10
+    }
+  ],
+  "surprises": [
+    {
+      "source": "HealthService",
+      "target": "Java Virtual Threads",
+      "source_files": [
+        "src/main/java/com/bryan/apiplayground/health/HealthService.java",
+        "README.md"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "crosses file types (doc \u2194 code); connects across different repos/directories; peripheral node `Java Virtual Threads` unexpectedly reaches hub `HealthService`"
+    },
+    {
+      "source": "HealthService",
+      "target": "RestClientConfig",
+      "source_files": [
+        "src/main/java/com/bryan/apiplayground/health/HealthService.java",
+        "src/main/java/com/bryan/apiplayground/config/RestClientConfig.java"
+      ],
+      "confidence": "INFERRED",
+      "relation": "references",
+      "why": "inferred connection - not explicitly stated in source; bridges separate communities"
+    },
+    {
+      "source": "MusicService",
+      "target": "RestClient",
+      "source_files": [
+        "src/main/java/com/bryan/apiplayground/apis/music/MusicController.java",
+        "src/main/java/com/bryan/apiplayground/apis/music/MusicService.java"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `RestClient` unexpectedly reaches hub `MusicService`"
+    },
+    {
+      "source": "MusicService",
+      "target": "ObjectMapper",
+      "source_files": [
+        "src/main/java/com/bryan/apiplayground/apis/music/MusicController.java",
+        "src/main/java/com/bryan/apiplayground/apis/music/MusicService.java"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `ObjectMapper` unexpectedly reaches hub `MusicService`"
+    },
+    {
+      "source": "BalldontlieService",
+      "target": "RestClient",
+      "source_files": [
+        "src/main/java/com/bryan/apiplayground/apis/balldontlie/BalldontlieController.java",
+        "src/main/java/com/bryan/apiplayground/apis/balldontlie/BalldontlieService.java"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "references",
+      "why": "peripheral node `RestClient` unexpectedly reaches hub `BalldontlieService`"
+    }
+  ],
+  "tokens": {
+    "input": 3331,
+    "output": 2061
+  }
+}

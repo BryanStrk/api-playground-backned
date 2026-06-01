@@ -116,16 +116,6 @@ public class CatalogService {
                     "Usuario aleatorio para mockear UIs."
             ),
             new ApiInfo(
-                    "github",
-                    "GitHub",
-                    "Desarrollo",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/github/{username}",
-                    "https://api.github.com/users",
-                    "Perfil público de un usuario de GitHub."
-            ),
-            new ApiInfo(
                     "books",
                     "Open Library",
                     "Cultura",
@@ -144,16 +134,6 @@ public class CatalogService {
                     "/api/v1/news/headlines",
                     "https://newsapi.org/v2/everything",
                     "Búsqueda de noticias por término e idioma. Requiere NEWS_API_KEY."
-            ),
-            new ApiInfo(
-                    "characters",
-                    "Rick and Morty",
-                    "Entretenimiento",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/characters/{id}",
-                    "https://rickandmortyapi.com/api/character",
-                    "Personaje de Rick and Morty por id."
             ),
             new ApiInfo(
                     "qrcode",
@@ -194,16 +174,6 @@ public class CatalogService {
                     "/api/v1/hn/stories",
                     "https://github.com/HackerNews/API",
                     "Las noticias y debates tech del momento."
-            ),
-            new ApiInfo(
-                    "dota",
-                    "OpenDota",
-                    "Videojuegos",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/dota/heroes",
-                    "https://docs.opendota.com",
-                    "Datos públicos de Dota 2: héroes y partidas pro."
             ),
             new ApiInfo(
                     "worldcup",
