@@ -194,6 +194,56 @@ public class CatalogService {
                     "/api/v1/balldontlie/teams",
                     "https://fifa.balldontlie.io/",
                     "Datos live del Mundial con sistema de tiers (FREE/ALL-STAR/GOAT). Requiere BALLDONTLIE_API_KEY."
+            ),
+            new ApiInfo(
+                    "fakestore",
+                    "FakeStoreAPI",
+                    "Compras",
+                    Difficulty.EASY,
+                    KeyRequirement.NONE,
+                    "/api/v1/store/products",
+                    "https://fakestoreapi.com/products",
+                    "Catálogo de productos de demo (precio, categoría, imagen y rating), sin API key."
+            ),
+            new ApiInfo(
+                    "platzi",
+                    "Platzi Fake Store",
+                    "Compras",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/platzi/products",
+                    "https://api.escuelajs.co/api/v1/products",
+                    "Productos con categoría anidada e imágenes (saneadas en el backend), sin API key."
+            ),
+            new ApiInfo(
+                    "food",
+                    "Open Food Facts",
+                    "Comida",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/food/product",
+                    "https://world.openfoodfacts.org/api/v2/product/3017620422003.json",
+                    "Datos nutricionales de un producto por código de barras (Nutri-Score, NOVA…), sin API key."
+            ),
+            new ApiInfo(
+                    "spacedevs",
+                    "The Space Devs",
+                    "Ciencia",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/spacedevs/launches",
+                    "https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?mode=list&limit=1",
+                    "Próximos lanzamientos espaciales (Launch Library 2). Cacheado ~12 min para respetar el rate limit. Sin API key."
+            ),
+            new ApiInfo(
+                    "sportsdb",
+                    "TheSportsDB",
+                    "Deportes",
+                    Difficulty.EASY,
+                    KeyRequirement.OPTIONAL,
+                    "/api/v1/sportsdb/team",
+                    "https://www.thesportsdb.com/api/v1/json",
+                    "Búsqueda de equipos deportivos. Usa la key de test '123' si no se configura THESPORTSDB_API_KEY."
             )
     );
 
