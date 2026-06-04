@@ -46,26 +46,6 @@ public class CatalogService {
                     "Búsqueda de canciones en el catálogo de iTunes."
             ),
             new ApiInfo(
-                    "crypto",
-                    "CoinGecko",
-                    "Finanzas",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/crypto/price",
-                    "https://api.coingecko.com/api/v3/simple/price",
-                    "Precio actual de criptomonedas en la divisa indicada."
-            ),
-            new ApiInfo(
-                    "pokemon",
-                    "PokéAPI",
-                    "Juegos",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/pokemon/{name}",
-                    "https://pokeapi.co/api/v2/pokemon",
-                    "Datos de un Pokémon por nombre."
-            ),
-            new ApiInfo(
                     "countries",
                     "REST Countries",
                     "Geografía",
@@ -76,26 +56,6 @@ public class CatalogService {
                     "Información de un país por nombre."
             ),
             new ApiInfo(
-                    "ai",
-                    "Google Gemini",
-                    "Inteligencia Artificial",
-                    Difficulty.MEDIUM,
-                    KeyRequirement.REQUIRED,
-                    "/api/v1/ai/generate",
-                    "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
-                    "Generación de texto con Gemini 2.5 Flash. Requiere GEMINI_API_KEY."
-            ),
-            new ApiInfo(
-                    "cats",
-                    "The Cat API",
-                    "Animales",
-                    Difficulty.EASY,
-                    KeyRequirement.OPTIONAL,
-                    "/api/v1/cats/random",
-                    "https://api.thecatapi.com/v1/images/search",
-                    "Imagen aleatoria de gato. La key mejora el rate limit."
-            ),
-            new ApiInfo(
                     "meals",
                     "TheMealDB",
                     "Cocina",
@@ -104,6 +64,16 @@ public class CatalogService {
                     "/api/v1/meals/search",
                     "https://www.themealdb.com/api/json/v1/1/search.php",
                     "Búsqueda de recetas por nombre."
+            ),
+            new ApiInfo(
+                    "cocktails",
+                    "TheCocktailDB",
+                    "Bebida",
+                    Difficulty.EASY,
+                    KeyRequirement.NONE,
+                    "/api/v1/cocktails/search",
+                    "https://www.thecocktaildb.com/api/json/v1/1/search.php",
+                    "Búsqueda de cócteles por nombre."
             ),
             new ApiInfo(
                     "photos",
@@ -126,16 +96,6 @@ public class CatalogService {
                     "Clasificación de las grandes ligas de fútbol (Football-Data.org). Requiere FOOTBALL_DATA_KEY."
             ),
             new ApiInfo(
-                    "dictionary",
-                    "Free Dictionary",
-                    "Idiomas",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/dictionary/{word}",
-                    "https://api.dictionaryapi.dev/api/v2/entries/en",
-                    "Definiciones en inglés palabra a palabra."
-            ),
-            new ApiInfo(
                     "space",
                     "NASA APOD",
                     "Ciencia",
@@ -146,16 +106,6 @@ public class CatalogService {
                     "Astronomy Picture of the Day. Usa DEMO_KEY si no se configura NASA_API_KEY."
             ),
             new ApiInfo(
-                    "exchange",
-                    "Frankfurter",
-                    "Finanzas",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/exchange",
-                    "https://api.frankfurter.dev/v1/latest",
-                    "Tipos de cambio entre divisas."
-            ),
-            new ApiInfo(
                     "users",
                     "RandomUser",
                     "Demos",
@@ -164,16 +114,6 @@ public class CatalogService {
                     "/api/v1/users/random",
                     "https://randomuser.me/api",
                     "Usuario aleatorio para mockear UIs."
-            ),
-            new ApiInfo(
-                    "github",
-                    "GitHub",
-                    "Desarrollo",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/github/{username}",
-                    "https://api.github.com/users",
-                    "Perfil público de un usuario de GitHub."
             ),
             new ApiInfo(
                     "books",
@@ -194,16 +134,6 @@ public class CatalogService {
                     "/api/v1/news/headlines",
                     "https://newsapi.org/v2/everything",
                     "Búsqueda de noticias por término e idioma. Requiere NEWS_API_KEY."
-            ),
-            new ApiInfo(
-                    "characters",
-                    "Rick and Morty",
-                    "Entretenimiento",
-                    Difficulty.EASY,
-                    KeyRequirement.NONE,
-                    "/api/v1/characters/{id}",
-                    "https://rickandmortyapi.com/api/character",
-                    "Personaje de Rick and Morty por id."
             ),
             new ApiInfo(
                     "qrcode",
@@ -246,14 +176,74 @@ public class CatalogService {
                     "Las noticias y debates tech del momento."
             ),
             new ApiInfo(
-                    "dota",
-                    "OpenDota",
-                    "Videojuegos",
+                    "worldcup",
+                    "Mundial 2026",
+                    "Deportes",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/worldcup/matches",
+                    "https://github.com/openfootball/worldcup.json",
+                    "Partidos, grupos y datos del Mundial 2026 (openfootball, sin key)."
+            ),
+            new ApiInfo(
+                    "balldontlie",
+                    "Mundial (BALLDONTLIE)",
+                    "Deportes",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.REQUIRED,
+                    "/api/v1/balldontlie/teams",
+                    "https://fifa.balldontlie.io/",
+                    "Datos live del Mundial con sistema de tiers (FREE/ALL-STAR/GOAT). Requiere BALLDONTLIE_API_KEY."
+            ),
+            new ApiInfo(
+                    "fakestore",
+                    "FakeStoreAPI",
+                    "Compras",
                     Difficulty.EASY,
                     KeyRequirement.NONE,
-                    "/api/v1/dota/heroes",
-                    "https://docs.opendota.com",
-                    "Datos públicos de Dota 2: héroes y partidas pro."
+                    "/api/v1/store/products",
+                    "https://fakestoreapi.com/products",
+                    "Catálogo de productos de demo (precio, categoría, imagen y rating), sin API key."
+            ),
+            new ApiInfo(
+                    "platzi",
+                    "Platzi Fake Store",
+                    "Compras",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/platzi/products",
+                    "https://api.escuelajs.co/api/v1/products",
+                    "Productos con categoría anidada e imágenes (saneadas en el backend), sin API key."
+            ),
+            new ApiInfo(
+                    "food",
+                    "Open Food Facts",
+                    "Comida",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/food/product",
+                    "https://world.openfoodfacts.org/api/v2/product/3017620422003.json",
+                    "Datos nutricionales de un producto por código de barras (Nutri-Score, NOVA…), sin API key."
+            ),
+            new ApiInfo(
+                    "spacedevs",
+                    "The Space Devs",
+                    "Ciencia",
+                    Difficulty.MEDIUM,
+                    KeyRequirement.NONE,
+                    "/api/v1/spacedevs/launches",
+                    "https://lldev.thespacedevs.com/2.3.0/launches/upcoming/?mode=list&limit=1",
+                    "Próximos lanzamientos espaciales (Launch Library 2). Cacheado ~12 min para respetar el rate limit. Sin API key."
+            ),
+            new ApiInfo(
+                    "sportsdb",
+                    "TheSportsDB",
+                    "Deportes",
+                    Difficulty.EASY,
+                    KeyRequirement.OPTIONAL,
+                    "/api/v1/sportsdb/team",
+                    "https://www.thesportsdb.com/api/v1/json",
+                    "Búsqueda de equipos deportivos. Usa la key de test '123' si no se configura THESPORTSDB_API_KEY."
             )
     );
 

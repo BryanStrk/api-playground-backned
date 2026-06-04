@@ -1,0 +1,647 @@
+{
+  "/Users/bryanpa/proyectos/api-playground-backend/.claude/settings.local.json": {
+    "mtime": 1780051718.3923821,
+    "ast_hash": "9473d494f401f2b21975cd72c6f41839",
+    "semantic_hash": "9473d494f401f2b21975cd72c6f41839"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/ApiPlaygroundApplication.java": {
+    "mtime": 1779831284.7744539,
+    "ast_hash": "9848c3966766345264ad65026fcd5cff",
+    "semantic_hash": "9848c3966766345264ad65026fcd5cff"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/music/MusicService.java": {
+    "mtime": 1779879627.8264954,
+    "ast_hash": "5f22db7f80758217c4c1d9348eef2561",
+    "semantic_hash": "5f22db7f80758217c4c1d9348eef2561"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/music/Track.java": {
+    "mtime": 1779879599.869937,
+    "ast_hash": "ffd146d0249ae45c4138bb3b5c6ab745",
+    "semantic_hash": "ffd146d0249ae45c4138bb3b5c6ab745"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/music/MusicController.java": {
+    "mtime": 1779879636.6609197,
+    "ast_hash": "e5cb6f3811b87f8c95d5fdf1b3557e68",
+    "semantic_hash": "e5cb6f3811b87f8c95d5fdf1b3557e68"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/music/MusicResponse.java": {
+    "mtime": 1779833028.3638864,
+    "ast_hash": "b9b802676c49f1ad800b4d428ac6a601",
+    "semantic_hash": "b9b802676c49f1ad800b4d428ac6a601"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/hackernews/HackerNewsService.java": {
+    "mtime": 1779917639.9254956,
+    "ast_hash": "2b92f0ad2868e6839049bbb18f09bf02",
+    "semantic_hash": "2b92f0ad2868e6839049bbb18f09bf02"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/hackernews/HackerNewsController.java": {
+    "mtime": 1779917649.429295,
+    "ast_hash": "6c5c1f9ccb47ef40e3820c9f33355a65",
+    "semantic_hash": "6c5c1f9ccb47ef40e3820c9f33355a65"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/hackernews/HnStory.java": {
+    "mtime": 1779917621.558267,
+    "ast_hash": "92e2a0561d427426f2a78d1941b6c4bc",
+    "semantic_hash": "92e2a0561d427426f2a78d1941b6c4bc"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/posts/PostResponse.java": {
+    "mtime": 1779832148.8970826,
+    "ast_hash": "5aa54d96d84a45abaa94e624d518b78b",
+    "semantic_hash": "5aa54d96d84a45abaa94e624d518b78b"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/posts/PostsController.java": {
+    "mtime": 1779832162.3793848,
+    "ast_hash": "2e24068ba863d19394948a9ccf7cc145",
+    "semantic_hash": "2e24068ba863d19394948a9ccf7cc145"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/posts/PostsService.java": {
+    "mtime": 1779832155.9428396,
+    "ast_hash": "5614da4044dbe40e86cf0e0ddc066467",
+    "semantic_hash": "5614da4044dbe40e86cf0e0ddc066467"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/holidays/Country.java": {
+    "mtime": 1779917180.491866,
+    "ast_hash": "11263890161a03f00e33a5810fdd7b00",
+    "semantic_hash": "11263890161a03f00e33a5810fdd7b00"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/holidays/HolidaysController.java": {
+    "mtime": 1779917202.070593,
+    "ast_hash": "2c6c7febdf44d94c19587fb3ee7d4565",
+    "semantic_hash": "2c6c7febdf44d94c19587fb3ee7d4565"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/holidays/HolidaysService.java": {
+    "mtime": 1779917192.1150062,
+    "ast_hash": "055e052316fd2d9578156195d5c79058",
+    "semantic_hash": "055e052316fd2d9578156195d5c79058"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/holidays/Holiday.java": {
+    "mtime": 1779917175.771307,
+    "ast_hash": "b6a3b7a0e3e0f74953fc4d8dc44d57a0",
+    "semantic_hash": "b6a3b7a0e3e0f74953fc4d8dc44d57a0"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/episodes/EpisodesController.java": {
+    "mtime": 1779897526.6869385,
+    "ast_hash": "b32f250882f48b18a4167257d031a560",
+    "semantic_hash": "b32f250882f48b18a4167257d031a560"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/episodes/EpisodesService.java": {
+    "mtime": 1779897515.9832444,
+    "ast_hash": "864f5cc308e85d5373c9d61ec5415cd8",
+    "semantic_hash": "864f5cc308e85d5373c9d61ec5415cd8"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/episodes/Episode.java": {
+    "mtime": 1779897498.447255,
+    "ast_hash": "af982e6162282944c32471fc3ab9f9a8",
+    "semantic_hash": "af982e6162282944c32471fc3ab9f9a8"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/worldcup/GroupStanding.java": {
+    "mtime": 1780049300.8606777,
+    "ast_hash": "3a279920efb1af514946e29d03070258",
+    "semantic_hash": "3a279920efb1af514946e29d03070258"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/worldcup/WorldCupInfo.java": {
+    "mtime": 1780049344.5047,
+    "ast_hash": "b326fefe521647cd640b33879a36372e",
+    "semantic_hash": "b326fefe521647cd640b33879a36372e"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/worldcup/WorldcupController.java": {
+    "mtime": 1780049377.1792855,
+    "ast_hash": "76ee79535d35a0a2bbb761647cd68040",
+    "semantic_hash": "76ee79535d35a0a2bbb761647cd68040"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/worldcup/WorldcupService.java": {
+    "mtime": 1780049452.8810263,
+    "ast_hash": "a70e8acdcf071ea7786551021e355320",
+    "semantic_hash": "a70e8acdcf071ea7786551021e355320"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/worldcup/WorldCupMatch.java": {
+    "mtime": 1780049242.7804623,
+    "ast_hash": "546ae841af37b298ccd8452b3b6e6340",
+    "semantic_hash": "546ae841af37b298ccd8452b3b6e6340"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/worldcup/Goal.java": {
+    "mtime": 1780049240.7782612,
+    "ast_hash": "176844260dbfa8d57c1787f155e8dd16",
+    "semantic_hash": "176844260dbfa8d57c1787f155e8dd16"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/balldontlie/BalldontlieService.java": {
+    "mtime": 1780051482.7384074,
+    "ast_hash": "a089f6685e101718b0ebcbb77341b08d",
+    "semantic_hash": "a089f6685e101718b0ebcbb77341b08d"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/balldontlie/BdlTier.java": {
+    "mtime": 1780051467.160875,
+    "ast_hash": "ad12fa1cc4f35de24c02918877acf3ed",
+    "semantic_hash": "ad12fa1cc4f35de24c02918877acf3ed"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/balldontlie/BdlMatch.java": {
+    "mtime": 1780051381.83823,
+    "ast_hash": "ab6fd705066487a447edabdbe1b1da34",
+    "semantic_hash": "ab6fd705066487a447edabdbe1b1da34"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/balldontlie/BdlStadium.java": {
+    "mtime": 1780051225.9430525,
+    "ast_hash": "978c7143101fe4b5a4db87a349f8af6a",
+    "semantic_hash": "978c7143101fe4b5a4db87a349f8af6a"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/balldontlie/BalldontlieController.java": {
+    "mtime": 1780051487.7864122,
+    "ast_hash": "b3cdbf6dcc1a5fd9dbc6db6d44840f54",
+    "semantic_hash": "b3cdbf6dcc1a5fd9dbc6db6d44840f54"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/balldontlie/BdlTeam.java": {
+    "mtime": 1780051224.4115345,
+    "ast_hash": "45e63c1236df505a86d982c9c20ffb5d",
+    "semantic_hash": "45e63c1236df505a86d982c9c20ffb5d"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/balldontlie/BdlPlayer.java": {
+    "mtime": 1780051383.2886925,
+    "ast_hash": "9247b085c5b9d618143d40d866d6a5bc",
+    "semantic_hash": "9247b085c5b9d618143d40d866d6a5bc"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/balldontlie/BdlStanding.java": {
+    "mtime": 1780051379.7721102,
+    "ast_hash": "07921ca82f90cc1cec6577edc979d669",
+    "semantic_hash": "07921ca82f90cc1cec6577edc979d669"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/trivia/TriviaQuestion.java": {
+    "mtime": 1779917258.1935792,
+    "ast_hash": "f3be37be38642ae158ff5a59ed362a60",
+    "semantic_hash": "f3be37be38642ae158ff5a59ed362a60"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/trivia/TriviaCategory.java": {
+    "mtime": 1779917262.7268503,
+    "ast_hash": "9d72c3b1b829df39ae1b55c23c77ac92",
+    "semantic_hash": "9d72c3b1b829df39ae1b55c23c77ac92"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/trivia/TriviaController.java": {
+    "mtime": 1779917293.0396,
+    "ast_hash": "5d85fac575dfb16ec8a9e94f967e601a",
+    "semantic_hash": "5d85fac575dfb16ec8a9e94f967e601a"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/trivia/TriviaService.java": {
+    "mtime": 1779917479.263711,
+    "ast_hash": "3ded23dd0c39fe19d691cbdfa51668f0",
+    "semantic_hash": "3ded23dd0c39fe19d691cbdfa51668f0"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/books/BooksService.java": {
+    "mtime": 1779896357.793609,
+    "ast_hash": "88e84f655e6889d454203c2a95328322",
+    "semantic_hash": "88e84f655e6889d454203c2a95328322"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/books/BooksController.java": {
+    "mtime": 1779896368.7672777,
+    "ast_hash": "a92f1a83c880d7a2b1338739d703aa85",
+    "semantic_hash": "a92f1a83c880d7a2b1338739d703aa85"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/books/Book.java": {
+    "mtime": 1779896335.665715,
+    "ast_hash": "01fadb415719a94a0345a4092fd973f1",
+    "semantic_hash": "01fadb415719a94a0345a4092fd973f1"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/books/BooksResponse.java": {
+    "mtime": 1779832689.360014,
+    "ast_hash": "c03d76f9df53cf3601a92791f5ec4640",
+    "semantic_hash": "c03d76f9df53cf3601a92791f5ec4640"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/TeamRow.java": {
+    "mtime": 1779888289.5531394,
+    "ast_hash": "f3bb30f5d2fb04428b64ccd6ca2b2b13",
+    "semantic_hash": "f3bb30f5d2fb04428b64ccd6ca2b2b13"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/StandingRow.java": {
+    "mtime": 1779881446.9111574,
+    "ast_hash": "485b2a6c3b313d1b3cc692e31a560eb0",
+    "semantic_hash": "485b2a6c3b313d1b3cc692e31a560eb0"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/CompetitionInfo.java": {
+    "mtime": 1779881520.379471,
+    "ast_hash": "9b5110c66af698c4de40a49249469175",
+    "semantic_hash": "9b5110c66af698c4de40a49249469175"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/MatchRow.java": {
+    "mtime": 1779888280.483399,
+    "ast_hash": "066b4c5bf87f3722d6abe803bd6cabb5",
+    "semantic_hash": "066b4c5bf87f3722d6abe803bd6cabb5"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/TeamsResponse.java": {
+    "mtime": 1779888294.9813812,
+    "ast_hash": "1f5269f4d44de790bf43df6529003b5a",
+    "semantic_hash": "1f5269f4d44de790bf43df6529003b5a"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/SportsService.java": {
+    "mtime": 1779894030.7149153,
+    "ast_hash": "b6cadc196e41ae755a5befbba0ee447a",
+    "semantic_hash": "b6cadc196e41ae755a5befbba0ee447a"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/StandingsResponse.java": {
+    "mtime": 1779893992.5717573,
+    "ast_hash": "9566bb32b6e91689369b2f3ab6895769",
+    "semantic_hash": "9566bb32b6e91689369b2f3ab6895769"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/GroupTable.java": {
+    "mtime": 1779893982.9025636,
+    "ast_hash": "813fa28f3b7397417b74885d2f565e09",
+    "semantic_hash": "813fa28f3b7397417b74885d2f565e09"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/MatchesResponse.java": {
+    "mtime": 1779888284.955785,
+    "ast_hash": "17dc5f92fbac16f40c1502e5cac64ce4",
+    "semantic_hash": "17dc5f92fbac16f40c1502e5cac64ce4"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/sports/SportsController.java": {
+    "mtime": 1779893946.6390703,
+    "ast_hash": "3375bedef8cf2f058e7a76e95f3f9a5b",
+    "semantic_hash": "3375bedef8cf2f058e7a76e95f3f9a5b"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/qrcode/QrResponse.java": {
+    "mtime": 1779917110.9280686,
+    "ast_hash": "c38f116ac51f8f1d8661be627e382266",
+    "semantic_hash": "c38f116ac51f8f1d8661be627e382266"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/qrcode/QrService.java": {
+    "mtime": 1779917120.5844488,
+    "ast_hash": "8cdc5bcdb39db42002e8ddc71650537d",
+    "semantic_hash": "8cdc5bcdb39db42002e8ddc71650537d"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/qrcode/QrController.java": {
+    "mtime": 1779917129.092767,
+    "ast_hash": "d084e532f9a1f622ee79f3b3cc100678",
+    "semantic_hash": "d084e532f9a1f622ee79f3b3cc100678"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/github/GithubUserResponse.java": {
+    "mtime": 1779832640.865046,
+    "ast_hash": "76d5b93056b8b5a76ef12c01c47f71c3",
+    "semantic_hash": "76d5b93056b8b5a76ef12c01c47f71c3"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/github/GithubController.java": {
+    "mtime": 1779832582.787863,
+    "ast_hash": "4f5d947280ff41a5f77bbed663cd0af0",
+    "semantic_hash": "4f5d947280ff41a5f77bbed663cd0af0"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/github/GithubService.java": {
+    "mtime": 1779832575.601989,
+    "ast_hash": "6310558bcec65987a6ef028a862f301d",
+    "semantic_hash": "6310558bcec65987a6ef028a862f301d"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/news/NewsService.java": {
+    "mtime": 1779884332.9926887,
+    "ast_hash": "9c9ff400551be780c59885e9754397da",
+    "semantic_hash": "9c9ff400551be780c59885e9754397da"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/news/Article.java": {
+    "mtime": 1779871934.4379797,
+    "ast_hash": "9f1e639865dca778f97aa27aad7757db",
+    "semantic_hash": "9f1e639865dca778f97aa27aad7757db"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/news/NewsController.java": {
+    "mtime": 1779884353.4310656,
+    "ast_hash": "4931746b0952483db2cf9e2be9efef0e",
+    "semantic_hash": "4931746b0952483db2cf9e2be9efef0e"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/news/NewsResponse.java": {
+    "mtime": 1779834274.3705876,
+    "ast_hash": "e0e9e5b5a043e2cd2343802bb9cc31a7",
+    "semantic_hash": "e0e9e5b5a043e2cd2343802bb9cc31a7"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/locations/LocationsController.java": {
+    "mtime": 1779897551.4478552,
+    "ast_hash": "dc69481b26afd059c6e92de19210c5f0",
+    "semantic_hash": "dc69481b26afd059c6e92de19210c5f0"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/locations/LocationsService.java": {
+    "mtime": 1779897542.2800615,
+    "ast_hash": "fc66785e920a310146557ea6b432ab21",
+    "semantic_hash": "fc66785e920a310146557ea6b432ab21"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/locations/Location.java": {
+    "mtime": 1779897532.7244062,
+    "ast_hash": "c612ee56e4f3c01b8594498cd7da6729",
+    "semantic_hash": "c612ee56e4f3c01b8594498cd7da6729"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/users/UserResponse.java": {
+    "mtime": 1779832504.5105333,
+    "ast_hash": "713698a966da4b9444a7fcef18d9c220",
+    "semantic_hash": "713698a966da4b9444a7fcef18d9c220"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/users/UsersService.java": {
+    "mtime": 1779832516.0445411,
+    "ast_hash": "e5ea826b1ac546a1bc9899dfebf2744b",
+    "semantic_hash": "e5ea826b1ac546a1bc9899dfebf2744b"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/users/UsersController.java": {
+    "mtime": 1779832523.1421366,
+    "ast_hash": "63a9ff9184266ea15431119753dc70b7",
+    "semantic_hash": "63a9ff9184266ea15431119753dc70b7"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/meals/MealsController.java": {
+    "mtime": 1779892657.6726964,
+    "ast_hash": "065774f30fa0adc04c862cd299e04722",
+    "semantic_hash": "065774f30fa0adc04c862cd299e04722"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/meals/MealsService.java": {
+    "mtime": 1779892630.916792,
+    "ast_hash": "e0c26dbd9ea9d07131229543167f7773",
+    "semantic_hash": "e0c26dbd9ea9d07131229543167f7773"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/meals/MealsResponse.java": {
+    "mtime": 1779832272.8274815,
+    "ast_hash": "338e0dbec31fb70e1cc1b3c3f6c0924d",
+    "semantic_hash": "338e0dbec31fb70e1cc1b3c3f6c0924d"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/meals/MealCategory.java": {
+    "mtime": 1779888044.9904957,
+    "ast_hash": "8645eb01a3dd17dcbc65e11acbceb56d",
+    "semantic_hash": "8645eb01a3dd17dcbc65e11acbceb56d"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/meals/Ingredient.java": {
+    "mtime": 1779888030.1746998,
+    "ast_hash": "62c12f7e802f8a448805c7d5411c2df5",
+    "semantic_hash": "62c12f7e802f8a448805c7d5411c2df5"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/meals/MealSummary.java": {
+    "mtime": 1779888049.4127886,
+    "ast_hash": "84f96e4053ac384472fb3abed3932132",
+    "semantic_hash": "84f96e4053ac384472fb3abed3932132"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/meals/Meal.java": {
+    "mtime": 1779888040.3867524,
+    "ast_hash": "2abf26b163dfd16f24b8fbd361434cd9",
+    "semantic_hash": "2abf26b163dfd16f24b8fbd361434cd9"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/movies/MoviesController.java": {
+    "mtime": 1779879342.7102814,
+    "ast_hash": "c9b2da53a22aa5c7476ca43dc3a93a2a",
+    "semantic_hash": "c9b2da53a22aa5c7476ca43dc3a93a2a"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/movies/MoviesService.java": {
+    "mtime": 1779879319.2784874,
+    "ast_hash": "9208e1b2088a3da869800d923d09f961",
+    "semantic_hash": "9208e1b2088a3da869800d923d09f961"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/movies/MovieDetails.java": {
+    "mtime": 1779879276.5158865,
+    "ast_hash": "1ef23eec3c0dd6f3a400ef8f6502510c",
+    "semantic_hash": "1ef23eec3c0dd6f3a400ef8f6502510c"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/movies/MoviesResponse.java": {
+    "mtime": 1779881716.5353482,
+    "ast_hash": "02cf7fafcfa2d2342600efa6ec271012",
+    "semantic_hash": "02cf7fafcfa2d2342600efa6ec271012"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/movies/Genre.java": {
+    "mtime": 1779879271.4696407,
+    "ast_hash": "bbaaeb56cd353c76c45a17c073a88fb7",
+    "semantic_hash": "bbaaeb56cd353c76c45a17c073a88fb7"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/movies/Movie.java": {
+    "mtime": 1779834139.7641509,
+    "ast_hash": "0705669a46a56640ccd4f784396cd6f6",
+    "semantic_hash": "0705669a46a56640ccd4f784396cd6f6"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/movies/TrailerResponse.java": {
+    "mtime": 1779879280.7024727,
+    "ast_hash": "3359b7f1944db40f08dec1ffdb977f09",
+    "semantic_hash": "3359b7f1944db40f08dec1ffdb977f09"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/cocktails/Ingredient.java": {
+    "mtime": 1780153111.200019,
+    "ast_hash": "887f820a33228f7ef4a7d2b384174cd2",
+    "semantic_hash": "887f820a33228f7ef4a7d2b384174cd2"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/cocktails/Cocktail.java": {
+    "mtime": 1780153111.199536,
+    "ast_hash": "d0f0c092f55dedc41fec7963d4e1e7be",
+    "semantic_hash": "d0f0c092f55dedc41fec7963d4e1e7be"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/cocktails/CocktailCategory.java": {
+    "mtime": 1780153111.199616,
+    "ast_hash": "e10bd752e380d2396fb95bbbca22b25c",
+    "semantic_hash": "e10bd752e380d2396fb95bbbca22b25c"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/cocktails/CocktailsService.java": {
+    "mtime": 1780155760.3409865,
+    "ast_hash": "93ed61aaab13d62c5f46e8ae3623956c",
+    "semantic_hash": "93ed61aaab13d62c5f46e8ae3623956c"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/cocktails/CocktailsResponse.java": {
+    "mtime": 1780153111.199856,
+    "ast_hash": "ef24579df2d1e318a4fe728e95d230d2",
+    "semantic_hash": "ef24579df2d1e318a4fe728e95d230d2"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/cocktails/CocktailsController.java": {
+    "mtime": 1780155779.697965,
+    "ast_hash": "0d775124e4a55f8f5bbf793848e9a5b3",
+    "semantic_hash": "0d775124e4a55f8f5bbf793848e9a5b3"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/weather/WeatherResponse.java": {
+    "mtime": 1779878744.234903,
+    "ast_hash": "6f91920f5a6b8aa5e5e1d395fcc91a1e",
+    "semantic_hash": "6f91920f5a6b8aa5e5e1d395fcc91a1e"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/weather/WeatherService.java": {
+    "mtime": 1779878767.50026,
+    "ast_hash": "ec65eaa8ee8ddc8fc1d9f8d59b5dbacd",
+    "semantic_hash": "ec65eaa8ee8ddc8fc1d9f8d59b5dbacd"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/weather/WeatherController.java": {
+    "mtime": 1779878783.658496,
+    "ast_hash": "7f7fcbbe3e010d8407341d3a205a5775",
+    "semantic_hash": "7f7fcbbe3e010d8407341d3a205a5775"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/dota/ProMatch.java": {
+    "mtime": 1779917712.57905,
+    "ast_hash": "6cbd386d9140738bda86ca79f0cdf99c",
+    "semantic_hash": "6cbd386d9140738bda86ca79f0cdf99c"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/dota/DotaService.java": {
+    "mtime": 1779917731.1659935,
+    "ast_hash": "595947a31578f8a463aaf547d7227e23",
+    "semantic_hash": "595947a31578f8a463aaf547d7227e23"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/dota/DotaHero.java": {
+    "mtime": 1779917707.5748997,
+    "ast_hash": "aa8e663a533578b6a07b70e00a92ae67",
+    "semantic_hash": "aa8e663a533578b6a07b70e00a92ae67"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/dota/DotaController.java": {
+    "mtime": 1779917741.8811104,
+    "ast_hash": "b92e4d5be0cfc9760f429615502c9ab5",
+    "semantic_hash": "b92e4d5be0cfc9760f429615502c9ab5"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/countries/CountriesService.java": {
+    "mtime": 1779871569.4880571,
+    "ast_hash": "cba03d2093ab969d16af9ddd25505b0f",
+    "semantic_hash": "cba03d2093ab969d16af9ddd25505b0f"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/countries/CountryResponse.java": {
+    "mtime": 1779871539.5158536,
+    "ast_hash": "467671e8cd553a0abe800933f5986c13",
+    "semantic_hash": "467671e8cd553a0abe800933f5986c13"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/countries/CountriesController.java": {
+    "mtime": 1779832107.2672894,
+    "ast_hash": "e61a56f1e20eafa7f548407ec134a250",
+    "semantic_hash": "e61a56f1e20eafa7f548407ec134a250"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/characters/PageInfo.java": {
+    "mtime": 1779897290.2152174,
+    "ast_hash": "74d9907d13563baf4daa8a095f763d41",
+    "semantic_hash": "74d9907d13563baf4daa8a095f763d41"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/characters/CharactersService.java": {
+    "mtime": 1779897386.4272368,
+    "ast_hash": "9dadeff98d2af78f2518b64f8523c298",
+    "semantic_hash": "9dadeff98d2af78f2518b64f8523c298"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/characters/CharacterSummary.java": {
+    "mtime": 1779897284.802846,
+    "ast_hash": "8d563eb48b37aa51903672bd40e92fed",
+    "semantic_hash": "8d563eb48b37aa51903672bd40e92fed"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/characters/CharacterResponse.java": {
+    "mtime": 1779871586.327,
+    "ast_hash": "9bca899bef227715a292379925f8b6b8",
+    "semantic_hash": "9bca899bef227715a292379925f8b6b8"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/characters/CharacterPage.java": {
+    "mtime": 1779897294.7234325,
+    "ast_hash": "3636ab84db686832a7d3874a578e8cf1",
+    "semantic_hash": "3636ab84db686832a7d3874a578e8cf1"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/characters/CharactersController.java": {
+    "mtime": 1779897403.223591,
+    "ast_hash": "ef2473ea33a9afaafe3e267b1fef649b",
+    "semantic_hash": "ef2473ea33a9afaafe3e267b1fef649b"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/space/SpaceImage.java": {
+    "mtime": 1779895030.3252923,
+    "ast_hash": "67f46f8ce2444f608e00f048357cf0bb",
+    "semantic_hash": "67f46f8ce2444f608e00f048357cf0bb"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/space/SpaceController.java": {
+    "mtime": 1779895107.5320635,
+    "ast_hash": "f71d3ccef1cdd415a544877a6c061066",
+    "semantic_hash": "f71d3ccef1cdd415a544877a6c061066"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/space/ApodResponse.java": {
+    "mtime": 1779894925.1619954,
+    "ast_hash": "435a5cdd26fff63b2b33bbb03a8daf84",
+    "semantic_hash": "435a5cdd26fff63b2b33bbb03a8daf84"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/space/SpaceService.java": {
+    "mtime": 1779895088.9066792,
+    "ast_hash": "74d3832624f66f1fb5fc281db9b8467a",
+    "semantic_hash": "74d3832624f66f1fb5fc281db9b8467a"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/photos/PhotosService.java": {
+    "mtime": 1779872333.722908,
+    "ast_hash": "d9bc86bc36fd2626535591bc43fbeded",
+    "semantic_hash": "d9bc86bc36fd2626535591bc43fbeded"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/photos/PhotosController.java": {
+    "mtime": 1779834226.1416206,
+    "ast_hash": "801e885736328c182f3a22680c69fe64",
+    "semantic_hash": "801e885736328c182f3a22680c69fe64"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/apis/photos/PhotoResponse.java": {
+    "mtime": 1779872315.5077069,
+    "ast_hash": "0e6f8b15dcdc682a5496c9c1f93fc9b1",
+    "semantic_hash": "0e6f8b15dcdc682a5496c9c1f93fc9b1"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/config/OpenApiConfig.java": {
+    "mtime": 1779831284.7761774,
+    "ast_hash": "31954e810a1a0da06c3173bd370ece89",
+    "semantic_hash": "31954e810a1a0da06c3173bd370ece89"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/config/CorsConfig.java": {
+    "mtime": 1780050082.4007044,
+    "ast_hash": "25d4a04805ce89ecbfe5262390f428d3",
+    "semantic_hash": "25d4a04805ce89ecbfe5262390f428d3"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/config/RestClientConfig.java": {
+    "mtime": 1779831284.7764318,
+    "ast_hash": "aa0a46000144384a9d2b703c738f8ff9",
+    "semantic_hash": "aa0a46000144384a9d2b703c738f8ff9"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/health/HealthStatus.java": {
+    "mtime": 1779834520.7541769,
+    "ast_hash": "1735b2f82a573bc624a96cf3b3824aee",
+    "semantic_hash": "1735b2f82a573bc624a96cf3b3824aee"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/health/HealthController.java": {
+    "mtime": 1779834595.7922568,
+    "ast_hash": "194379a3137f0ba15da69302e1f8e365",
+    "semantic_hash": "194379a3137f0ba15da69302e1f8e365"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/health/HealthReport.java": {
+    "mtime": 1779834529.2268217,
+    "ast_hash": "fe52d3fed49cd67597198ee68af5b058",
+    "semantic_hash": "fe52d3fed49cd67597198ee68af5b058"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/health/HealthService.java": {
+    "mtime": 1780051302.3268235,
+    "ast_hash": "ea9560de1ca0bbdf683667a345c93c0a",
+    "semantic_hash": "ea9560de1ca0bbdf683667a345c93c0a"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/health/ApiHealth.java": {
+    "mtime": 1779834525.058407,
+    "ast_hash": "daf9a99d92ea78e8c541905610b437a1",
+    "semantic_hash": "daf9a99d92ea78e8c541905610b437a1"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/catalog/ApiInfo.java": {
+    "mtime": 1779831382.5548348,
+    "ast_hash": "ea8de94659f9eb471fa9e07afa44b1ac",
+    "semantic_hash": "ea8de94659f9eb471fa9e07afa44b1ac"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/catalog/Difficulty.java": {
+    "mtime": 1779831375.7563214,
+    "ast_hash": "1cc8e6d3d95eb8bc5b17e42c426a6a6b",
+    "semantic_hash": "1cc8e6d3d95eb8bc5b17e42c426a6a6b"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/catalog/CatalogController.java": {
+    "mtime": 1779831429.0639243,
+    "ast_hash": "af67855696ad7617a116cd58e41fa037",
+    "semantic_hash": "af67855696ad7617a116cd58e41fa037"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/catalog/CatalogService.java": {
+    "mtime": 1780153111.200039,
+    "ast_hash": "ef11ae574c05278c52b8a65fd1ee355e",
+    "semantic_hash": "ef11ae574c05278c52b8a65fd1ee355e"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/catalog/KeyRequirement.java": {
+    "mtime": 1779831378.9284923,
+    "ast_hash": "95f25369cdcf92991e6306ff5fb4bd9d",
+    "semantic_hash": "95f25369cdcf92991e6306ff5fb4bd9d"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/common/PremiumRequiredError.java": {
+    "mtime": 1780051329.8370247,
+    "ast_hash": "6d611c2503a3996a9acf054c2fcdea0e",
+    "semantic_hash": "6d611c2503a3996a9acf054c2fcdea0e"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/common/GlobalExceptionHandler.java": {
+    "mtime": 1780051344.9818964,
+    "ast_hash": "7cf77f08e66e49256d4a41636a650bc6",
+    "semantic_hash": "7cf77f08e66e49256d4a41636a650bc6"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/common/ApiError.java": {
+    "mtime": 1779831284.7747736,
+    "ast_hash": "df6e5d455898f9ac8552c98347ebf11f",
+    "semantic_hash": "df6e5d455898f9ac8552c98347ebf11f"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/common/exception/ExternalApiException.java": {
+    "mtime": 1779831284.7755392,
+    "ast_hash": "c1635ddd932ac4fdc49d234d2b77ee83",
+    "semantic_hash": "c1635ddd932ac4fdc49d234d2b77ee83"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/common/exception/ApiKeyNotConfiguredException.java": {
+    "mtime": 1779831284.7753422,
+    "ast_hash": "f054b84b815032007ad2b15c537959d4",
+    "semantic_hash": "f054b84b815032007ad2b15c537959d4"
+  },
+  "/Users/bryanpa/proyectos/api-playground-backend/src/main/java/com/bryan/apiplayground/common/exception/PremiumFeatureException.java": {
+    "mtime": 1780051327.3234484,
+    "ast_hash": "15b947286d2214096960474b55100f13",
+    "semantic_hash": "15b947286d2214096960474b55100f13"
+  }
+}

@@ -10,9 +10,10 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/v1/**")
-                .allowedOrigins("http://localhost:4200")
-                .allowedMethods("GET", "POST", "OPTIONS")
+                // local --> .allowedOrigins("http://localhost:4200")
+                .allowedOrigins("https://api-playground-dashboard.vercel.app", "http://localhost:4200") // Tu URL de Vercel
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
-                .maxAge(3600);
+                .allowCredentials(true);
     }
 }
