@@ -37,3 +37,4 @@ application-local.properties
 application-local.yml
 application-local.yaml
 graphify-out/cache/
+graphify-out/cache/
